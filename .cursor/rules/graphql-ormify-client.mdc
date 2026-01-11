@@ -1,0 +1,55 @@
+---
+alwaysApply: true
+---
+项目的所有请求都应该由graphql-ormify-client进行处理
+对应npm文档链接：https://www.npmjs.com/package/graphql-ormify-client
+
+示例：
+
+准备工作：
+import { HasuraGraphqlClient } from "graphql-ormify-client";
+
+const hasuraClient = new HasuraGraphqlClient({
+  endpoint: "https://your-hasura-endpoint.com/v1/graphql",
+  headers: {
+    "x-hasura-admin-secret": "your-secret",
+  },
+});
+
+使用：
+一、基础方法：
+1.发送query=>hasuraClient.query
+2.发送mutation=>hasuraClient.mutate
+3.直接运行graphql语句=>hasuraClient.excute
+
+参数说明：
+1.query和mutate：
+{operationName,fields,variableDefinitions,variables}
+
+2.excute：{query,variables}
+
+二、快捷方法
+1.通过主键查询=>data_by_pk
+2.条件查询多条=>datas
+3.写入单条=>insert_data_one
+4.写入多条=>insert_datas
+5.通过主键更新=>update_data_by_pk
+6.条件更新多条=>update_datas
+7.通过主键删除=>delete_data_by_pk
+8.分页与聚合查询=>find
+9.聚合查询=>aggregate
+
+参数说明：
+公共参数：{table,args,data_fields|datas_fields}
+
+部分接口特别参数：
+1.aggregate：{aggregate_fields}
+2.find：{page,pageSize,aggregate_fields}
+
+快捷方法基本能满足数据表相关的所有查询，所以处理表相关的逻辑时优先用快捷方法，如果快捷方法不能实现的，可用query或mutate，如果能确定类型结构，也可以直接用excute执行
+
+特别注意：对于部分graphql语句需要传入枚举参数或变量时，生成器构建时是通过判断参数是否为函数来区分的。
+如：graphql语句`order_by:{id:desc}`在js中是不能写成这样的,会报desc未定义，如果写成`order_by:{id:"desc"}`,则gql不符合期待不会执行成功，此时应该写成`order_by:{id:()=>"desc"}`,graphql-ormify-client生成器在遇到函数时会判定为生成不带引号内容，会调用函数后取出结果作为生成的内容片段。
+
+另外：
+config-lib/hasura-graphql-client里面已导出项目配置好的实例，可以直接使用

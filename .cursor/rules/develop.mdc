@@ -1,0 +1,6 @@
+---
+alwaysApply: true
+---
+开发应该严格按照 [README.md](mdc:nextjs-template/README.md) 项目说明文档规范编写
+完成业务逻辑时围绕着项目schema进行思考，从全局出发先考虑如何构建合理的文件目录，在思考流程逻辑并结合API路由编写route.ts,最后绘制好页面
+项目schema：[schema.graphql](mdc:nextjs-template/graphql/schema.graphql)

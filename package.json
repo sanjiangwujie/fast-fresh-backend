@@ -1,0 +1,37 @@
+{
+  "name": "nextjs-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings 0",
+    "download:schema": "graphql-codegen --config graphql/codegen.ts"
+  },
+  "dependencies": {
+    "@alicloud/dysmsapi20170525": "^4.1.2",
+    "@alicloud/openapi-client": "^0.4.14",
+    "graphql-ormify-client": "^1.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "next": "^16.1.1",
+    "proxy-agent": "^6.5.0",
+    "qiniu": "^7.14.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "wechatpay-node-v3": "^2.2.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^16.1.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
