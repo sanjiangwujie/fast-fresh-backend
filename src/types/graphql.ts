@@ -15,6 +15,7 @@ export type Scalars = {
   bigint: { input: any; output: any; }
   jsonb: { input: any; output: any; }
   numeric: { input: any; output: any; }
+  timestamp: { input: any; output: any; }
   timestamptz: { input: any; output: any; }
 };
 
@@ -75,6 +76,251 @@ export type String_Comparison_Exp = {
   _regex?: InputMaybe<Scalars['String']['input']>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** 轮播图 */
+export type Banners = {
+  __typename?: 'banners';
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['bigint']['output'];
+  /** image/video */
+  media_file_type: Scalars['String']['output'];
+  /** 轮播资源路径 */
+  media_file_url?: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['timestamptz']['output'];
+};
+
+/** aggregated selection of "banners" */
+export type Banners_Aggregate = {
+  __typename?: 'banners_aggregate';
+  aggregate?: Maybe<Banners_Aggregate_Fields>;
+  nodes: Array<Banners>;
+};
+
+/** aggregate fields of "banners" */
+export type Banners_Aggregate_Fields = {
+  __typename?: 'banners_aggregate_fields';
+  avg?: Maybe<Banners_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Banners_Max_Fields>;
+  min?: Maybe<Banners_Min_Fields>;
+  stddev?: Maybe<Banners_Stddev_Fields>;
+  stddev_pop?: Maybe<Banners_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Banners_Stddev_Samp_Fields>;
+  sum?: Maybe<Banners_Sum_Fields>;
+  var_pop?: Maybe<Banners_Var_Pop_Fields>;
+  var_samp?: Maybe<Banners_Var_Samp_Fields>;
+  variance?: Maybe<Banners_Variance_Fields>;
+};
+
+
+/** aggregate fields of "banners" */
+export type Banners_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Banners_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Banners_Avg_Fields = {
+  __typename?: 'banners_avg_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "banners". All fields are combined with a logical 'AND'. */
+export type Banners_Bool_Exp = {
+  _and?: InputMaybe<Array<Banners_Bool_Exp>>;
+  _not?: InputMaybe<Banners_Bool_Exp>;
+  _or?: InputMaybe<Array<Banners_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  media_file_type?: InputMaybe<String_Comparison_Exp>;
+  media_file_url?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "banners" */
+export enum Banners_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BannersPkey = 'banners_pkey'
+}
+
+/** input type for incrementing numeric columns in table "banners" */
+export type Banners_Inc_Input = {
+  id?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** input type for inserting data into table "banners" */
+export type Banners_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** image/video */
+  media_file_type?: InputMaybe<Scalars['String']['input']>;
+  /** 轮播资源路径 */
+  media_file_url?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate max on columns */
+export type Banners_Max_Fields = {
+  __typename?: 'banners_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** image/video */
+  media_file_type?: Maybe<Scalars['String']['output']>;
+  /** 轮播资源路径 */
+  media_file_url?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** aggregate min on columns */
+export type Banners_Min_Fields = {
+  __typename?: 'banners_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** image/video */
+  media_file_type?: Maybe<Scalars['String']['output']>;
+  /** 轮播资源路径 */
+  media_file_url?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** response of any mutation on the table "banners" */
+export type Banners_Mutation_Response = {
+  __typename?: 'banners_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Banners>;
+};
+
+/** on_conflict condition type for table "banners" */
+export type Banners_On_Conflict = {
+  constraint: Banners_Constraint;
+  update_columns?: Array<Banners_Update_Column>;
+  where?: InputMaybe<Banners_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "banners". */
+export type Banners_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  media_file_type?: InputMaybe<Order_By>;
+  media_file_url?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: banners */
+export type Banners_Pk_Columns_Input = {
+  id: Scalars['bigint']['input'];
+};
+
+/** select columns of table "banners" */
+export enum Banners_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MediaFileType = 'media_file_type',
+  /** column name */
+  MediaFileUrl = 'media_file_url',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "banners" */
+export type Banners_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** image/video */
+  media_file_type?: InputMaybe<Scalars['String']['input']>;
+  /** 轮播资源路径 */
+  media_file_url?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Banners_Stddev_Fields = {
+  __typename?: 'banners_stddev_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Banners_Stddev_Pop_Fields = {
+  __typename?: 'banners_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Banners_Stddev_Samp_Fields = {
+  __typename?: 'banners_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "banners" */
+export type Banners_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Banners_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Banners_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** image/video */
+  media_file_type?: InputMaybe<Scalars['String']['input']>;
+  /** 轮播资源路径 */
+  media_file_url?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Banners_Sum_Fields = {
+  __typename?: 'banners_sum_fields';
+  id?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** update columns of table "banners" */
+export enum Banners_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MediaFileType = 'media_file_type',
+  /** column name */
+  MediaFileUrl = 'media_file_url',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Banners_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Banners_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Banners_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Banners_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Banners_Var_Pop_Fields = {
+  __typename?: 'banners_var_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Banners_Var_Samp_Fields = {
+  __typename?: 'banners_var_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Banners_Variance_Fields = {
+  __typename?: 'banners_variance_fields';
+  id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** 批次媒体文件表 */
@@ -1009,7 +1255,9 @@ export type Carts_Bool_Exp = {
 /** unique or primary key constraints on table "carts" */
 export enum Carts_Constraint {
   /** unique or primary key constraint on columns "id" */
-  CartsPkey = 'carts_pkey'
+  CartsPkey = 'carts_pkey',
+  /** unique or primary key constraint on columns "user_users", "product_products" */
+  CartsUserUsersProductProductsKey = 'carts_user_users_product_products_key'
 }
 
 /** input type for incrementing numeric columns in table "carts" */
@@ -1343,6 +1591,8 @@ export type Carts_Variance_Order_By = {
 /** 分类表 */
 export type Categories = {
   __typename?: 'categories';
+  /** 分类类别，如 水果、蔬菜 */
+  category_name?: Maybe<Scalars['String']['output']>;
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
   /** 分类名称，如 苹果、香蕉、车厘子 */
@@ -1415,6 +1665,7 @@ export type Categories_Bool_Exp = {
   _and?: InputMaybe<Array<Categories_Bool_Exp>>;
   _not?: InputMaybe<Categories_Bool_Exp>;
   _or?: InputMaybe<Array<Categories_Bool_Exp>>;
+  category_name?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -1436,6 +1687,8 @@ export type Categories_Inc_Input = {
 
 /** input type for inserting data into table "categories" */
 export type Categories_Insert_Input = {
+  /** 分类类别，如 水果、蔬菜 */
+  category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
@@ -1447,6 +1700,8 @@ export type Categories_Insert_Input = {
 /** aggregate max on columns */
 export type Categories_Max_Fields = {
   __typename?: 'categories_max_fields';
+  /** 分类类别，如 水果、蔬菜 */
+  category_name?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
@@ -1457,6 +1712,8 @@ export type Categories_Max_Fields = {
 /** aggregate min on columns */
 export type Categories_Min_Fields = {
   __typename?: 'categories_min_fields';
+  /** 分类类别，如 水果、蔬菜 */
+  category_name?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
@@ -1489,6 +1746,7 @@ export type Categories_On_Conflict = {
 
 /** Ordering options when selecting data from "categories". */
 export type Categories_Order_By = {
+  category_name?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
@@ -1504,6 +1762,8 @@ export type Categories_Pk_Columns_Input = {
 /** select columns of table "categories" */
 export enum Categories_Select_Column {
   /** column name */
+  CategoryName = 'category_name',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
@@ -1515,6 +1775,8 @@ export enum Categories_Select_Column {
 
 /** input type for updating data in table "categories" */
 export type Categories_Set_Input = {
+  /** 分类类别，如 水果、蔬菜 */
+  category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
@@ -1550,6 +1812,8 @@ export type Categories_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Categories_Stream_Cursor_Value_Input = {
+  /** 分类类别，如 水果、蔬菜 */
+  category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
@@ -1565,6 +1829,8 @@ export type Categories_Sum_Fields = {
 
 /** update columns of table "categories" */
 export enum Categories_Update_Column {
+  /** column name */
+  CategoryName = 'category_name',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -2030,6 +2296,10 @@ export type Jsonb_Comparison_Exp = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "banners" */
+  delete_banners?: Maybe<Banners_Mutation_Response>;
+  /** delete single row from the table: "banners" */
+  delete_banners_by_pk?: Maybe<Banners>;
   /** delete data from the table: "batch_media_files" */
   delete_batch_media_files?: Maybe<Batch_Media_Files_Mutation_Response>;
   /** delete single row from the table: "batch_media_files" */
@@ -2066,6 +2336,10 @@ export type Mutation_Root = {
   delete_origins?: Maybe<Origins_Mutation_Response>;
   /** delete single row from the table: "origins" */
   delete_origins_by_pk?: Maybe<Origins>;
+  /** delete data from the table: "product_price_history" */
+  delete_product_price_history?: Maybe<Product_Price_History_Mutation_Response>;
+  /** delete single row from the table: "product_price_history" */
+  delete_product_price_history_by_pk?: Maybe<Product_Price_History>;
   /** delete data from the table: "products" */
   delete_products?: Maybe<Products_Mutation_Response>;
   /** delete single row from the table: "products" */
@@ -2078,6 +2352,10 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "banners" */
+  insert_banners?: Maybe<Banners_Mutation_Response>;
+  /** insert a single row into the table: "banners" */
+  insert_banners_one?: Maybe<Banners>;
   /** insert data into the table: "batch_media_files" */
   insert_batch_media_files?: Maybe<Batch_Media_Files_Mutation_Response>;
   /** insert a single row into the table: "batch_media_files" */
@@ -2114,6 +2392,10 @@ export type Mutation_Root = {
   insert_origins?: Maybe<Origins_Mutation_Response>;
   /** insert a single row into the table: "origins" */
   insert_origins_one?: Maybe<Origins>;
+  /** insert data into the table: "product_price_history" */
+  insert_product_price_history?: Maybe<Product_Price_History_Mutation_Response>;
+  /** insert a single row into the table: "product_price_history" */
+  insert_product_price_history_one?: Maybe<Product_Price_History>;
   /** insert data into the table: "products" */
   insert_products?: Maybe<Products_Mutation_Response>;
   /** insert a single row into the table: "products" */
@@ -2126,6 +2408,12 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "banners" */
+  update_banners?: Maybe<Banners_Mutation_Response>;
+  /** update single row of the table: "banners" */
+  update_banners_by_pk?: Maybe<Banners>;
+  /** update multiples rows of table: "banners" */
+  update_banners_many?: Maybe<Array<Maybe<Banners_Mutation_Response>>>;
   /** update data of the table: "batch_media_files" */
   update_batch_media_files?: Maybe<Batch_Media_Files_Mutation_Response>;
   /** update single row of the table: "batch_media_files" */
@@ -2180,6 +2468,12 @@ export type Mutation_Root = {
   update_origins_by_pk?: Maybe<Origins>;
   /** update multiples rows of table: "origins" */
   update_origins_many?: Maybe<Array<Maybe<Origins_Mutation_Response>>>;
+  /** update data of the table: "product_price_history" */
+  update_product_price_history?: Maybe<Product_Price_History_Mutation_Response>;
+  /** update single row of the table: "product_price_history" */
+  update_product_price_history_by_pk?: Maybe<Product_Price_History>;
+  /** update multiples rows of table: "product_price_history" */
+  update_product_price_history_many?: Maybe<Array<Maybe<Product_Price_History_Mutation_Response>>>;
   /** update data of the table: "products" */
   update_products?: Maybe<Products_Mutation_Response>;
   /** update single row of the table: "products" */
@@ -2198,6 +2492,18 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_BannersArgs = {
+  where: Banners_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Banners_By_PkArgs = {
+  id: Scalars['bigint']['input'];
 };
 
 
@@ -2310,6 +2616,18 @@ export type Mutation_RootDelete_Origins_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Product_Price_HistoryArgs = {
+  where: Product_Price_History_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Product_Price_History_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_ProductsArgs = {
   where: Products_Bool_Exp;
 };
@@ -2342,6 +2660,20 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['bigint']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_BannersArgs = {
+  objects: Array<Banners_Insert_Input>;
+  on_conflict?: InputMaybe<Banners_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Banners_OneArgs = {
+  object: Banners_Insert_Input;
+  on_conflict?: InputMaybe<Banners_On_Conflict>;
 };
 
 
@@ -2472,6 +2804,20 @@ export type Mutation_RootInsert_Origins_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Product_Price_HistoryArgs = {
+  objects: Array<Product_Price_History_Insert_Input>;
+  on_conflict?: InputMaybe<Product_Price_History_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Product_Price_History_OneArgs = {
+  object: Product_Price_History_Insert_Input;
+  on_conflict?: InputMaybe<Product_Price_History_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_ProductsArgs = {
   objects: Array<Products_Insert_Input>;
   on_conflict?: InputMaybe<Products_On_Conflict>;
@@ -2510,6 +2856,28 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_BannersArgs = {
+  _inc?: InputMaybe<Banners_Inc_Input>;
+  _set?: InputMaybe<Banners_Set_Input>;
+  where: Banners_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Banners_By_PkArgs = {
+  _inc?: InputMaybe<Banners_Inc_Input>;
+  _set?: InputMaybe<Banners_Set_Input>;
+  pk_columns: Banners_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Banners_ManyArgs = {
+  updates: Array<Banners_Updates>;
 };
 
 
@@ -2718,6 +3086,28 @@ export type Mutation_RootUpdate_Origins_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Origins_ManyArgs = {
   updates: Array<Origins_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Product_Price_HistoryArgs = {
+  _inc?: InputMaybe<Product_Price_History_Inc_Input>;
+  _set?: InputMaybe<Product_Price_History_Set_Input>;
+  where: Product_Price_History_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Product_Price_History_By_PkArgs = {
+  _inc?: InputMaybe<Product_Price_History_Inc_Input>;
+  _set?: InputMaybe<Product_Price_History_Set_Input>;
+  pk_columns: Product_Price_History_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Product_Price_History_ManyArgs = {
+  updates: Array<Product_Price_History_Updates>;
 };
 
 
@@ -4681,7 +5071,7 @@ export type Orders_Variance_Order_By = {
 /** 产地表 */
 export type Origins = {
   __typename?: 'origins';
-  /** 分类名称，如 国内、进口 */
+  /** 产地分类，如 国内、进口 */
   category_name?: Maybe<Scalars['String']['output']>;
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['Int']['output'];
@@ -4777,7 +5167,7 @@ export type Origins_Inc_Input = {
 
 /** input type for inserting data into table "origins" */
 export type Origins_Insert_Input = {
-  /** 分类名称，如 国内、进口 */
+  /** 产地分类，如 国内、进口 */
   category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -4790,7 +5180,7 @@ export type Origins_Insert_Input = {
 /** aggregate max on columns */
 export type Origins_Max_Fields = {
   __typename?: 'origins_max_fields';
-  /** 分类名称，如 国内、进口 */
+  /** 产地分类，如 国内、进口 */
   category_name?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -4802,7 +5192,7 @@ export type Origins_Max_Fields = {
 /** aggregate min on columns */
 export type Origins_Min_Fields = {
   __typename?: 'origins_min_fields';
-  /** 分类名称，如 国内、进口 */
+  /** 产地分类，如 国内、进口 */
   category_name?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -4865,7 +5255,7 @@ export enum Origins_Select_Column {
 
 /** input type for updating data in table "origins" */
 export type Origins_Set_Input = {
-  /** 分类名称，如 国内、进口 */
+  /** 产地分类，如 国内、进口 */
   category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -4902,7 +5292,7 @@ export type Origins_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Origins_Stream_Cursor_Value_Input = {
-  /** 分类名称，如 国内、进口 */
+  /** 产地分类，如 国内、进口 */
   category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -4958,9 +5348,331 @@ export type Origins_Variance_Fields = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
+/** 价格历史记录表 */
+export type Product_Price_History = {
+  __typename?: 'product_price_history';
+  /** 变动原因（可选） */
+  change_reason?: Maybe<Scalars['String']['output']>;
+  /** 变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录) */
+  change_type: Scalars['String']['output'];
+  created_at: Scalars['timestamp']['output'];
+  id: Scalars['bigint']['output'];
+  product_products: Scalars['bigint']['output'];
+  /** 记录时间 */
+  recorded_at: Scalars['timestamptz']['output'];
+  /** 记录时的包装单价 */
+  unit_price: Scalars['numeric']['output'];
+  updated_at: Scalars['timestamptz']['output'];
+};
+
+/** aggregated selection of "product_price_history" */
+export type Product_Price_History_Aggregate = {
+  __typename?: 'product_price_history_aggregate';
+  aggregate?: Maybe<Product_Price_History_Aggregate_Fields>;
+  nodes: Array<Product_Price_History>;
+};
+
+/** aggregate fields of "product_price_history" */
+export type Product_Price_History_Aggregate_Fields = {
+  __typename?: 'product_price_history_aggregate_fields';
+  avg?: Maybe<Product_Price_History_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Product_Price_History_Max_Fields>;
+  min?: Maybe<Product_Price_History_Min_Fields>;
+  stddev?: Maybe<Product_Price_History_Stddev_Fields>;
+  stddev_pop?: Maybe<Product_Price_History_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Product_Price_History_Stddev_Samp_Fields>;
+  sum?: Maybe<Product_Price_History_Sum_Fields>;
+  var_pop?: Maybe<Product_Price_History_Var_Pop_Fields>;
+  var_samp?: Maybe<Product_Price_History_Var_Samp_Fields>;
+  variance?: Maybe<Product_Price_History_Variance_Fields>;
+};
+
+
+/** aggregate fields of "product_price_history" */
+export type Product_Price_History_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Product_Price_History_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Product_Price_History_Avg_Fields = {
+  __typename?: 'product_price_history_avg_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  product_products?: Maybe<Scalars['Float']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "product_price_history". All fields are combined with a logical 'AND'. */
+export type Product_Price_History_Bool_Exp = {
+  _and?: InputMaybe<Array<Product_Price_History_Bool_Exp>>;
+  _not?: InputMaybe<Product_Price_History_Bool_Exp>;
+  _or?: InputMaybe<Array<Product_Price_History_Bool_Exp>>;
+  change_reason?: InputMaybe<String_Comparison_Exp>;
+  change_type?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamp_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  product_products?: InputMaybe<Bigint_Comparison_Exp>;
+  recorded_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  unit_price?: InputMaybe<Numeric_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "product_price_history" */
+export enum Product_Price_History_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ProductPriceHistoryPkey = 'product_price_history_pkey'
+}
+
+/** input type for incrementing numeric columns in table "product_price_history" */
+export type Product_Price_History_Inc_Input = {
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  product_products?: InputMaybe<Scalars['bigint']['input']>;
+  /** 记录时的包装单价 */
+  unit_price?: InputMaybe<Scalars['numeric']['input']>;
+};
+
+/** input type for inserting data into table "product_price_history" */
+export type Product_Price_History_Insert_Input = {
+  /** 变动原因（可选） */
+  change_reason?: InputMaybe<Scalars['String']['input']>;
+  /** 变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录) */
+  change_type?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamp']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  product_products?: InputMaybe<Scalars['bigint']['input']>;
+  /** 记录时间 */
+  recorded_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 记录时的包装单价 */
+  unit_price?: InputMaybe<Scalars['numeric']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate max on columns */
+export type Product_Price_History_Max_Fields = {
+  __typename?: 'product_price_history_max_fields';
+  /** 变动原因（可选） */
+  change_reason?: Maybe<Scalars['String']['output']>;
+  /** 变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录) */
+  change_type?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamp']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  product_products?: Maybe<Scalars['bigint']['output']>;
+  /** 记录时间 */
+  recorded_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['numeric']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** aggregate min on columns */
+export type Product_Price_History_Min_Fields = {
+  __typename?: 'product_price_history_min_fields';
+  /** 变动原因（可选） */
+  change_reason?: Maybe<Scalars['String']['output']>;
+  /** 变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录) */
+  change_type?: Maybe<Scalars['String']['output']>;
+  created_at?: Maybe<Scalars['timestamp']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  product_products?: Maybe<Scalars['bigint']['output']>;
+  /** 记录时间 */
+  recorded_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['numeric']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** response of any mutation on the table "product_price_history" */
+export type Product_Price_History_Mutation_Response = {
+  __typename?: 'product_price_history_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Product_Price_History>;
+};
+
+/** on_conflict condition type for table "product_price_history" */
+export type Product_Price_History_On_Conflict = {
+  constraint: Product_Price_History_Constraint;
+  update_columns?: Array<Product_Price_History_Update_Column>;
+  where?: InputMaybe<Product_Price_History_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "product_price_history". */
+export type Product_Price_History_Order_By = {
+  change_reason?: InputMaybe<Order_By>;
+  change_type?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  product_products?: InputMaybe<Order_By>;
+  recorded_at?: InputMaybe<Order_By>;
+  unit_price?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: product_price_history */
+export type Product_Price_History_Pk_Columns_Input = {
+  id: Scalars['bigint']['input'];
+};
+
+/** select columns of table "product_price_history" */
+export enum Product_Price_History_Select_Column {
+  /** column name */
+  ChangeReason = 'change_reason',
+  /** column name */
+  ChangeType = 'change_type',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ProductProducts = 'product_products',
+  /** column name */
+  RecordedAt = 'recorded_at',
+  /** column name */
+  UnitPrice = 'unit_price',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "product_price_history" */
+export type Product_Price_History_Set_Input = {
+  /** 变动原因（可选） */
+  change_reason?: InputMaybe<Scalars['String']['input']>;
+  /** 变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录) */
+  change_type?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamp']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  product_products?: InputMaybe<Scalars['bigint']['input']>;
+  /** 记录时间 */
+  recorded_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 记录时的包装单价 */
+  unit_price?: InputMaybe<Scalars['numeric']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Product_Price_History_Stddev_Fields = {
+  __typename?: 'product_price_history_stddev_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  product_products?: Maybe<Scalars['Float']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Product_Price_History_Stddev_Pop_Fields = {
+  __typename?: 'product_price_history_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  product_products?: Maybe<Scalars['Float']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Product_Price_History_Stddev_Samp_Fields = {
+  __typename?: 'product_price_history_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  product_products?: Maybe<Scalars['Float']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "product_price_history" */
+export type Product_Price_History_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Product_Price_History_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Product_Price_History_Stream_Cursor_Value_Input = {
+  /** 变动原因（可选） */
+  change_reason?: InputMaybe<Scalars['String']['input']>;
+  /** 变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录) */
+  change_type?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamp']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  product_products?: InputMaybe<Scalars['bigint']['input']>;
+  /** 记录时间 */
+  recorded_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 记录时的包装单价 */
+  unit_price?: InputMaybe<Scalars['numeric']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Product_Price_History_Sum_Fields = {
+  __typename?: 'product_price_history_sum_fields';
+  id?: Maybe<Scalars['bigint']['output']>;
+  product_products?: Maybe<Scalars['bigint']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['numeric']['output']>;
+};
+
+/** update columns of table "product_price_history" */
+export enum Product_Price_History_Update_Column {
+  /** column name */
+  ChangeReason = 'change_reason',
+  /** column name */
+  ChangeType = 'change_type',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ProductProducts = 'product_products',
+  /** column name */
+  RecordedAt = 'recorded_at',
+  /** column name */
+  UnitPrice = 'unit_price',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Product_Price_History_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Product_Price_History_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Product_Price_History_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Product_Price_History_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Product_Price_History_Var_Pop_Fields = {
+  __typename?: 'product_price_history_var_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  product_products?: Maybe<Scalars['Float']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Product_Price_History_Var_Samp_Fields = {
+  __typename?: 'product_price_history_var_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  product_products?: Maybe<Scalars['Float']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Product_Price_History_Variance_Fields = {
+  __typename?: 'product_price_history_variance_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  product_products?: Maybe<Scalars['Float']['output']>;
+  /** 记录时的包装单价 */
+  unit_price?: Maybe<Scalars['Float']['output']>;
+};
+
 /** 产品表 */
 export type Products = {
   __typename?: 'products';
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   batch: Batches;
   batch_batches: Scalars['bigint']['output'];
@@ -4972,11 +5684,17 @@ export type Products = {
   category?: Maybe<Categories>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
   created_at: Scalars['timestamptz']['output'];
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: Maybe<Scalars['String']['output']>;
+  /** 毛重 */
+  gross_weight: Scalars['numeric']['output'];
   id: Scalars['bigint']['output'];
   /** 产品图片地址 */
   image_url?: Maybe<Scalars['String']['output']>;
   /** 产品名称 */
   name: Scalars['String']['output'];
+  /** 净重 */
+  net_weight: Scalars['numeric']['output'];
   /** An array relationship */
   order_products: Array<Order_Products>;
   /** An aggregate relationship */
@@ -4984,13 +5702,15 @@ export type Products = {
   /** An object relationship */
   origin?: Maybe<Origins>;
   origin_origins?: Maybe<Scalars['bigint']['output']>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: Maybe<Scalars['String']['output']>;
   /** 销量 */
   sales: Scalars['bigint']['output'];
-  /** 单位 */
+  /** 包装单位 */
   unit?: Maybe<Scalars['String']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['numeric']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['bigint']['output']>;
   updated_at: Scalars['timestamptz']['output'];
 };
@@ -5103,13 +5823,17 @@ export type Products_Avg_Fields = {
   __typename?: 'products_avg_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['Float']['output']>;
   origin_origins?: Maybe<Scalars['Float']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['Float']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['Float']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -5117,13 +5841,17 @@ export type Products_Avg_Fields = {
 export type Products_Avg_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
@@ -5132,6 +5860,7 @@ export type Products_Bool_Exp = {
   _and?: InputMaybe<Array<Products_Bool_Exp>>;
   _not?: InputMaybe<Products_Bool_Exp>;
   _or?: InputMaybe<Array<Products_Bool_Exp>>;
+  after_sales_html?: InputMaybe<String_Comparison_Exp>;
   batch?: InputMaybe<Batches_Bool_Exp>;
   batch_batches?: InputMaybe<Bigint_Comparison_Exp>;
   carts?: InputMaybe<Carts_Bool_Exp>;
@@ -5139,13 +5868,17 @@ export type Products_Bool_Exp = {
   category?: InputMaybe<Categories_Bool_Exp>;
   category_categories?: InputMaybe<Bigint_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  detail_html?: InputMaybe<String_Comparison_Exp>;
+  gross_weight?: InputMaybe<Numeric_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
   image_url?: InputMaybe<String_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  net_weight?: InputMaybe<Numeric_Comparison_Exp>;
   order_products?: InputMaybe<Order_Products_Bool_Exp>;
   order_products_aggregate?: InputMaybe<Order_Products_Aggregate_Bool_Exp>;
   origin?: InputMaybe<Origins_Bool_Exp>;
   origin_origins?: InputMaybe<Bigint_Comparison_Exp>;
+  retail_unit?: InputMaybe<String_Comparison_Exp>;
   sales?: InputMaybe<Bigint_Comparison_Exp>;
   unit?: InputMaybe<String_Comparison_Exp>;
   unit_price?: InputMaybe<Numeric_Comparison_Exp>;
@@ -5165,39 +5898,53 @@ export enum Products_Constraint {
 export type Products_Inc_Input = {
   batch_batches?: InputMaybe<Scalars['bigint']['input']>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 净重 */
+  net_weight?: InputMaybe<Scalars['numeric']['input']>;
   origin_origins?: InputMaybe<Scalars['bigint']['input']>;
   /** 销量 */
   sales?: InputMaybe<Scalars['bigint']['input']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Scalars['numeric']['input']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Scalars['bigint']['input']>;
 };
 
 /** input type for inserting data into table "products" */
 export type Products_Insert_Input = {
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: InputMaybe<Scalars['String']['input']>;
   batch?: InputMaybe<Batches_Obj_Rel_Insert_Input>;
   batch_batches?: InputMaybe<Scalars['bigint']['input']>;
   carts?: InputMaybe<Carts_Arr_Rel_Insert_Input>;
   category?: InputMaybe<Categories_Obj_Rel_Insert_Input>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: InputMaybe<Scalars['String']['input']>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Scalars['String']['input']>;
   /** 产品名称 */
   name?: InputMaybe<Scalars['String']['input']>;
+  /** 净重 */
+  net_weight?: InputMaybe<Scalars['numeric']['input']>;
   order_products?: InputMaybe<Order_Products_Arr_Rel_Insert_Input>;
   origin?: InputMaybe<Origins_Obj_Rel_Insert_Input>;
   origin_origins?: InputMaybe<Scalars['bigint']['input']>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: InputMaybe<Scalars['String']['input']>;
   /** 销量 */
   sales?: InputMaybe<Scalars['bigint']['input']>;
-  /** 单位 */
+  /** 包装单位 */
   unit?: InputMaybe<Scalars['String']['input']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Scalars['numeric']['input']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Scalars['bigint']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
 };
@@ -5205,44 +5952,64 @@ export type Products_Insert_Input = {
 /** aggregate max on columns */
 export type Products_Max_Fields = {
   __typename?: 'products_max_fields';
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: Maybe<Scalars['String']['output']>;
   batch_batches?: Maybe<Scalars['bigint']['output']>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: Maybe<Scalars['String']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['numeric']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   /** 产品图片地址 */
   image_url?: Maybe<Scalars['String']['output']>;
   /** 产品名称 */
   name?: Maybe<Scalars['String']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['numeric']['output']>;
   origin_origins?: Maybe<Scalars['bigint']['output']>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: Maybe<Scalars['String']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['bigint']['output']>;
-  /** 单位 */
+  /** 包装单位 */
   unit?: Maybe<Scalars['String']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['numeric']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['bigint']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
 };
 
 /** order by max() on columns of table "products" */
 export type Products_Max_Order_By = {
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: InputMaybe<Order_By>;
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Order_By>;
   /** 产品名称 */
   name?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单位 */
+  /** 包装单位 */
   unit?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -5250,44 +6017,64 @@ export type Products_Max_Order_By = {
 /** aggregate min on columns */
 export type Products_Min_Fields = {
   __typename?: 'products_min_fields';
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: Maybe<Scalars['String']['output']>;
   batch_batches?: Maybe<Scalars['bigint']['output']>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: Maybe<Scalars['String']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['numeric']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   /** 产品图片地址 */
   image_url?: Maybe<Scalars['String']['output']>;
   /** 产品名称 */
   name?: Maybe<Scalars['String']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['numeric']['output']>;
   origin_origins?: Maybe<Scalars['bigint']['output']>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: Maybe<Scalars['String']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['bigint']['output']>;
-  /** 单位 */
+  /** 包装单位 */
   unit?: Maybe<Scalars['String']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['numeric']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['bigint']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
 };
 
 /** order by min() on columns of table "products" */
 export type Products_Min_Order_By = {
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: InputMaybe<Order_By>;
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Order_By>;
   /** 产品名称 */
   name?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单位 */
+  /** 包装单位 */
   unit?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -5317,18 +6104,23 @@ export type Products_On_Conflict = {
 
 /** Ordering options when selecting data from "products". */
 export type Products_Order_By = {
+  after_sales_html?: InputMaybe<Order_By>;
   batch?: InputMaybe<Batches_Order_By>;
   batch_batches?: InputMaybe<Order_By>;
   carts_aggregate?: InputMaybe<Carts_Aggregate_Order_By>;
   category?: InputMaybe<Categories_Order_By>;
   category_categories?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  detail_html?: InputMaybe<Order_By>;
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image_url?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  net_weight?: InputMaybe<Order_By>;
   order_products_aggregate?: InputMaybe<Order_Products_Aggregate_Order_By>;
   origin?: InputMaybe<Origins_Order_By>;
   origin_origins?: InputMaybe<Order_By>;
+  retail_unit?: InputMaybe<Order_By>;
   sales?: InputMaybe<Order_By>;
   unit?: InputMaybe<Order_By>;
   unit_price?: InputMaybe<Order_By>;
@@ -5344,11 +6136,17 @@ export type Products_Pk_Columns_Input = {
 /** select columns of table "products" */
 export enum Products_Select_Column {
   /** column name */
+  AfterSalesHtml = 'after_sales_html',
+  /** column name */
   BatchBatches = 'batch_batches',
   /** column name */
   CategoryCategories = 'category_categories',
   /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  DetailHtml = 'detail_html',
+  /** column name */
+  GrossWeight = 'gross_weight',
   /** column name */
   Id = 'id',
   /** column name */
@@ -5356,7 +6154,11 @@ export enum Products_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
+  NetWeight = 'net_weight',
+  /** column name */
   OriginOrigins = 'origin_origins',
+  /** column name */
+  RetailUnit = 'retail_unit',
   /** column name */
   Sales = 'sales',
   /** column name */
@@ -5371,22 +6173,32 @@ export enum Products_Select_Column {
 
 /** input type for updating data in table "products" */
 export type Products_Set_Input = {
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: InputMaybe<Scalars['String']['input']>;
   batch_batches?: InputMaybe<Scalars['bigint']['input']>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: InputMaybe<Scalars['String']['input']>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Scalars['String']['input']>;
   /** 产品名称 */
   name?: InputMaybe<Scalars['String']['input']>;
+  /** 净重 */
+  net_weight?: InputMaybe<Scalars['numeric']['input']>;
   origin_origins?: InputMaybe<Scalars['bigint']['input']>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: InputMaybe<Scalars['String']['input']>;
   /** 销量 */
   sales?: InputMaybe<Scalars['bigint']['input']>;
-  /** 单位 */
+  /** 包装单位 */
   unit?: InputMaybe<Scalars['String']['input']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Scalars['numeric']['input']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Scalars['bigint']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
 };
@@ -5396,13 +6208,17 @@ export type Products_Stddev_Fields = {
   __typename?: 'products_stddev_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['Float']['output']>;
   origin_origins?: Maybe<Scalars['Float']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['Float']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['Float']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -5410,13 +6226,17 @@ export type Products_Stddev_Fields = {
 export type Products_Stddev_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
@@ -5425,13 +6245,17 @@ export type Products_Stddev_Pop_Fields = {
   __typename?: 'products_stddev_pop_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['Float']['output']>;
   origin_origins?: Maybe<Scalars['Float']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['Float']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['Float']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -5439,13 +6263,17 @@ export type Products_Stddev_Pop_Fields = {
 export type Products_Stddev_Pop_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
@@ -5454,13 +6282,17 @@ export type Products_Stddev_Samp_Fields = {
   __typename?: 'products_stddev_samp_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['Float']['output']>;
   origin_origins?: Maybe<Scalars['Float']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['Float']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['Float']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -5468,13 +6300,17 @@ export type Products_Stddev_Samp_Fields = {
 export type Products_Stddev_Samp_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
@@ -5488,22 +6324,32 @@ export type Products_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Products_Stream_Cursor_Value_Input = {
+  /** 售后须知，可以是富文本 可以是纯文本 */
+  after_sales_html?: InputMaybe<Scalars['String']['input']>;
   batch_batches?: InputMaybe<Scalars['bigint']['input']>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 商品详情，可以是富文本可以是纯文本 */
+  detail_html?: InputMaybe<Scalars['String']['input']>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Scalars['String']['input']>;
   /** 产品名称 */
   name?: InputMaybe<Scalars['String']['input']>;
+  /** 净重 */
+  net_weight?: InputMaybe<Scalars['numeric']['input']>;
   origin_origins?: InputMaybe<Scalars['bigint']['input']>;
+  /** 零售单位-供门店参考 */
+  retail_unit?: InputMaybe<Scalars['String']['input']>;
   /** 销量 */
   sales?: InputMaybe<Scalars['bigint']['input']>;
-  /** 单位 */
+  /** 包装单位 */
   unit?: InputMaybe<Scalars['String']['input']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Scalars['numeric']['input']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Scalars['bigint']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
 };
@@ -5513,13 +6359,17 @@ export type Products_Sum_Fields = {
   __typename?: 'products_sum_fields';
   batch_batches?: Maybe<Scalars['bigint']['output']>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['numeric']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['numeric']['output']>;
   origin_origins?: Maybe<Scalars['bigint']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['bigint']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['numeric']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['bigint']['output']>;
 };
 
@@ -5527,18 +6377,24 @@ export type Products_Sum_Fields = {
 export type Products_Sum_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "products" */
 export enum Products_Update_Column {
+  /** column name */
+  AfterSalesHtml = 'after_sales_html',
   /** column name */
   BatchBatches = 'batch_batches',
   /** column name */
@@ -5546,13 +6402,21 @@ export enum Products_Update_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
+  DetailHtml = 'detail_html',
+  /** column name */
+  GrossWeight = 'gross_weight',
+  /** column name */
   Id = 'id',
   /** column name */
   ImageUrl = 'image_url',
   /** column name */
   Name = 'name',
   /** column name */
+  NetWeight = 'net_weight',
+  /** column name */
   OriginOrigins = 'origin_origins',
+  /** column name */
+  RetailUnit = 'retail_unit',
   /** column name */
   Sales = 'sales',
   /** column name */
@@ -5579,13 +6443,17 @@ export type Products_Var_Pop_Fields = {
   __typename?: 'products_var_pop_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['Float']['output']>;
   origin_origins?: Maybe<Scalars['Float']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['Float']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['Float']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -5593,13 +6461,17 @@ export type Products_Var_Pop_Fields = {
 export type Products_Var_Pop_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
@@ -5608,13 +6480,17 @@ export type Products_Var_Samp_Fields = {
   __typename?: 'products_var_samp_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['Float']['output']>;
   origin_origins?: Maybe<Scalars['Float']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['Float']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['Float']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -5622,13 +6498,17 @@ export type Products_Var_Samp_Fields = {
 export type Products_Var_Samp_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
@@ -5637,13 +6517,17 @@ export type Products_Variance_Fields = {
   __typename?: 'products_variance_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 毛重 */
+  gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
+  /** 净重 */
+  net_weight?: Maybe<Scalars['Float']['output']>;
   origin_origins?: Maybe<Scalars['Float']['output']>;
   /** 销量 */
   sales?: Maybe<Scalars['Float']['output']>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: Maybe<Scalars['Float']['output']>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -5651,18 +6535,28 @@ export type Products_Variance_Fields = {
 export type Products_Variance_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 毛重 */
+  gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** 净重 */
+  net_weight?: InputMaybe<Order_By>;
   origin_origins?: InputMaybe<Order_By>;
   /** 销量 */
   sales?: InputMaybe<Order_By>;
-  /** 单价 */
+  /** 包装单价 */
   unit_price?: InputMaybe<Order_By>;
-  /** 单位库存，售卖单位的库存 */
+  /** 包装单位库存 */
   unit_stock?: InputMaybe<Order_By>;
 };
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "banners" */
+  banners: Array<Banners>;
+  /** fetch aggregated fields from the table: "banners" */
+  banners_aggregate: Banners_Aggregate;
+  /** fetch data from the table: "banners" using primary key columns */
+  banners_by_pk?: Maybe<Banners>;
   /** An array relationship */
   batch_media_files: Array<Batch_Media_Files>;
   /** An aggregate relationship */
@@ -5717,6 +6611,12 @@ export type Query_Root = {
   origins_aggregate: Origins_Aggregate;
   /** fetch data from the table: "origins" using primary key columns */
   origins_by_pk?: Maybe<Origins>;
+  /** fetch data from the table: "product_price_history" */
+  product_price_history: Array<Product_Price_History>;
+  /** fetch aggregated fields from the table: "product_price_history" */
+  product_price_history_aggregate: Product_Price_History_Aggregate;
+  /** fetch data from the table: "product_price_history" using primary key columns */
+  product_price_history_by_pk?: Maybe<Product_Price_History>;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
@@ -5735,6 +6635,29 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+export type Query_RootBannersArgs = {
+  distinct_on?: InputMaybe<Array<Banners_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Banners_Order_By>>;
+  where?: InputMaybe<Banners_Bool_Exp>;
+};
+
+
+export type Query_RootBanners_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Banners_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Banners_Order_By>>;
+  where?: InputMaybe<Banners_Bool_Exp>;
+};
+
+
+export type Query_RootBanners_By_PkArgs = {
+  id: Scalars['bigint']['input'];
 };
 
 
@@ -5945,6 +6868,29 @@ export type Query_RootOrigins_By_PkArgs = {
 };
 
 
+export type Query_RootProduct_Price_HistoryArgs = {
+  distinct_on?: InputMaybe<Array<Product_Price_History_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Product_Price_History_Order_By>>;
+  where?: InputMaybe<Product_Price_History_Bool_Exp>;
+};
+
+
+export type Query_RootProduct_Price_History_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Product_Price_History_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Product_Price_History_Order_By>>;
+  where?: InputMaybe<Product_Price_History_Bool_Exp>;
+};
+
+
+export type Query_RootProduct_Price_History_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
 export type Query_RootProductsArgs = {
   distinct_on?: InputMaybe<Array<Products_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -6015,6 +6961,14 @@ export type Query_RootUsers_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "banners" */
+  banners: Array<Banners>;
+  /** fetch aggregated fields from the table: "banners" */
+  banners_aggregate: Banners_Aggregate;
+  /** fetch data from the table: "banners" using primary key columns */
+  banners_by_pk?: Maybe<Banners>;
+  /** fetch data from the table in a streaming manner: "banners" */
+  banners_stream: Array<Banners>;
   /** An array relationship */
   batch_media_files: Array<Batch_Media_Files>;
   /** An aggregate relationship */
@@ -6087,6 +7041,14 @@ export type Subscription_Root = {
   origins_by_pk?: Maybe<Origins>;
   /** fetch data from the table in a streaming manner: "origins" */
   origins_stream: Array<Origins>;
+  /** fetch data from the table: "product_price_history" */
+  product_price_history: Array<Product_Price_History>;
+  /** fetch aggregated fields from the table: "product_price_history" */
+  product_price_history_aggregate: Product_Price_History_Aggregate;
+  /** fetch data from the table: "product_price_history" using primary key columns */
+  product_price_history_by_pk?: Maybe<Product_Price_History>;
+  /** fetch data from the table in a streaming manner: "product_price_history" */
+  product_price_history_stream: Array<Product_Price_History>;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
@@ -6111,6 +7073,36 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+};
+
+
+export type Subscription_RootBannersArgs = {
+  distinct_on?: InputMaybe<Array<Banners_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Banners_Order_By>>;
+  where?: InputMaybe<Banners_Bool_Exp>;
+};
+
+
+export type Subscription_RootBanners_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Banners_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Banners_Order_By>>;
+  where?: InputMaybe<Banners_Bool_Exp>;
+};
+
+
+export type Subscription_RootBanners_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+export type Subscription_RootBanners_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Banners_Stream_Cursor_Input>>;
+  where?: InputMaybe<Banners_Bool_Exp>;
 };
 
 
@@ -6384,6 +7376,36 @@ export type Subscription_RootOrigins_StreamArgs = {
 };
 
 
+export type Subscription_RootProduct_Price_HistoryArgs = {
+  distinct_on?: InputMaybe<Array<Product_Price_History_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Product_Price_History_Order_By>>;
+  where?: InputMaybe<Product_Price_History_Bool_Exp>;
+};
+
+
+export type Subscription_RootProduct_Price_History_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Product_Price_History_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Product_Price_History_Order_By>>;
+  where?: InputMaybe<Product_Price_History_Bool_Exp>;
+};
+
+
+export type Subscription_RootProduct_Price_History_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+export type Subscription_RootProduct_Price_History_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Product_Price_History_Stream_Cursor_Input>>;
+  where?: InputMaybe<Product_Price_History_Bool_Exp>;
+};
+
+
 export type Subscription_RootProductsArgs = {
   distinct_on?: InputMaybe<Array<Products_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -6471,6 +7493,19 @@ export type Subscription_RootUsers_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Users_Stream_Cursor_Input>>;
   where?: InputMaybe<Users_Bool_Exp>;
+};
+
+/** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
+export type Timestamp_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['timestamp']['input']>;
+  _gt?: InputMaybe<Scalars['timestamp']['input']>;
+  _gte?: InputMaybe<Scalars['timestamp']['input']>;
+  _in?: InputMaybe<Array<Scalars['timestamp']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['timestamp']['input']>;
+  _lte?: InputMaybe<Scalars['timestamp']['input']>;
+  _neq?: InputMaybe<Scalars['timestamp']['input']>;
+  _nin?: InputMaybe<Array<Scalars['timestamp']['input']>>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */

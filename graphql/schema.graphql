@@ -96,6 +96,280 @@ input String_comparison_exp {
   _similar: String
 }
 
+"""轮播图"""
+type banners {
+  created_at: timestamptz!
+  id: bigint!
+
+  """image/video"""
+  media_file_type: String!
+
+  """轮播资源路径"""
+  media_file_url: String
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "banners"
+"""
+type banners_aggregate {
+  aggregate: banners_aggregate_fields
+  nodes: [banners!]!
+}
+
+"""
+aggregate fields of "banners"
+"""
+type banners_aggregate_fields {
+  avg: banners_avg_fields
+  count(columns: [banners_select_column!], distinct: Boolean): Int!
+  max: banners_max_fields
+  min: banners_min_fields
+  stddev: banners_stddev_fields
+  stddev_pop: banners_stddev_pop_fields
+  stddev_samp: banners_stddev_samp_fields
+  sum: banners_sum_fields
+  var_pop: banners_var_pop_fields
+  var_samp: banners_var_samp_fields
+  variance: banners_variance_fields
+}
+
+"""aggregate avg on columns"""
+type banners_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "banners". All fields are combined with a logical 'AND'.
+"""
+input banners_bool_exp {
+  _and: [banners_bool_exp!]
+  _not: banners_bool_exp
+  _or: [banners_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: bigint_comparison_exp
+  media_file_type: String_comparison_exp
+  media_file_url: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "banners"
+"""
+enum banners_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  banners_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "banners"
+"""
+input banners_inc_input {
+  id: bigint
+}
+
+"""
+input type for inserting data into table "banners"
+"""
+input banners_insert_input {
+  created_at: timestamptz
+  id: bigint
+
+  """image/video"""
+  media_file_type: String
+
+  """轮播资源路径"""
+  media_file_url: String
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type banners_max_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """image/video"""
+  media_file_type: String
+
+  """轮播资源路径"""
+  media_file_url: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type banners_min_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """image/video"""
+  media_file_type: String
+
+  """轮播资源路径"""
+  media_file_url: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "banners"
+"""
+type banners_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [banners!]!
+}
+
+"""
+on_conflict condition type for table "banners"
+"""
+input banners_on_conflict {
+  constraint: banners_constraint!
+  update_columns: [banners_update_column!]! = []
+  where: banners_bool_exp
+}
+
+"""Ordering options when selecting data from "banners"."""
+input banners_order_by {
+  created_at: order_by
+  id: order_by
+  media_file_type: order_by
+  media_file_url: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: banners"""
+input banners_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "banners"
+"""
+enum banners_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  media_file_type
+
+  """column name"""
+  media_file_url
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "banners"
+"""
+input banners_set_input {
+  created_at: timestamptz
+  id: bigint
+
+  """image/video"""
+  media_file_type: String
+
+  """轮播资源路径"""
+  media_file_url: String
+  updated_at: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type banners_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type banners_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type banners_stddev_samp_fields {
+  id: Float
+}
+
+"""
+Streaming cursor of the table "banners"
+"""
+input banners_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: banners_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input banners_stream_cursor_value_input {
+  created_at: timestamptz
+  id: bigint
+
+  """image/video"""
+  media_file_type: String
+
+  """轮播资源路径"""
+  media_file_url: String
+  updated_at: timestamptz
+}
+
+"""aggregate sum on columns"""
+type banners_sum_fields {
+  id: bigint
+}
+
+"""
+update columns of table "banners"
+"""
+enum banners_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  media_file_type
+
+  """column name"""
+  media_file_url
+
+  """column name"""
+  updated_at
+}
+
+input banners_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: banners_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: banners_set_input
+
+  """filter the rows which have to be updated"""
+  where: banners_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type banners_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type banners_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type banners_variance_fields {
+  id: Float
+}
+
 """批次媒体文件表"""
 type batch_media_files {
   """An object relationship"""
@@ -1173,6 +1447,11 @@ enum carts_constraint {
   unique or primary key constraint on columns "id"
   """
   carts_pkey
+
+  """
+  unique or primary key constraint on columns "user_users", "product_products"
+  """
+  carts_user_users_product_products_key
 }
 
 """
@@ -1574,6 +1853,8 @@ input carts_variance_order_by {
 
 """分类表"""
 type categories {
+  """分类类别，如 水果、蔬菜"""
+  category_name: String
   created_at: timestamptz!
   id: bigint!
 
@@ -1655,6 +1936,7 @@ input categories_bool_exp {
   _and: [categories_bool_exp!]
   _not: categories_bool_exp
   _or: [categories_bool_exp!]
+  category_name: String_comparison_exp
   created_at: timestamptz_comparison_exp
   id: bigint_comparison_exp
   name: String_comparison_exp
@@ -1684,6 +1966,8 @@ input categories_inc_input {
 input type for inserting data into table "categories"
 """
 input categories_insert_input {
+  """分类类别，如 水果、蔬菜"""
+  category_name: String
   created_at: timestamptz
   id: bigint
 
@@ -1695,6 +1979,8 @@ input categories_insert_input {
 
 """aggregate max on columns"""
 type categories_max_fields {
+  """分类类别，如 水果、蔬菜"""
+  category_name: String
   created_at: timestamptz
   id: bigint
 
@@ -1705,6 +1991,8 @@ type categories_max_fields {
 
 """aggregate min on columns"""
 type categories_min_fields {
+  """分类类别，如 水果、蔬菜"""
+  category_name: String
   created_at: timestamptz
   id: bigint
 
@@ -1745,6 +2033,7 @@ input categories_on_conflict {
 
 """Ordering options when selecting data from "categories"."""
 input categories_order_by {
+  category_name: order_by
   created_at: order_by
   id: order_by
   name: order_by
@@ -1762,6 +2051,9 @@ select columns of table "categories"
 """
 enum categories_select_column {
   """column name"""
+  category_name
+
+  """column name"""
   created_at
 
   """column name"""
@@ -1778,6 +2070,8 @@ enum categories_select_column {
 input type for updating data in table "categories"
 """
 input categories_set_input {
+  """分类类别，如 水果、蔬菜"""
+  category_name: String
   created_at: timestamptz
   id: bigint
 
@@ -1814,6 +2108,8 @@ input categories_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input categories_stream_cursor_value_input {
+  """分类类别，如 水果、蔬菜"""
+  category_name: String
   created_at: timestamptz
   id: bigint
 
@@ -1831,6 +2127,9 @@ type categories_sum_fields {
 update columns of table "categories"
 """
 enum categories_update_column {
+  """column name"""
+  category_name
+
   """column name"""
   created_at
 
@@ -2373,6 +2672,19 @@ input jsonb_comparison_exp {
 """mutation root"""
 type mutation_root {
   """
+  delete data from the table: "banners"
+  """
+  delete_banners(
+    """filter the rows which have to be deleted"""
+    where: banners_bool_exp!
+  ): banners_mutation_response
+
+  """
+  delete single row from the table: "banners"
+  """
+  delete_banners_by_pk(id: bigint!): banners
+
+  """
   delete data from the table: "batch_media_files"
   """
   delete_batch_media_files(
@@ -2490,6 +2802,19 @@ type mutation_root {
   delete_origins_by_pk(id: Int!): origins
 
   """
+  delete data from the table: "product_price_history"
+  """
+  delete_product_price_history(
+    """filter the rows which have to be deleted"""
+    where: product_price_history_bool_exp!
+  ): product_price_history_mutation_response
+
+  """
+  delete single row from the table: "product_price_history"
+  """
+  delete_product_price_history_by_pk(id: bigint!): product_price_history
+
+  """
   delete data from the table: "products"
   """
   delete_products(
@@ -2527,6 +2852,28 @@ type mutation_root {
   delete single row from the table: "users"
   """
   delete_users_by_pk(id: bigint!): users
+
+  """
+  insert data into the table: "banners"
+  """
+  insert_banners(
+    """the rows to be inserted"""
+    objects: [banners_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: banners_on_conflict
+  ): banners_mutation_response
+
+  """
+  insert a single row into the table: "banners"
+  """
+  insert_banners_one(
+    """the row to be inserted"""
+    object: banners_insert_input!
+
+    """upsert condition"""
+    on_conflict: banners_on_conflict
+  ): banners
 
   """
   insert data into the table: "batch_media_files"
@@ -2727,6 +3074,28 @@ type mutation_root {
   ): origins
 
   """
+  insert data into the table: "product_price_history"
+  """
+  insert_product_price_history(
+    """the rows to be inserted"""
+    objects: [product_price_history_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: product_price_history_on_conflict
+  ): product_price_history_mutation_response
+
+  """
+  insert a single row into the table: "product_price_history"
+  """
+  insert_product_price_history_one(
+    """the row to be inserted"""
+    object: product_price_history_insert_input!
+
+    """upsert condition"""
+    on_conflict: product_price_history_on_conflict
+  ): product_price_history
+
+  """
   insert data into the table: "products"
   """
   insert_products(
@@ -2791,6 +3160,40 @@ type mutation_root {
     """upsert condition"""
     on_conflict: users_on_conflict
   ): users
+
+  """
+  update data of the table: "banners"
+  """
+  update_banners(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: banners_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: banners_set_input
+
+    """filter the rows which have to be updated"""
+    where: banners_bool_exp!
+  ): banners_mutation_response
+
+  """
+  update single row of the table: "banners"
+  """
+  update_banners_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: banners_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: banners_set_input
+    pk_columns: banners_pk_columns_input!
+  ): banners
+
+  """
+  update multiples rows of table: "banners"
+  """
+  update_banners_many(
+    """updates to execute, in order"""
+    updates: [banners_updates!]!
+  ): [banners_mutation_response]
 
   """
   update data of the table: "batch_media_files"
@@ -3139,6 +3542,40 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [origins_updates!]!
   ): [origins_mutation_response]
+
+  """
+  update data of the table: "product_price_history"
+  """
+  update_product_price_history(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: product_price_history_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: product_price_history_set_input
+
+    """filter the rows which have to be updated"""
+    where: product_price_history_bool_exp!
+  ): product_price_history_mutation_response
+
+  """
+  update single row of the table: "product_price_history"
+  """
+  update_product_price_history_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: product_price_history_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: product_price_history_set_input
+    pk_columns: product_price_history_pk_columns_input!
+  ): product_price_history
+
+  """
+  update multiples rows of table: "product_price_history"
+  """
+  update_product_price_history_many(
+    """updates to execute, in order"""
+    updates: [product_price_history_updates!]!
+  ): [product_price_history_mutation_response]
 
   """
   update data of the table: "products"
@@ -5665,7 +6102,7 @@ input orders_variance_order_by {
 
 """产地表"""
 type origins {
-  """分类名称，如 国内、进口"""
+  """产地分类，如 国内、进口"""
   category_name: String
   created_at: timestamptz!
   id: Int!
@@ -5778,7 +6215,7 @@ input origins_inc_input {
 input type for inserting data into table "origins"
 """
 input origins_insert_input {
-  """分类名称，如 国内、进口"""
+  """产地分类，如 国内、进口"""
   category_name: String
   created_at: timestamptz
   id: Int
@@ -5791,7 +6228,7 @@ input origins_insert_input {
 
 """aggregate max on columns"""
 type origins_max_fields {
-  """分类名称，如 国内、进口"""
+  """产地分类，如 国内、进口"""
   category_name: String
   created_at: timestamptz
   id: Int
@@ -5803,7 +6240,7 @@ type origins_max_fields {
 
 """aggregate min on columns"""
 type origins_min_fields {
-  """分类名称，如 国内、进口"""
+  """产地分类，如 国内、进口"""
   category_name: String
   created_at: timestamptz
   id: Int
@@ -5882,7 +6319,7 @@ enum origins_select_column {
 input type for updating data in table "origins"
 """
 input origins_set_input {
-  """分类名称，如 国内、进口"""
+  """产地分类，如 国内、进口"""
   category_name: String
   created_at: timestamptz
   id: Int
@@ -5920,7 +6357,7 @@ input origins_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input origins_stream_cursor_value_input {
-  """分类名称，如 国内、进口"""
+  """产地分类，如 国内、进口"""
   category_name: String
   created_at: timestamptz
   id: Int
@@ -5981,8 +6418,381 @@ type origins_variance_fields {
   id: Float
 }
 
+"""价格历史记录表"""
+type product_price_history {
+  """变动原因（可选）"""
+  change_reason: String
+
+  """变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录)"""
+  change_type: String!
+  created_at: timestamp!
+  id: bigint!
+  product_products: bigint!
+
+  """记录时间"""
+  recorded_at: timestamptz!
+
+  """记录时的包装单价"""
+  unit_price: numeric!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "product_price_history"
+"""
+type product_price_history_aggregate {
+  aggregate: product_price_history_aggregate_fields
+  nodes: [product_price_history!]!
+}
+
+"""
+aggregate fields of "product_price_history"
+"""
+type product_price_history_aggregate_fields {
+  avg: product_price_history_avg_fields
+  count(columns: [product_price_history_select_column!], distinct: Boolean): Int!
+  max: product_price_history_max_fields
+  min: product_price_history_min_fields
+  stddev: product_price_history_stddev_fields
+  stddev_pop: product_price_history_stddev_pop_fields
+  stddev_samp: product_price_history_stddev_samp_fields
+  sum: product_price_history_sum_fields
+  var_pop: product_price_history_var_pop_fields
+  var_samp: product_price_history_var_samp_fields
+  variance: product_price_history_variance_fields
+}
+
+"""aggregate avg on columns"""
+type product_price_history_avg_fields {
+  id: Float
+  product_products: Float
+
+  """记录时的包装单价"""
+  unit_price: Float
+}
+
+"""
+Boolean expression to filter rows from the table "product_price_history". All fields are combined with a logical 'AND'.
+"""
+input product_price_history_bool_exp {
+  _and: [product_price_history_bool_exp!]
+  _not: product_price_history_bool_exp
+  _or: [product_price_history_bool_exp!]
+  change_reason: String_comparison_exp
+  change_type: String_comparison_exp
+  created_at: timestamp_comparison_exp
+  id: bigint_comparison_exp
+  product_products: bigint_comparison_exp
+  recorded_at: timestamptz_comparison_exp
+  unit_price: numeric_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "product_price_history"
+"""
+enum product_price_history_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  product_price_history_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "product_price_history"
+"""
+input product_price_history_inc_input {
+  id: bigint
+  product_products: bigint
+
+  """记录时的包装单价"""
+  unit_price: numeric
+}
+
+"""
+input type for inserting data into table "product_price_history"
+"""
+input product_price_history_insert_input {
+  """变动原因（可选）"""
+  change_reason: String
+
+  """变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录)"""
+  change_type: String
+  created_at: timestamp
+  id: bigint
+  product_products: bigint
+
+  """记录时间"""
+  recorded_at: timestamptz
+
+  """记录时的包装单价"""
+  unit_price: numeric
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type product_price_history_max_fields {
+  """变动原因（可选）"""
+  change_reason: String
+
+  """变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录)"""
+  change_type: String
+  created_at: timestamp
+  id: bigint
+  product_products: bigint
+
+  """记录时间"""
+  recorded_at: timestamptz
+
+  """记录时的包装单价"""
+  unit_price: numeric
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type product_price_history_min_fields {
+  """变动原因（可选）"""
+  change_reason: String
+
+  """变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录)"""
+  change_type: String
+  created_at: timestamp
+  id: bigint
+  product_products: bigint
+
+  """记录时间"""
+  recorded_at: timestamptz
+
+  """记录时的包装单价"""
+  unit_price: numeric
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "product_price_history"
+"""
+type product_price_history_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [product_price_history!]!
+}
+
+"""
+on_conflict condition type for table "product_price_history"
+"""
+input product_price_history_on_conflict {
+  constraint: product_price_history_constraint!
+  update_columns: [product_price_history_update_column!]! = []
+  where: product_price_history_bool_exp
+}
+
+"""Ordering options when selecting data from "product_price_history"."""
+input product_price_history_order_by {
+  change_reason: order_by
+  change_type: order_by
+  created_at: order_by
+  id: order_by
+  product_products: order_by
+  recorded_at: order_by
+  unit_price: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: product_price_history"""
+input product_price_history_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "product_price_history"
+"""
+enum product_price_history_select_column {
+  """column name"""
+  change_reason
+
+  """column name"""
+  change_type
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  product_products
+
+  """column name"""
+  recorded_at
+
+  """column name"""
+  unit_price
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "product_price_history"
+"""
+input product_price_history_set_input {
+  """变动原因（可选）"""
+  change_reason: String
+
+  """变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录)"""
+  change_type: String
+  created_at: timestamp
+  id: bigint
+  product_products: bigint
+
+  """记录时间"""
+  recorded_at: timestamptz
+
+  """记录时的包装单价"""
+  unit_price: numeric
+  updated_at: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type product_price_history_stddev_fields {
+  id: Float
+  product_products: Float
+
+  """记录时的包装单价"""
+  unit_price: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type product_price_history_stddev_pop_fields {
+  id: Float
+  product_products: Float
+
+  """记录时的包装单价"""
+  unit_price: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type product_price_history_stddev_samp_fields {
+  id: Float
+  product_products: Float
+
+  """记录时的包装单价"""
+  unit_price: Float
+}
+
+"""
+Streaming cursor of the table "product_price_history"
+"""
+input product_price_history_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: product_price_history_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input product_price_history_stream_cursor_value_input {
+  """变动原因（可选）"""
+  change_reason: String
+
+  """变动类型: 'create'(创建), 'update'(更新), 'manual'(手动记录)"""
+  change_type: String
+  created_at: timestamp
+  id: bigint
+  product_products: bigint
+
+  """记录时间"""
+  recorded_at: timestamptz
+
+  """记录时的包装单价"""
+  unit_price: numeric
+  updated_at: timestamptz
+}
+
+"""aggregate sum on columns"""
+type product_price_history_sum_fields {
+  id: bigint
+  product_products: bigint
+
+  """记录时的包装单价"""
+  unit_price: numeric
+}
+
+"""
+update columns of table "product_price_history"
+"""
+enum product_price_history_update_column {
+  """column name"""
+  change_reason
+
+  """column name"""
+  change_type
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  product_products
+
+  """column name"""
+  recorded_at
+
+  """column name"""
+  unit_price
+
+  """column name"""
+  updated_at
+}
+
+input product_price_history_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: product_price_history_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: product_price_history_set_input
+
+  """filter the rows which have to be updated"""
+  where: product_price_history_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type product_price_history_var_pop_fields {
+  id: Float
+  product_products: Float
+
+  """记录时的包装单价"""
+  unit_price: Float
+}
+
+"""aggregate var_samp on columns"""
+type product_price_history_var_samp_fields {
+  id: Float
+  product_products: Float
+
+  """记录时的包装单价"""
+  unit_price: Float
+}
+
+"""aggregate variance on columns"""
+type product_price_history_variance_fields {
+  id: Float
+  product_products: Float
+
+  """记录时的包装单价"""
+  unit_price: Float
+}
+
 """产品表"""
 type products {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: String
+
   """An object relationship"""
   batch: batches!
   batch_batches: bigint!
@@ -6027,6 +6837,12 @@ type products {
   category: categories
   category_categories: bigint
   created_at: timestamptz!
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: String
+
+  """毛重"""
+  gross_weight: numeric!
   id: bigint!
 
   """产品图片地址"""
@@ -6034,6 +6850,9 @@ type products {
 
   """产品名称"""
   name: String!
+
+  """净重"""
+  net_weight: numeric!
 
   """An array relationship"""
   order_products(
@@ -6075,16 +6894,19 @@ type products {
   origin: origins
   origin_origins: bigint
 
+  """零售单位-供门店参考"""
+  retail_unit: String
+
   """销量"""
   sales: bigint!
 
-  """单位"""
+  """包装单位"""
   unit: String
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz!
 }
@@ -6156,16 +6978,22 @@ input products_arr_rel_insert_input {
 type products_avg_fields {
   batch_batches: Float
   category_categories: Float
+
+  """毛重"""
+  gross_weight: Float
   id: Float
+
+  """净重"""
+  net_weight: Float
   origin_origins: Float
 
   """销量"""
   sales: Float
 
-  """单价"""
+  """包装单价"""
   unit_price: Float
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: Float
 }
 
@@ -6175,16 +7003,22 @@ order by avg() on columns of table "products"
 input products_avg_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
@@ -6195,6 +7029,7 @@ input products_bool_exp {
   _and: [products_bool_exp!]
   _not: products_bool_exp
   _or: [products_bool_exp!]
+  after_sales_html: String_comparison_exp
   batch: batches_bool_exp
   batch_batches: bigint_comparison_exp
   carts: carts_bool_exp
@@ -6202,13 +7037,17 @@ input products_bool_exp {
   category: categories_bool_exp
   category_categories: bigint_comparison_exp
   created_at: timestamptz_comparison_exp
+  detail_html: String_comparison_exp
+  gross_weight: numeric_comparison_exp
   id: bigint_comparison_exp
   image_url: String_comparison_exp
   name: String_comparison_exp
+  net_weight: numeric_comparison_exp
   order_products: order_products_bool_exp
   order_products_aggregate: order_products_aggregate_bool_exp
   origin: origins_bool_exp
   origin_origins: bigint_comparison_exp
+  retail_unit: String_comparison_exp
   sales: bigint_comparison_exp
   unit: String_comparison_exp
   unit_price: numeric_comparison_exp
@@ -6237,16 +7076,22 @@ input type for incrementing numeric columns in table "products"
 input products_inc_input {
   batch_batches: bigint
   category_categories: bigint
+
+  """毛重"""
+  gross_weight: numeric
   id: bigint
+
+  """净重"""
+  net_weight: numeric
   origin_origins: bigint
 
   """销量"""
   sales: bigint
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
 }
 
@@ -6254,12 +7099,20 @@ input products_inc_input {
 input type for inserting data into table "products"
 """
 input products_insert_input {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: String
   batch: batches_obj_rel_insert_input
   batch_batches: bigint
   carts: carts_arr_rel_insert_input
   category: categories_obj_rel_insert_input
   category_categories: bigint
   created_at: timestamptz
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: String
+
+  """毛重"""
+  gross_weight: numeric
   id: bigint
 
   """产品图片地址"""
@@ -6267,29 +7120,43 @@ input products_insert_input {
 
   """产品名称"""
   name: String
+
+  """净重"""
+  net_weight: numeric
   order_products: order_products_arr_rel_insert_input
   origin: origins_obj_rel_insert_input
   origin_origins: bigint
 
+  """零售单位-供门店参考"""
+  retail_unit: String
+
   """销量"""
   sales: bigint
 
-  """单位"""
+  """包装单位"""
   unit: String
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz
 }
 
 """aggregate max on columns"""
 type products_max_fields {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: String
   batch_batches: bigint
   category_categories: bigint
   created_at: timestamptz
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: String
+
+  """毛重"""
+  gross_weight: numeric
   id: bigint
 
   """产品图片地址"""
@@ -6297,18 +7164,24 @@ type products_max_fields {
 
   """产品名称"""
   name: String
+
+  """净重"""
+  net_weight: numeric
   origin_origins: bigint
+
+  """零售单位-供门店参考"""
+  retail_unit: String
 
   """销量"""
   sales: bigint
 
-  """单位"""
+  """包装单位"""
   unit: String
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz
 }
@@ -6317,9 +7190,17 @@ type products_max_fields {
 order by max() on columns of table "products"
 """
 input products_max_order_by {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: order_by
   batch_batches: order_by
   category_categories: order_by
   created_at: order_by
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
 
   """产品图片地址"""
@@ -6327,27 +7208,41 @@ input products_max_order_by {
 
   """产品名称"""
   name: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
+
+  """零售单位-供门店参考"""
+  retail_unit: order_by
 
   """销量"""
   sales: order_by
 
-  """单位"""
+  """包装单位"""
   unit: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
   updated_at: order_by
 }
 
 """aggregate min on columns"""
 type products_min_fields {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: String
   batch_batches: bigint
   category_categories: bigint
   created_at: timestamptz
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: String
+
+  """毛重"""
+  gross_weight: numeric
   id: bigint
 
   """产品图片地址"""
@@ -6355,18 +7250,24 @@ type products_min_fields {
 
   """产品名称"""
   name: String
+
+  """净重"""
+  net_weight: numeric
   origin_origins: bigint
+
+  """零售单位-供门店参考"""
+  retail_unit: String
 
   """销量"""
   sales: bigint
 
-  """单位"""
+  """包装单位"""
   unit: String
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz
 }
@@ -6375,9 +7276,17 @@ type products_min_fields {
 order by min() on columns of table "products"
 """
 input products_min_order_by {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: order_by
   batch_batches: order_by
   category_categories: order_by
   created_at: order_by
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
 
   """产品图片地址"""
@@ -6385,18 +7294,24 @@ input products_min_order_by {
 
   """产品名称"""
   name: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
+
+  """零售单位-供门店参考"""
+  retail_unit: order_by
 
   """销量"""
   sales: order_by
 
-  """单位"""
+  """包装单位"""
   unit: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
   updated_at: order_by
 }
@@ -6433,18 +7348,23 @@ input products_on_conflict {
 
 """Ordering options when selecting data from "products"."""
 input products_order_by {
+  after_sales_html: order_by
   batch: batches_order_by
   batch_batches: order_by
   carts_aggregate: carts_aggregate_order_by
   category: categories_order_by
   category_categories: order_by
   created_at: order_by
+  detail_html: order_by
+  gross_weight: order_by
   id: order_by
   image_url: order_by
   name: order_by
+  net_weight: order_by
   order_products_aggregate: order_products_aggregate_order_by
   origin: origins_order_by
   origin_origins: order_by
+  retail_unit: order_by
   sales: order_by
   unit: order_by
   unit_price: order_by
@@ -6462,6 +7382,9 @@ select columns of table "products"
 """
 enum products_select_column {
   """column name"""
+  after_sales_html
+
+  """column name"""
   batch_batches
 
   """column name"""
@@ -6469,6 +7392,12 @@ enum products_select_column {
 
   """column name"""
   created_at
+
+  """column name"""
+  detail_html
+
+  """column name"""
+  gross_weight
 
   """column name"""
   id
@@ -6480,7 +7409,13 @@ enum products_select_column {
   name
 
   """column name"""
+  net_weight
+
+  """column name"""
   origin_origins
+
+  """column name"""
+  retail_unit
 
   """column name"""
   sales
@@ -6502,9 +7437,17 @@ enum products_select_column {
 input type for updating data in table "products"
 """
 input products_set_input {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: String
   batch_batches: bigint
   category_categories: bigint
   created_at: timestamptz
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: String
+
+  """毛重"""
+  gross_weight: numeric
   id: bigint
 
   """产品图片地址"""
@@ -6512,18 +7455,24 @@ input products_set_input {
 
   """产品名称"""
   name: String
+
+  """净重"""
+  net_weight: numeric
   origin_origins: bigint
+
+  """零售单位-供门店参考"""
+  retail_unit: String
 
   """销量"""
   sales: bigint
 
-  """单位"""
+  """包装单位"""
   unit: String
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz
 }
@@ -6532,16 +7481,22 @@ input products_set_input {
 type products_stddev_fields {
   batch_batches: Float
   category_categories: Float
+
+  """毛重"""
+  gross_weight: Float
   id: Float
+
+  """净重"""
+  net_weight: Float
   origin_origins: Float
 
   """销量"""
   sales: Float
 
-  """单价"""
+  """包装单价"""
   unit_price: Float
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: Float
 }
 
@@ -6551,16 +7506,22 @@ order by stddev() on columns of table "products"
 input products_stddev_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
@@ -6568,16 +7529,22 @@ input products_stddev_order_by {
 type products_stddev_pop_fields {
   batch_batches: Float
   category_categories: Float
+
+  """毛重"""
+  gross_weight: Float
   id: Float
+
+  """净重"""
+  net_weight: Float
   origin_origins: Float
 
   """销量"""
   sales: Float
 
-  """单价"""
+  """包装单价"""
   unit_price: Float
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: Float
 }
 
@@ -6587,16 +7554,22 @@ order by stddev_pop() on columns of table "products"
 input products_stddev_pop_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
@@ -6604,16 +7577,22 @@ input products_stddev_pop_order_by {
 type products_stddev_samp_fields {
   batch_batches: Float
   category_categories: Float
+
+  """毛重"""
+  gross_weight: Float
   id: Float
+
+  """净重"""
+  net_weight: Float
   origin_origins: Float
 
   """销量"""
   sales: Float
 
-  """单价"""
+  """包装单价"""
   unit_price: Float
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: Float
 }
 
@@ -6623,16 +7602,22 @@ order by stddev_samp() on columns of table "products"
 input products_stddev_samp_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
@@ -6649,9 +7634,17 @@ input products_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input products_stream_cursor_value_input {
+  """售后须知，可以是富文本 可以是纯文本"""
+  after_sales_html: String
   batch_batches: bigint
   category_categories: bigint
   created_at: timestamptz
+
+  """商品详情，可以是富文本可以是纯文本"""
+  detail_html: String
+
+  """毛重"""
+  gross_weight: numeric
   id: bigint
 
   """产品图片地址"""
@@ -6659,18 +7652,24 @@ input products_stream_cursor_value_input {
 
   """产品名称"""
   name: String
+
+  """净重"""
+  net_weight: numeric
   origin_origins: bigint
+
+  """零售单位-供门店参考"""
+  retail_unit: String
 
   """销量"""
   sales: bigint
 
-  """单位"""
+  """包装单位"""
   unit: String
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz
 }
@@ -6679,16 +7678,22 @@ input products_stream_cursor_value_input {
 type products_sum_fields {
   batch_batches: bigint
   category_categories: bigint
+
+  """毛重"""
+  gross_weight: numeric
   id: bigint
+
+  """净重"""
+  net_weight: numeric
   origin_origins: bigint
 
   """销量"""
   sales: bigint
 
-  """单价"""
+  """包装单价"""
   unit_price: numeric
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: bigint
 }
 
@@ -6698,16 +7703,22 @@ order by sum() on columns of table "products"
 input products_sum_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
@@ -6716,6 +7727,9 @@ update columns of table "products"
 """
 enum products_update_column {
   """column name"""
+  after_sales_html
+
+  """column name"""
   batch_batches
 
   """column name"""
@@ -6723,6 +7737,12 @@ enum products_update_column {
 
   """column name"""
   created_at
+
+  """column name"""
+  detail_html
+
+  """column name"""
+  gross_weight
 
   """column name"""
   id
@@ -6734,7 +7754,13 @@ enum products_update_column {
   name
 
   """column name"""
+  net_weight
+
+  """column name"""
   origin_origins
+
+  """column name"""
+  retail_unit
 
   """column name"""
   sales
@@ -6767,16 +7793,22 @@ input products_updates {
 type products_var_pop_fields {
   batch_batches: Float
   category_categories: Float
+
+  """毛重"""
+  gross_weight: Float
   id: Float
+
+  """净重"""
+  net_weight: Float
   origin_origins: Float
 
   """销量"""
   sales: Float
 
-  """单价"""
+  """包装单价"""
   unit_price: Float
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: Float
 }
 
@@ -6786,16 +7818,22 @@ order by var_pop() on columns of table "products"
 input products_var_pop_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
@@ -6803,16 +7841,22 @@ input products_var_pop_order_by {
 type products_var_samp_fields {
   batch_batches: Float
   category_categories: Float
+
+  """毛重"""
+  gross_weight: Float
   id: Float
+
+  """净重"""
+  net_weight: Float
   origin_origins: Float
 
   """销量"""
   sales: Float
 
-  """单价"""
+  """包装单价"""
   unit_price: Float
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: Float
 }
 
@@ -6822,16 +7866,22 @@ order by var_samp() on columns of table "products"
 input products_var_samp_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
@@ -6839,16 +7889,22 @@ input products_var_samp_order_by {
 type products_variance_fields {
   batch_batches: Float
   category_categories: Float
+
+  """毛重"""
+  gross_weight: Float
   id: Float
+
+  """净重"""
+  net_weight: Float
   origin_origins: Float
 
   """销量"""
   sales: Float
 
-  """单价"""
+  """包装单价"""
   unit_price: Float
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: Float
 }
 
@@ -6858,20 +7914,69 @@ order by variance() on columns of table "products"
 input products_variance_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """毛重"""
+  gross_weight: order_by
   id: order_by
+
+  """净重"""
+  net_weight: order_by
   origin_origins: order_by
 
   """销量"""
   sales: order_by
 
-  """单价"""
+  """包装单价"""
   unit_price: order_by
 
-  """单位库存，售卖单位的库存"""
+  """包装单位库存"""
   unit_stock: order_by
 }
 
 type query_root {
+  """
+  fetch data from the table: "banners"
+  """
+  banners(
+    """distinct select on columns"""
+    distinct_on: [banners_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [banners_order_by!]
+
+    """filter the rows returned"""
+    where: banners_bool_exp
+  ): [banners!]!
+
+  """
+  fetch aggregated fields from the table: "banners"
+  """
+  banners_aggregate(
+    """distinct select on columns"""
+    distinct_on: [banners_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [banners_order_by!]
+
+    """filter the rows returned"""
+    where: banners_bool_exp
+  ): banners_aggregate!
+
+  """fetch data from the table: "banners" using primary key columns"""
+  banners_by_pk(id: bigint!): banners
+
   """An array relationship"""
   batch_media_files(
     """distinct select on columns"""
@@ -7235,6 +8340,51 @@ type query_root {
   """fetch data from the table: "origins" using primary key columns"""
   origins_by_pk(id: Int!): origins
 
+  """
+  fetch data from the table: "product_price_history"
+  """
+  product_price_history(
+    """distinct select on columns"""
+    distinct_on: [product_price_history_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_price_history_order_by!]
+
+    """filter the rows returned"""
+    where: product_price_history_bool_exp
+  ): [product_price_history!]!
+
+  """
+  fetch aggregated fields from the table: "product_price_history"
+  """
+  product_price_history_aggregate(
+    """distinct select on columns"""
+    distinct_on: [product_price_history_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_price_history_order_by!]
+
+    """filter the rows returned"""
+    where: product_price_history_bool_exp
+  ): product_price_history_aggregate!
+
+  """
+  fetch data from the table: "product_price_history" using primary key columns
+  """
+  product_price_history_by_pk(id: bigint!): product_price_history
+
   """An array relationship"""
   products(
     """distinct select on columns"""
@@ -7358,6 +8508,63 @@ type query_root {
 }
 
 type subscription_root {
+  """
+  fetch data from the table: "banners"
+  """
+  banners(
+    """distinct select on columns"""
+    distinct_on: [banners_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [banners_order_by!]
+
+    """filter the rows returned"""
+    where: banners_bool_exp
+  ): [banners!]!
+
+  """
+  fetch aggregated fields from the table: "banners"
+  """
+  banners_aggregate(
+    """distinct select on columns"""
+    distinct_on: [banners_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [banners_order_by!]
+
+    """filter the rows returned"""
+    where: banners_bool_exp
+  ): banners_aggregate!
+
+  """fetch data from the table: "banners" using primary key columns"""
+  banners_by_pk(id: bigint!): banners
+
+  """
+  fetch data from the table in a streaming manner: "banners"
+  """
+  banners_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [banners_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: banners_bool_exp
+  ): [banners!]!
+
   """An array relationship"""
   batch_media_files(
     """distinct select on columns"""
@@ -7847,6 +9054,65 @@ type subscription_root {
     where: origins_bool_exp
   ): [origins!]!
 
+  """
+  fetch data from the table: "product_price_history"
+  """
+  product_price_history(
+    """distinct select on columns"""
+    distinct_on: [product_price_history_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_price_history_order_by!]
+
+    """filter the rows returned"""
+    where: product_price_history_bool_exp
+  ): [product_price_history!]!
+
+  """
+  fetch aggregated fields from the table: "product_price_history"
+  """
+  product_price_history_aggregate(
+    """distinct select on columns"""
+    distinct_on: [product_price_history_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_price_history_order_by!]
+
+    """filter the rows returned"""
+    where: product_price_history_bool_exp
+  ): product_price_history_aggregate!
+
+  """
+  fetch data from the table: "product_price_history" using primary key columns
+  """
+  product_price_history_by_pk(id: bigint!): product_price_history
+
+  """
+  fetch data from the table in a streaming manner: "product_price_history"
+  """
+  product_price_history_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [product_price_history_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: product_price_history_bool_exp
+  ): [product_price_history!]!
+
   """An array relationship"""
   products(
     """distinct select on columns"""
@@ -8009,6 +9275,23 @@ type subscription_root {
     """filter the rows returned"""
     where: users_bool_exp
   ): [users!]!
+}
+
+scalar timestamp
+
+"""
+Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'.
+"""
+input timestamp_comparison_exp {
+  _eq: timestamp
+  _gt: timestamp
+  _gte: timestamp
+  _in: [timestamp!]
+  _is_null: Boolean
+  _lt: timestamp
+  _lte: timestamp
+  _neq: timestamp
+  _nin: [timestamp!]
 }
 
 scalar timestamptz
