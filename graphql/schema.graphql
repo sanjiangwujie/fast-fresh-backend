@@ -2632,43 +2632,6 @@ input farmers_variance_order_by {
   user_users: order_by
 }
 
-scalar jsonb
-
-input jsonb_cast_exp {
-  String: String_comparison_exp
-}
-
-"""
-Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
-"""
-input jsonb_comparison_exp {
-  _cast: jsonb_cast_exp
-
-  """is the column contained in the given json value"""
-  _contained_in: jsonb
-
-  """does the column contain the given json value at the top level"""
-  _contains: jsonb
-  _eq: jsonb
-  _gt: jsonb
-  _gte: jsonb
-
-  """does the string exist as a top-level key in the column"""
-  _has_key: String
-
-  """do all of these strings exist as top-level keys in the column"""
-  _has_keys_all: [String!]
-
-  """do any of these strings exist as top-level keys in the column"""
-  _has_keys_any: [String!]
-  _in: [jsonb!]
-  _is_null: Boolean
-  _lt: jsonb
-  _lte: jsonb
-  _neq: jsonb
-  _nin: [jsonb!]
-}
-
 """mutation root"""
 type mutation_root {
   """
@@ -3437,29 +3400,8 @@ type mutation_root {
   update data of the table: "orders"
   """
   update_orders(
-    """append existing jsonb value of filtered columns with new jsonb value"""
-    _append: orders_append_input
-
-    """
-    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-    """
-    _delete_at_path: orders_delete_at_path_input
-
-    """
-    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-    """
-    _delete_elem: orders_delete_elem_input
-
-    """
-    delete key/value pair or string element. key/value pairs are matched based on their key value
-    """
-    _delete_key: orders_delete_key_input
-
     """increments the numeric columns with given value of the filtered values"""
     _inc: orders_inc_input
-
-    """prepend existing jsonb value of filtered columns with new jsonb value"""
-    _prepend: orders_prepend_input
 
     """sets the columns of the filtered rows to the given values"""
     _set: orders_set_input
@@ -3472,29 +3414,8 @@ type mutation_root {
   update single row of the table: "orders"
   """
   update_orders_by_pk(
-    """append existing jsonb value of filtered columns with new jsonb value"""
-    _append: orders_append_input
-
-    """
-    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-    """
-    _delete_at_path: orders_delete_at_path_input
-
-    """
-    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-    """
-    _delete_elem: orders_delete_elem_input
-
-    """
-    delete key/value pair or string element. key/value pairs are matched based on their key value
-    """
-    _delete_key: orders_delete_key_input
-
     """increments the numeric columns with given value of the filtered values"""
     _inc: orders_inc_input
-
-    """prepend existing jsonb value of filtered columns with new jsonb value"""
-    _prepend: orders_prepend_input
 
     """sets the columns of the filtered rows to the given values"""
     _set: orders_set_input
@@ -4942,14 +4863,6 @@ type orders {
   admin_remark: String
   created_at: timestamptz!
 
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address(
-    """JSON select path"""
-    path: String
-  ): jsonb
-
   """优惠金额（优惠券、满减等）"""
   discount_amount: numeric!
 
@@ -5048,6 +4961,24 @@ type orders {
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: String
 
+  """收货地址"""
+  receiver_address: String!
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String!
+
+  """收货电话"""
+  receiver_phone: String!
+
+  """可不填，收货人-省"""
+  receiver_province: String
+
   """订单备注（用户留言）"""
   remark: String
 
@@ -5129,14 +5060,6 @@ input orders_aggregate_order_by {
   variance: orders_variance_order_by
 }
 
-"""append existing jsonb value of filtered columns with new jsonb value"""
-input orders_append_input {
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: jsonb
-}
-
 """
 input type for inserting array relation for remote table "orders"
 """
@@ -5194,7 +5117,6 @@ input orders_bool_exp {
   actual_amount: numeric_comparison_exp
   admin_remark: String_comparison_exp
   created_at: timestamptz_comparison_exp
-  delivery_address: jsonb_comparison_exp
   discount_amount: numeric_comparison_exp
   freight_amount: numeric_comparison_exp
   id: bigint_comparison_exp
@@ -5207,6 +5129,12 @@ input orders_bool_exp {
   order_status: String_comparison_exp
   payment_status: String_comparison_exp
   payment_voucher_url: String_comparison_exp
+  receiver_address: String_comparison_exp
+  receiver_city: String_comparison_exp
+  receiver_district: String_comparison_exp
+  receiver_name: String_comparison_exp
+  receiver_phone: String_comparison_exp
+  receiver_province: String_comparison_exp
   remark: String_comparison_exp
   total_amount: numeric_comparison_exp
   updated_at: timestamptz_comparison_exp
@@ -5222,36 +5150,6 @@ enum orders_constraint {
   unique or primary key constraint on columns "id"
   """
   orders_pkey
-}
-
-"""
-delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-"""
-input orders_delete_at_path_input {
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: [String!]
-}
-
-"""
-delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-"""
-input orders_delete_elem_input {
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: Int
-}
-
-"""
-delete key/value pair or string element. key/value pairs are matched based on their key value
-"""
-input orders_delete_key_input {
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: String
 }
 
 """
@@ -5287,11 +5185,6 @@ input orders_insert_input {
   admin_remark: String
   created_at: timestamptz
 
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: jsonb
-
   """优惠金额（优惠券、满减等）"""
   discount_amount: numeric
 
@@ -5319,6 +5212,24 @@ input orders_insert_input {
 
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: String
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
 
   """订单备注（用户留言）"""
   remark: String
@@ -5361,6 +5272,24 @@ type orders_max_fields {
 
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: String
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
 
   """订单备注（用户留言）"""
   remark: String
@@ -5405,6 +5334,24 @@ input orders_max_order_by {
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: order_by
 
+  """收货地址"""
+  receiver_address: order_by
+
+  """可不填，收货人-市"""
+  receiver_city: order_by
+
+  """可不填，收货人-区"""
+  receiver_district: order_by
+
+  """收货人"""
+  receiver_name: order_by
+
+  """收货电话"""
+  receiver_phone: order_by
+
+  """可不填，收货人-省"""
+  receiver_province: order_by
+
   """订单备注（用户留言）"""
   remark: order_by
 
@@ -5445,6 +5392,24 @@ type orders_min_fields {
 
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: String
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
 
   """订单备注（用户留言）"""
   remark: String
@@ -5488,6 +5453,24 @@ input orders_min_order_by {
 
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: order_by
+
+  """收货地址"""
+  receiver_address: order_by
+
+  """可不填，收货人-市"""
+  receiver_city: order_by
+
+  """可不填，收货人-区"""
+  receiver_district: order_by
+
+  """收货人"""
+  receiver_name: order_by
+
+  """收货电话"""
+  receiver_phone: order_by
+
+  """可不填，收货人-省"""
+  receiver_province: order_by
 
   """订单备注（用户留言）"""
   remark: order_by
@@ -5534,7 +5517,6 @@ input orders_order_by {
   actual_amount: order_by
   admin_remark: order_by
   created_at: order_by
-  delivery_address: order_by
   discount_amount: order_by
   freight_amount: order_by
   id: order_by
@@ -5545,6 +5527,12 @@ input orders_order_by {
   order_status: order_by
   payment_status: order_by
   payment_voucher_url: order_by
+  receiver_address: order_by
+  receiver_city: order_by
+  receiver_district: order_by
+  receiver_name: order_by
+  receiver_phone: order_by
+  receiver_province: order_by
   remark: order_by
   total_amount: order_by
   updated_at: order_by
@@ -5555,14 +5543,6 @@ input orders_order_by {
 """primary key columns input for table: orders"""
 input orders_pk_columns_input {
   id: bigint!
-}
-
-"""prepend existing jsonb value of filtered columns with new jsonb value"""
-input orders_prepend_input {
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: jsonb
 }
 
 """
@@ -5580,9 +5560,6 @@ enum orders_select_column {
 
   """column name"""
   created_at
-
-  """column name"""
-  delivery_address
 
   """column name"""
   discount_amount
@@ -5607,6 +5584,24 @@ enum orders_select_column {
 
   """column name"""
   payment_voucher_url
+
+  """column name"""
+  receiver_address
+
+  """column name"""
+  receiver_city
+
+  """column name"""
+  receiver_district
+
+  """column name"""
+  receiver_name
+
+  """column name"""
+  receiver_phone
+
+  """column name"""
+  receiver_province
 
   """column name"""
   remark
@@ -5657,11 +5652,6 @@ input orders_set_input {
   admin_remark: String
   created_at: timestamptz
 
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: jsonb
-
   """优惠金额（优惠券、满减等）"""
   discount_amount: numeric
 
@@ -5687,6 +5677,24 @@ input orders_set_input {
 
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: String
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
 
   """订单备注（用户留言）"""
   remark: String
@@ -5828,11 +5836,6 @@ input orders_stream_cursor_value_input {
   admin_remark: String
   created_at: timestamptz
 
-  """
-  -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- }
-  """
-  delivery_address: jsonb
-
   """优惠金额（优惠券、满减等）"""
   discount_amount: numeric
 
@@ -5858,6 +5861,24 @@ input orders_stream_cursor_value_input {
 
   """支付凭证图片URL（打款截图）"""
   payment_voucher_url: String
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
 
   """订单备注（用户留言）"""
   remark: String
@@ -5921,9 +5942,6 @@ enum orders_update_column {
   created_at
 
   """column name"""
-  delivery_address
-
-  """column name"""
   discount_amount
 
   """column name"""
@@ -5948,6 +5966,24 @@ enum orders_update_column {
   payment_voucher_url
 
   """column name"""
+  receiver_address
+
+  """column name"""
+  receiver_city
+
+  """column name"""
+  receiver_district
+
+  """column name"""
+  receiver_name
+
+  """column name"""
+  receiver_phone
+
+  """column name"""
+  receiver_province
+
+  """column name"""
   remark
 
   """column name"""
@@ -5961,29 +5997,8 @@ enum orders_update_column {
 }
 
 input orders_updates {
-  """append existing jsonb value of filtered columns with new jsonb value"""
-  _append: orders_append_input
-
-  """
-  delete the field or element with specified path (for JSON arrays, negative integers count from the end)
-  """
-  _delete_at_path: orders_delete_at_path_input
-
-  """
-  delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
-  """
-  _delete_elem: orders_delete_elem_input
-
-  """
-  delete key/value pair or string element. key/value pairs are matched based on their key value
-  """
-  _delete_key: orders_delete_key_input
-
   """increments the numeric columns with given value of the filtered values"""
   _inc: orders_inc_input
-
-  """prepend existing jsonb value of filtered columns with new jsonb value"""
-  _prepend: orders_prepend_input
 
   """sets the columns of the filtered rows to the given values"""
   _set: orders_set_input

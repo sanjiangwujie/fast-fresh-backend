@@ -13,7 +13,6 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   bigint: { input: any; output: any; }
-  jsonb: { input: any; output: any; }
   numeric: { input: any; output: any; }
   timestamp: { input: any; output: any; }
   timestamptz: { input: any; output: any; }
@@ -2265,34 +2264,6 @@ export type Farmers_Variance_Order_By = {
   user_users?: InputMaybe<Order_By>;
 };
 
-export type Jsonb_Cast_Exp = {
-  String?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
-export type Jsonb_Comparison_Exp = {
-  _cast?: InputMaybe<Jsonb_Cast_Exp>;
-  /** is the column contained in the given json value */
-  _contained_in?: InputMaybe<Scalars['jsonb']['input']>;
-  /** does the column contain the given json value at the top level */
-  _contains?: InputMaybe<Scalars['jsonb']['input']>;
-  _eq?: InputMaybe<Scalars['jsonb']['input']>;
-  _gt?: InputMaybe<Scalars['jsonb']['input']>;
-  _gte?: InputMaybe<Scalars['jsonb']['input']>;
-  /** does the string exist as a top-level key in the column */
-  _has_key?: InputMaybe<Scalars['String']['input']>;
-  /** do all of these strings exist as top-level keys in the column */
-  _has_keys_all?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** do any of these strings exist as top-level keys in the column */
-  _has_keys_any?: InputMaybe<Array<Scalars['String']['input']>>;
-  _in?: InputMaybe<Array<Scalars['jsonb']['input']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
-  _lt?: InputMaybe<Scalars['jsonb']['input']>;
-  _lte?: InputMaybe<Scalars['jsonb']['input']>;
-  _neq?: InputMaybe<Scalars['jsonb']['input']>;
-  _nin?: InputMaybe<Array<Scalars['jsonb']['input']>>;
-};
-
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
@@ -3037,12 +3008,7 @@ export type Mutation_RootUpdate_Order_Products_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_OrdersArgs = {
-  _append?: InputMaybe<Orders_Append_Input>;
-  _delete_at_path?: InputMaybe<Orders_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Orders_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Orders_Delete_Key_Input>;
   _inc?: InputMaybe<Orders_Inc_Input>;
-  _prepend?: InputMaybe<Orders_Prepend_Input>;
   _set?: InputMaybe<Orders_Set_Input>;
   where: Orders_Bool_Exp;
 };
@@ -3050,12 +3016,7 @@ export type Mutation_RootUpdate_OrdersArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Orders_By_PkArgs = {
-  _append?: InputMaybe<Orders_Append_Input>;
-  _delete_at_path?: InputMaybe<Orders_Delete_At_Path_Input>;
-  _delete_elem?: InputMaybe<Orders_Delete_Elem_Input>;
-  _delete_key?: InputMaybe<Orders_Delete_Key_Input>;
   _inc?: InputMaybe<Orders_Inc_Input>;
-  _prepend?: InputMaybe<Orders_Prepend_Input>;
   _set?: InputMaybe<Orders_Set_Input>;
   pk_columns: Orders_Pk_Columns_Input;
 };
@@ -4207,8 +4168,6 @@ export type Orders = {
   /** 管理员备注 */
   admin_remark?: Maybe<Scalars['String']['output']>;
   created_at: Scalars['timestamptz']['output'];
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: Maybe<Scalars['jsonb']['output']>;
   /** 优惠金额（优惠券、满减等） */
   discount_amount: Scalars['numeric']['output'];
   /** 运费 */
@@ -4232,6 +4191,18 @@ export type Orders = {
   payment_status?: Maybe<Scalars['String']['output']>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: Maybe<Scalars['String']['output']>;
+  /** 收货地址 */
+  receiver_address: Scalars['String']['output'];
+  /** 可不填，收货人-市 */
+  receiver_city?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: Maybe<Scalars['String']['output']>;
+  /** 收货人 */
+  receiver_name: Scalars['String']['output'];
+  /** 收货电话 */
+  receiver_phone: Scalars['String']['output'];
+  /** 可不填，收货人-省 */
+  receiver_province?: Maybe<Scalars['String']['output']>;
   /** 订单备注（用户留言） */
   remark?: Maybe<Scalars['String']['output']>;
   /** 商品总金额 */
@@ -4240,12 +4211,6 @@ export type Orders = {
   /** An object relationship */
   user: Users;
   user_users: Scalars['bigint']['output'];
-};
-
-
-/** 订单表 */
-export type OrdersDelivery_AddressArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -4360,12 +4325,6 @@ export type Orders_Aggregate_Order_By = {
   variance?: InputMaybe<Orders_Variance_Order_By>;
 };
 
-/** append existing jsonb value of filtered columns with new jsonb value */
-export type Orders_Append_Input = {
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Scalars['jsonb']['input']>;
-};
-
 /** input type for inserting array relation for remote table "orders" */
 export type Orders_Arr_Rel_Insert_Input = {
   data: Array<Orders_Insert_Input>;
@@ -4411,7 +4370,6 @@ export type Orders_Bool_Exp = {
   actual_amount?: InputMaybe<Numeric_Comparison_Exp>;
   admin_remark?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  delivery_address?: InputMaybe<Jsonb_Comparison_Exp>;
   discount_amount?: InputMaybe<Numeric_Comparison_Exp>;
   freight_amount?: InputMaybe<Numeric_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
@@ -4424,6 +4382,12 @@ export type Orders_Bool_Exp = {
   order_status?: InputMaybe<String_Comparison_Exp>;
   payment_status?: InputMaybe<String_Comparison_Exp>;
   payment_voucher_url?: InputMaybe<String_Comparison_Exp>;
+  receiver_address?: InputMaybe<String_Comparison_Exp>;
+  receiver_city?: InputMaybe<String_Comparison_Exp>;
+  receiver_district?: InputMaybe<String_Comparison_Exp>;
+  receiver_name?: InputMaybe<String_Comparison_Exp>;
+  receiver_phone?: InputMaybe<String_Comparison_Exp>;
+  receiver_province?: InputMaybe<String_Comparison_Exp>;
   remark?: InputMaybe<String_Comparison_Exp>;
   total_amount?: InputMaybe<Numeric_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -4436,24 +4400,6 @@ export enum Orders_Constraint {
   /** unique or primary key constraint on columns "id" */
   OrdersPkey = 'orders_pkey'
 }
-
-/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-export type Orders_Delete_At_Path_Input = {
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Array<Scalars['String']['input']>>;
-};
-
-/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-export type Orders_Delete_Elem_Input = {
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-export type Orders_Delete_Key_Input = {
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Scalars['String']['input']>;
-};
 
 /** input type for incrementing numeric columns in table "orders" */
 export type Orders_Inc_Input = {
@@ -4478,8 +4424,6 @@ export type Orders_Insert_Input = {
   /** 管理员备注 */
   admin_remark?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Scalars['jsonb']['input']>;
   /** 优惠金额（优惠券、满减等） */
   discount_amount?: InputMaybe<Scalars['numeric']['input']>;
   /** 运费 */
@@ -4497,6 +4441,18 @@ export type Orders_Insert_Input = {
   payment_status?: InputMaybe<Scalars['String']['input']>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: InputMaybe<Scalars['String']['input']>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Scalars['String']['input']>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Scalars['String']['input']>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Scalars['String']['input']>;
   /** 订单备注（用户留言） */
   remark?: InputMaybe<Scalars['String']['input']>;
   /** 商品总金额 */
@@ -4527,6 +4483,18 @@ export type Orders_Max_Fields = {
   payment_status?: Maybe<Scalars['String']['output']>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: Maybe<Scalars['String']['output']>;
+  /** 收货地址 */
+  receiver_address?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: Maybe<Scalars['String']['output']>;
+  /** 收货人 */
+  receiver_name?: Maybe<Scalars['String']['output']>;
+  /** 收货电话 */
+  receiver_phone?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: Maybe<Scalars['String']['output']>;
   /** 订单备注（用户留言） */
   remark?: Maybe<Scalars['String']['output']>;
   /** 商品总金额 */
@@ -4555,6 +4523,18 @@ export type Orders_Max_Order_By = {
   payment_status?: InputMaybe<Order_By>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: InputMaybe<Order_By>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Order_By>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Order_By>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Order_By>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Order_By>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Order_By>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Order_By>;
   /** 订单备注（用户留言） */
   remark?: InputMaybe<Order_By>;
   /** 商品总金额 */
@@ -4584,6 +4564,18 @@ export type Orders_Min_Fields = {
   payment_status?: Maybe<Scalars['String']['output']>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: Maybe<Scalars['String']['output']>;
+  /** 收货地址 */
+  receiver_address?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: Maybe<Scalars['String']['output']>;
+  /** 收货人 */
+  receiver_name?: Maybe<Scalars['String']['output']>;
+  /** 收货电话 */
+  receiver_phone?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: Maybe<Scalars['String']['output']>;
   /** 订单备注（用户留言） */
   remark?: Maybe<Scalars['String']['output']>;
   /** 商品总金额 */
@@ -4612,6 +4604,18 @@ export type Orders_Min_Order_By = {
   payment_status?: InputMaybe<Order_By>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: InputMaybe<Order_By>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Order_By>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Order_By>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Order_By>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Order_By>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Order_By>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Order_By>;
   /** 订单备注（用户留言） */
   remark?: InputMaybe<Order_By>;
   /** 商品总金额 */
@@ -4649,7 +4653,6 @@ export type Orders_Order_By = {
   actual_amount?: InputMaybe<Order_By>;
   admin_remark?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
-  delivery_address?: InputMaybe<Order_By>;
   discount_amount?: InputMaybe<Order_By>;
   freight_amount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -4660,6 +4663,12 @@ export type Orders_Order_By = {
   order_status?: InputMaybe<Order_By>;
   payment_status?: InputMaybe<Order_By>;
   payment_voucher_url?: InputMaybe<Order_By>;
+  receiver_address?: InputMaybe<Order_By>;
+  receiver_city?: InputMaybe<Order_By>;
+  receiver_district?: InputMaybe<Order_By>;
+  receiver_name?: InputMaybe<Order_By>;
+  receiver_phone?: InputMaybe<Order_By>;
+  receiver_province?: InputMaybe<Order_By>;
   remark?: InputMaybe<Order_By>;
   total_amount?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -4672,12 +4681,6 @@ export type Orders_Pk_Columns_Input = {
   id: Scalars['bigint']['input'];
 };
 
-/** prepend existing jsonb value of filtered columns with new jsonb value */
-export type Orders_Prepend_Input = {
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Scalars['jsonb']['input']>;
-};
-
 /** select columns of table "orders" */
 export enum Orders_Select_Column {
   /** column name */
@@ -4688,8 +4691,6 @@ export enum Orders_Select_Column {
   AdminRemark = 'admin_remark',
   /** column name */
   CreatedAt = 'created_at',
-  /** column name */
-  DeliveryAddress = 'delivery_address',
   /** column name */
   DiscountAmount = 'discount_amount',
   /** column name */
@@ -4706,6 +4707,18 @@ export enum Orders_Select_Column {
   PaymentStatus = 'payment_status',
   /** column name */
   PaymentVoucherUrl = 'payment_voucher_url',
+  /** column name */
+  ReceiverAddress = 'receiver_address',
+  /** column name */
+  ReceiverCity = 'receiver_city',
+  /** column name */
+  ReceiverDistrict = 'receiver_district',
+  /** column name */
+  ReceiverName = 'receiver_name',
+  /** column name */
+  ReceiverPhone = 'receiver_phone',
+  /** column name */
+  ReceiverProvince = 'receiver_province',
   /** column name */
   Remark = 'remark',
   /** column name */
@@ -4741,8 +4754,6 @@ export type Orders_Set_Input = {
   /** 管理员备注 */
   admin_remark?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Scalars['jsonb']['input']>;
   /** 优惠金额（优惠券、满减等） */
   discount_amount?: InputMaybe<Scalars['numeric']['input']>;
   /** 运费 */
@@ -4758,6 +4769,18 @@ export type Orders_Set_Input = {
   payment_status?: InputMaybe<Scalars['String']['input']>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: InputMaybe<Scalars['String']['input']>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Scalars['String']['input']>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Scalars['String']['input']>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Scalars['String']['input']>;
   /** 订单备注（用户留言） */
   remark?: InputMaybe<Scalars['String']['input']>;
   /** 商品总金额 */
@@ -4870,8 +4893,6 @@ export type Orders_Stream_Cursor_Value_Input = {
   /** 管理员备注 */
   admin_remark?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  /** -- 格式示例：   -- {   --   "receiver_name": "张三",   --   "receiver_phone": "13800138000",   --   "province": "广东省",   --   "city": "深圳市",   --   "district": "南山区",   --   "detail_address": "科技园南路100号",   --   "postal_code": "518000"   -- } */
-  delivery_address?: InputMaybe<Scalars['jsonb']['input']>;
   /** 优惠金额（优惠券、满减等） */
   discount_amount?: InputMaybe<Scalars['numeric']['input']>;
   /** 运费 */
@@ -4887,6 +4908,18 @@ export type Orders_Stream_Cursor_Value_Input = {
   payment_status?: InputMaybe<Scalars['String']['input']>;
   /** 支付凭证图片URL（打款截图） */
   payment_voucher_url?: InputMaybe<Scalars['String']['input']>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Scalars['String']['input']>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Scalars['String']['input']>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Scalars['String']['input']>;
   /** 订单备注（用户留言） */
   remark?: InputMaybe<Scalars['String']['input']>;
   /** 商品总金额 */
@@ -4935,8 +4968,6 @@ export enum Orders_Update_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  DeliveryAddress = 'delivery_address',
-  /** column name */
   DiscountAmount = 'discount_amount',
   /** column name */
   FreightAmount = 'freight_amount',
@@ -4953,6 +4984,18 @@ export enum Orders_Update_Column {
   /** column name */
   PaymentVoucherUrl = 'payment_voucher_url',
   /** column name */
+  ReceiverAddress = 'receiver_address',
+  /** column name */
+  ReceiverCity = 'receiver_city',
+  /** column name */
+  ReceiverDistrict = 'receiver_district',
+  /** column name */
+  ReceiverName = 'receiver_name',
+  /** column name */
+  ReceiverPhone = 'receiver_phone',
+  /** column name */
+  ReceiverProvince = 'receiver_province',
+  /** column name */
   Remark = 'remark',
   /** column name */
   TotalAmount = 'total_amount',
@@ -4963,18 +5006,8 @@ export enum Orders_Update_Column {
 }
 
 export type Orders_Updates = {
-  /** append existing jsonb value of filtered columns with new jsonb value */
-  _append?: InputMaybe<Orders_Append_Input>;
-  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
-  _delete_at_path?: InputMaybe<Orders_Delete_At_Path_Input>;
-  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
-  _delete_elem?: InputMaybe<Orders_Delete_Elem_Input>;
-  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
-  _delete_key?: InputMaybe<Orders_Delete_Key_Input>;
   /** increments the numeric columns with given value of the filtered values */
   _inc?: InputMaybe<Orders_Inc_Input>;
-  /** prepend existing jsonb value of filtered columns with new jsonb value */
-  _prepend?: InputMaybe<Orders_Prepend_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Orders_Set_Input>;
   /** filter the rows which have to be updated */
