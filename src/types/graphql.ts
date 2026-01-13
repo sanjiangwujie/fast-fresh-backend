@@ -77,6 +77,603 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** 收货地址 */
+export type Addresses = {
+  __typename?: 'addresses';
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['bigint']['output'];
+  /** 是否默认 */
+  is_default: Scalars['Boolean']['output'];
+  /** 收货地址 */
+  receiver_address: Scalars['String']['output'];
+  /** 可不填，收货人-市 */
+  receiver_city?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: Maybe<Scalars['String']['output']>;
+  /** 收货人 */
+  receiver_name: Scalars['String']['output'];
+  /** 收货电话 */
+  receiver_phone: Scalars['String']['output'];
+  /** 可不填，收货人-省 */
+  receiver_province?: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['timestamptz']['output'];
+  user_users: Scalars['bigint']['output'];
+};
+
+/** aggregated selection of "addresses" */
+export type Addresses_Aggregate = {
+  __typename?: 'addresses_aggregate';
+  aggregate?: Maybe<Addresses_Aggregate_Fields>;
+  nodes: Array<Addresses>;
+};
+
+/** aggregate fields of "addresses" */
+export type Addresses_Aggregate_Fields = {
+  __typename?: 'addresses_aggregate_fields';
+  avg?: Maybe<Addresses_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Addresses_Max_Fields>;
+  min?: Maybe<Addresses_Min_Fields>;
+  stddev?: Maybe<Addresses_Stddev_Fields>;
+  stddev_pop?: Maybe<Addresses_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Addresses_Stddev_Samp_Fields>;
+  sum?: Maybe<Addresses_Sum_Fields>;
+  var_pop?: Maybe<Addresses_Var_Pop_Fields>;
+  var_samp?: Maybe<Addresses_Var_Samp_Fields>;
+  variance?: Maybe<Addresses_Variance_Fields>;
+};
+
+
+/** aggregate fields of "addresses" */
+export type Addresses_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Addresses_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Addresses_Avg_Fields = {
+  __typename?: 'addresses_avg_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  user_users?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "addresses". All fields are combined with a logical 'AND'. */
+export type Addresses_Bool_Exp = {
+  _and?: InputMaybe<Array<Addresses_Bool_Exp>>;
+  _not?: InputMaybe<Addresses_Bool_Exp>;
+  _or?: InputMaybe<Array<Addresses_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  is_default?: InputMaybe<Boolean_Comparison_Exp>;
+  receiver_address?: InputMaybe<String_Comparison_Exp>;
+  receiver_city?: InputMaybe<String_Comparison_Exp>;
+  receiver_district?: InputMaybe<String_Comparison_Exp>;
+  receiver_name?: InputMaybe<String_Comparison_Exp>;
+  receiver_phone?: InputMaybe<String_Comparison_Exp>;
+  receiver_province?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user_users?: InputMaybe<Bigint_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "addresses" */
+export enum Addresses_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  AddressesPkey = 'addresses_pkey'
+}
+
+/** input type for incrementing numeric columns in table "addresses" */
+export type Addresses_Inc_Input = {
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  user_users?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** input type for inserting data into table "addresses" */
+export type Addresses_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 是否默认 */
+  is_default?: InputMaybe<Scalars['Boolean']['input']>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Scalars['String']['input']>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Scalars['String']['input']>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  user_users?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** aggregate max on columns */
+export type Addresses_Max_Fields = {
+  __typename?: 'addresses_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** 收货地址 */
+  receiver_address?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: Maybe<Scalars['String']['output']>;
+  /** 收货人 */
+  receiver_name?: Maybe<Scalars['String']['output']>;
+  /** 收货电话 */
+  receiver_phone?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  user_users?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** aggregate min on columns */
+export type Addresses_Min_Fields = {
+  __typename?: 'addresses_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** 收货地址 */
+  receiver_address?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: Maybe<Scalars['String']['output']>;
+  /** 收货人 */
+  receiver_name?: Maybe<Scalars['String']['output']>;
+  /** 收货电话 */
+  receiver_phone?: Maybe<Scalars['String']['output']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  user_users?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** response of any mutation on the table "addresses" */
+export type Addresses_Mutation_Response = {
+  __typename?: 'addresses_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Addresses>;
+};
+
+/** on_conflict condition type for table "addresses" */
+export type Addresses_On_Conflict = {
+  constraint: Addresses_Constraint;
+  update_columns?: Array<Addresses_Update_Column>;
+  where?: InputMaybe<Addresses_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "addresses". */
+export type Addresses_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  is_default?: InputMaybe<Order_By>;
+  receiver_address?: InputMaybe<Order_By>;
+  receiver_city?: InputMaybe<Order_By>;
+  receiver_district?: InputMaybe<Order_By>;
+  receiver_name?: InputMaybe<Order_By>;
+  receiver_phone?: InputMaybe<Order_By>;
+  receiver_province?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_users?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: addresses */
+export type Addresses_Pk_Columns_Input = {
+  id: Scalars['bigint']['input'];
+};
+
+/** select columns of table "addresses" */
+export enum Addresses_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IsDefault = 'is_default',
+  /** column name */
+  ReceiverAddress = 'receiver_address',
+  /** column name */
+  ReceiverCity = 'receiver_city',
+  /** column name */
+  ReceiverDistrict = 'receiver_district',
+  /** column name */
+  ReceiverName = 'receiver_name',
+  /** column name */
+  ReceiverPhone = 'receiver_phone',
+  /** column name */
+  ReceiverProvince = 'receiver_province',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserUsers = 'user_users'
+}
+
+/** input type for updating data in table "addresses" */
+export type Addresses_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 是否默认 */
+  is_default?: InputMaybe<Scalars['Boolean']['input']>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Scalars['String']['input']>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Scalars['String']['input']>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  user_users?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Addresses_Stddev_Fields = {
+  __typename?: 'addresses_stddev_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  user_users?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Addresses_Stddev_Pop_Fields = {
+  __typename?: 'addresses_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  user_users?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Addresses_Stddev_Samp_Fields = {
+  __typename?: 'addresses_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  user_users?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "addresses" */
+export type Addresses_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Addresses_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Addresses_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 是否默认 */
+  is_default?: InputMaybe<Scalars['Boolean']['input']>;
+  /** 收货地址 */
+  receiver_address?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-市 */
+  receiver_city?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-区 */
+  receiver_district?: InputMaybe<Scalars['String']['input']>;
+  /** 收货人 */
+  receiver_name?: InputMaybe<Scalars['String']['input']>;
+  /** 收货电话 */
+  receiver_phone?: InputMaybe<Scalars['String']['input']>;
+  /** 可不填，收货人-省 */
+  receiver_province?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  user_users?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Addresses_Sum_Fields = {
+  __typename?: 'addresses_sum_fields';
+  id?: Maybe<Scalars['bigint']['output']>;
+  user_users?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** update columns of table "addresses" */
+export enum Addresses_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IsDefault = 'is_default',
+  /** column name */
+  ReceiverAddress = 'receiver_address',
+  /** column name */
+  ReceiverCity = 'receiver_city',
+  /** column name */
+  ReceiverDistrict = 'receiver_district',
+  /** column name */
+  ReceiverName = 'receiver_name',
+  /** column name */
+  ReceiverPhone = 'receiver_phone',
+  /** column name */
+  ReceiverProvince = 'receiver_province',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserUsers = 'user_users'
+}
+
+export type Addresses_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Addresses_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Addresses_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Addresses_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Addresses_Var_Pop_Fields = {
+  __typename?: 'addresses_var_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  user_users?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Addresses_Var_Samp_Fields = {
+  __typename?: 'addresses_var_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  user_users?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Addresses_Variance_Fields = {
+  __typename?: 'addresses_variance_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  user_users?: Maybe<Scalars['Float']['output']>;
+};
+
+/** 应用配置表 */
+export type App = {
+  __typename?: 'app';
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['bigint']['output'];
+  /** 收款码 */
+  payment_code?: Maybe<Scalars['String']['output']>;
+  updated_at: Scalars['timestamptz']['output'];
+  /** 微信加好友二维码 */
+  wechat_code?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregated selection of "app" */
+export type App_Aggregate = {
+  __typename?: 'app_aggregate';
+  aggregate?: Maybe<App_Aggregate_Fields>;
+  nodes: Array<App>;
+};
+
+/** aggregate fields of "app" */
+export type App_Aggregate_Fields = {
+  __typename?: 'app_aggregate_fields';
+  avg?: Maybe<App_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<App_Max_Fields>;
+  min?: Maybe<App_Min_Fields>;
+  stddev?: Maybe<App_Stddev_Fields>;
+  stddev_pop?: Maybe<App_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<App_Stddev_Samp_Fields>;
+  sum?: Maybe<App_Sum_Fields>;
+  var_pop?: Maybe<App_Var_Pop_Fields>;
+  var_samp?: Maybe<App_Var_Samp_Fields>;
+  variance?: Maybe<App_Variance_Fields>;
+};
+
+
+/** aggregate fields of "app" */
+export type App_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<App_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type App_Avg_Fields = {
+  __typename?: 'app_avg_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "app". All fields are combined with a logical 'AND'. */
+export type App_Bool_Exp = {
+  _and?: InputMaybe<Array<App_Bool_Exp>>;
+  _not?: InputMaybe<App_Bool_Exp>;
+  _or?: InputMaybe<Array<App_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  payment_code?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  wechat_code?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "app" */
+export enum App_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  AppPkey = 'app_pkey'
+}
+
+/** input type for incrementing numeric columns in table "app" */
+export type App_Inc_Input = {
+  id?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** input type for inserting data into table "app" */
+export type App_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 收款码 */
+  payment_code?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 微信加好友二维码 */
+  wechat_code?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type App_Max_Fields = {
+  __typename?: 'app_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** 收款码 */
+  payment_code?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 微信加好友二维码 */
+  wechat_code?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type App_Min_Fields = {
+  __typename?: 'app_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** 收款码 */
+  payment_code?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 微信加好友二维码 */
+  wechat_code?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "app" */
+export type App_Mutation_Response = {
+  __typename?: 'app_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<App>;
+};
+
+/** on_conflict condition type for table "app" */
+export type App_On_Conflict = {
+  constraint: App_Constraint;
+  update_columns?: Array<App_Update_Column>;
+  where?: InputMaybe<App_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "app". */
+export type App_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  payment_code?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  wechat_code?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: app */
+export type App_Pk_Columns_Input = {
+  id: Scalars['bigint']['input'];
+};
+
+/** select columns of table "app" */
+export enum App_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PaymentCode = 'payment_code',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  WechatCode = 'wechat_code'
+}
+
+/** input type for updating data in table "app" */
+export type App_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 收款码 */
+  payment_code?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 微信加好友二维码 */
+  wechat_code?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type App_Stddev_Fields = {
+  __typename?: 'app_stddev_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type App_Stddev_Pop_Fields = {
+  __typename?: 'app_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type App_Stddev_Samp_Fields = {
+  __typename?: 'app_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "app" */
+export type App_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: App_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type App_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 收款码 */
+  payment_code?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 微信加好友二维码 */
+  wechat_code?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate sum on columns */
+export type App_Sum_Fields = {
+  __typename?: 'app_sum_fields';
+  id?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** update columns of table "app" */
+export enum App_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PaymentCode = 'payment_code',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  WechatCode = 'wechat_code'
+}
+
+export type App_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<App_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<App_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: App_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type App_Var_Pop_Fields = {
+  __typename?: 'app_var_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type App_Var_Samp_Fields = {
+  __typename?: 'app_var_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type App_Variance_Fields = {
+  __typename?: 'app_variance_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
 /** 轮播图 */
 export type Banners = {
   __typename?: 'banners';
@@ -2264,9 +2861,316 @@ export type Farmers_Variance_Order_By = {
   user_users?: InputMaybe<Order_By>;
 };
 
+/** 首页金刚区 */
+export type Home_Kingkong_Items = {
+  __typename?: 'home_kingkong_items';
+  created_at: Scalars['timestamptz']['output'];
+  id: Scalars['bigint']['output'];
+  /** 图标 CDN 地址 */
+  img_url?: Maybe<Scalars['String']['output']>;
+  /** 跳转链接（H5/小程序路径） */
+  link_url?: Maybe<Scalars['String']['output']>;
+  /** 越小越靠前 */
+  sort: Scalars['bigint']['output'];
+  /** 主标题（如“秒杀”） */
+  title: Scalars['String']['output'];
+  updated_at: Scalars['timestamptz']['output'];
+};
+
+/** aggregated selection of "home_kingkong_items" */
+export type Home_Kingkong_Items_Aggregate = {
+  __typename?: 'home_kingkong_items_aggregate';
+  aggregate?: Maybe<Home_Kingkong_Items_Aggregate_Fields>;
+  nodes: Array<Home_Kingkong_Items>;
+};
+
+/** aggregate fields of "home_kingkong_items" */
+export type Home_Kingkong_Items_Aggregate_Fields = {
+  __typename?: 'home_kingkong_items_aggregate_fields';
+  avg?: Maybe<Home_Kingkong_Items_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Home_Kingkong_Items_Max_Fields>;
+  min?: Maybe<Home_Kingkong_Items_Min_Fields>;
+  stddev?: Maybe<Home_Kingkong_Items_Stddev_Fields>;
+  stddev_pop?: Maybe<Home_Kingkong_Items_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Home_Kingkong_Items_Stddev_Samp_Fields>;
+  sum?: Maybe<Home_Kingkong_Items_Sum_Fields>;
+  var_pop?: Maybe<Home_Kingkong_Items_Var_Pop_Fields>;
+  var_samp?: Maybe<Home_Kingkong_Items_Var_Samp_Fields>;
+  variance?: Maybe<Home_Kingkong_Items_Variance_Fields>;
+};
+
+
+/** aggregate fields of "home_kingkong_items" */
+export type Home_Kingkong_Items_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Home_Kingkong_Items_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Home_Kingkong_Items_Avg_Fields = {
+  __typename?: 'home_kingkong_items_avg_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "home_kingkong_items". All fields are combined with a logical 'AND'. */
+export type Home_Kingkong_Items_Bool_Exp = {
+  _and?: InputMaybe<Array<Home_Kingkong_Items_Bool_Exp>>;
+  _not?: InputMaybe<Home_Kingkong_Items_Bool_Exp>;
+  _or?: InputMaybe<Array<Home_Kingkong_Items_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
+  img_url?: InputMaybe<String_Comparison_Exp>;
+  link_url?: InputMaybe<String_Comparison_Exp>;
+  sort?: InputMaybe<Bigint_Comparison_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "home_kingkong_items" */
+export enum Home_Kingkong_Items_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  HomeKingkongItemsPkey = 'home_kingkong_items_pkey'
+}
+
+/** input type for incrementing numeric columns in table "home_kingkong_items" */
+export type Home_Kingkong_Items_Inc_Input = {
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 越小越靠前 */
+  sort?: InputMaybe<Scalars['bigint']['input']>;
+};
+
+/** input type for inserting data into table "home_kingkong_items" */
+export type Home_Kingkong_Items_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 图标 CDN 地址 */
+  img_url?: InputMaybe<Scalars['String']['input']>;
+  /** 跳转链接（H5/小程序路径） */
+  link_url?: InputMaybe<Scalars['String']['input']>;
+  /** 越小越靠前 */
+  sort?: InputMaybe<Scalars['bigint']['input']>;
+  /** 主标题（如“秒杀”） */
+  title?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate max on columns */
+export type Home_Kingkong_Items_Max_Fields = {
+  __typename?: 'home_kingkong_items_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** 图标 CDN 地址 */
+  img_url?: Maybe<Scalars['String']['output']>;
+  /** 跳转链接（H5/小程序路径） */
+  link_url?: Maybe<Scalars['String']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['bigint']['output']>;
+  /** 主标题（如“秒杀”） */
+  title?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** aggregate min on columns */
+export type Home_Kingkong_Items_Min_Fields = {
+  __typename?: 'home_kingkong_items_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** 图标 CDN 地址 */
+  img_url?: Maybe<Scalars['String']['output']>;
+  /** 跳转链接（H5/小程序路径） */
+  link_url?: Maybe<Scalars['String']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['bigint']['output']>;
+  /** 主标题（如“秒杀”） */
+  title?: Maybe<Scalars['String']['output']>;
+  updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** response of any mutation on the table "home_kingkong_items" */
+export type Home_Kingkong_Items_Mutation_Response = {
+  __typename?: 'home_kingkong_items_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Home_Kingkong_Items>;
+};
+
+/** on_conflict condition type for table "home_kingkong_items" */
+export type Home_Kingkong_Items_On_Conflict = {
+  constraint: Home_Kingkong_Items_Constraint;
+  update_columns?: Array<Home_Kingkong_Items_Update_Column>;
+  where?: InputMaybe<Home_Kingkong_Items_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "home_kingkong_items". */
+export type Home_Kingkong_Items_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  img_url?: InputMaybe<Order_By>;
+  link_url?: InputMaybe<Order_By>;
+  sort?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: home_kingkong_items */
+export type Home_Kingkong_Items_Pk_Columns_Input = {
+  id: Scalars['bigint']['input'];
+};
+
+/** select columns of table "home_kingkong_items" */
+export enum Home_Kingkong_Items_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ImgUrl = 'img_url',
+  /** column name */
+  LinkUrl = 'link_url',
+  /** column name */
+  Sort = 'sort',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "home_kingkong_items" */
+export type Home_Kingkong_Items_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 图标 CDN 地址 */
+  img_url?: InputMaybe<Scalars['String']['input']>;
+  /** 跳转链接（H5/小程序路径） */
+  link_url?: InputMaybe<Scalars['String']['input']>;
+  /** 越小越靠前 */
+  sort?: InputMaybe<Scalars['bigint']['input']>;
+  /** 主标题（如“秒杀”） */
+  title?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Home_Kingkong_Items_Stddev_Fields = {
+  __typename?: 'home_kingkong_items_stddev_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Home_Kingkong_Items_Stddev_Pop_Fields = {
+  __typename?: 'home_kingkong_items_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Home_Kingkong_Items_Stddev_Samp_Fields = {
+  __typename?: 'home_kingkong_items_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "home_kingkong_items" */
+export type Home_Kingkong_Items_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Home_Kingkong_Items_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Home_Kingkong_Items_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 图标 CDN 地址 */
+  img_url?: InputMaybe<Scalars['String']['input']>;
+  /** 跳转链接（H5/小程序路径） */
+  link_url?: InputMaybe<Scalars['String']['input']>;
+  /** 越小越靠前 */
+  sort?: InputMaybe<Scalars['bigint']['input']>;
+  /** 主标题（如“秒杀”） */
+  title?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Home_Kingkong_Items_Sum_Fields = {
+  __typename?: 'home_kingkong_items_sum_fields';
+  id?: Maybe<Scalars['bigint']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** update columns of table "home_kingkong_items" */
+export enum Home_Kingkong_Items_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ImgUrl = 'img_url',
+  /** column name */
+  LinkUrl = 'link_url',
+  /** column name */
+  Sort = 'sort',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Home_Kingkong_Items_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Home_Kingkong_Items_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Home_Kingkong_Items_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Home_Kingkong_Items_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Home_Kingkong_Items_Var_Pop_Fields = {
+  __typename?: 'home_kingkong_items_var_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Home_Kingkong_Items_Var_Samp_Fields = {
+  __typename?: 'home_kingkong_items_var_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Home_Kingkong_Items_Variance_Fields = {
+  __typename?: 'home_kingkong_items_variance_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  /** 越小越靠前 */
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "addresses" */
+  delete_addresses?: Maybe<Addresses_Mutation_Response>;
+  /** delete single row from the table: "addresses" */
+  delete_addresses_by_pk?: Maybe<Addresses>;
+  /** delete data from the table: "app" */
+  delete_app?: Maybe<App_Mutation_Response>;
+  /** delete single row from the table: "app" */
+  delete_app_by_pk?: Maybe<App>;
   /** delete data from the table: "banners" */
   delete_banners?: Maybe<Banners_Mutation_Response>;
   /** delete single row from the table: "banners" */
@@ -2291,6 +3195,10 @@ export type Mutation_Root = {
   delete_farmers?: Maybe<Farmers_Mutation_Response>;
   /** delete single row from the table: "farmers" */
   delete_farmers_by_pk?: Maybe<Farmers>;
+  /** delete data from the table: "home_kingkong_items" */
+  delete_home_kingkong_items?: Maybe<Home_Kingkong_Items_Mutation_Response>;
+  /** delete single row from the table: "home_kingkong_items" */
+  delete_home_kingkong_items_by_pk?: Maybe<Home_Kingkong_Items>;
   /** delete data from the table: "order_delivery_media_files" */
   delete_order_delivery_media_files?: Maybe<Order_Delivery_Media_Files_Mutation_Response>;
   /** delete single row from the table: "order_delivery_media_files" */
@@ -2323,6 +3231,14 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "addresses" */
+  insert_addresses?: Maybe<Addresses_Mutation_Response>;
+  /** insert a single row into the table: "addresses" */
+  insert_addresses_one?: Maybe<Addresses>;
+  /** insert data into the table: "app" */
+  insert_app?: Maybe<App_Mutation_Response>;
+  /** insert a single row into the table: "app" */
+  insert_app_one?: Maybe<App>;
   /** insert data into the table: "banners" */
   insert_banners?: Maybe<Banners_Mutation_Response>;
   /** insert a single row into the table: "banners" */
@@ -2347,6 +3263,10 @@ export type Mutation_Root = {
   insert_farmers?: Maybe<Farmers_Mutation_Response>;
   /** insert a single row into the table: "farmers" */
   insert_farmers_one?: Maybe<Farmers>;
+  /** insert data into the table: "home_kingkong_items" */
+  insert_home_kingkong_items?: Maybe<Home_Kingkong_Items_Mutation_Response>;
+  /** insert a single row into the table: "home_kingkong_items" */
+  insert_home_kingkong_items_one?: Maybe<Home_Kingkong_Items>;
   /** insert data into the table: "order_delivery_media_files" */
   insert_order_delivery_media_files?: Maybe<Order_Delivery_Media_Files_Mutation_Response>;
   /** insert a single row into the table: "order_delivery_media_files" */
@@ -2379,6 +3299,18 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "addresses" */
+  update_addresses?: Maybe<Addresses_Mutation_Response>;
+  /** update single row of the table: "addresses" */
+  update_addresses_by_pk?: Maybe<Addresses>;
+  /** update multiples rows of table: "addresses" */
+  update_addresses_many?: Maybe<Array<Maybe<Addresses_Mutation_Response>>>;
+  /** update data of the table: "app" */
+  update_app?: Maybe<App_Mutation_Response>;
+  /** update single row of the table: "app" */
+  update_app_by_pk?: Maybe<App>;
+  /** update multiples rows of table: "app" */
+  update_app_many?: Maybe<Array<Maybe<App_Mutation_Response>>>;
   /** update data of the table: "banners" */
   update_banners?: Maybe<Banners_Mutation_Response>;
   /** update single row of the table: "banners" */
@@ -2415,6 +3347,12 @@ export type Mutation_Root = {
   update_farmers_by_pk?: Maybe<Farmers>;
   /** update multiples rows of table: "farmers" */
   update_farmers_many?: Maybe<Array<Maybe<Farmers_Mutation_Response>>>;
+  /** update data of the table: "home_kingkong_items" */
+  update_home_kingkong_items?: Maybe<Home_Kingkong_Items_Mutation_Response>;
+  /** update single row of the table: "home_kingkong_items" */
+  update_home_kingkong_items_by_pk?: Maybe<Home_Kingkong_Items>;
+  /** update multiples rows of table: "home_kingkong_items" */
+  update_home_kingkong_items_many?: Maybe<Array<Maybe<Home_Kingkong_Items_Mutation_Response>>>;
   /** update data of the table: "order_delivery_media_files" */
   update_order_delivery_media_files?: Maybe<Order_Delivery_Media_Files_Mutation_Response>;
   /** update single row of the table: "order_delivery_media_files" */
@@ -2463,6 +3401,30 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_AddressesArgs = {
+  where: Addresses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Addresses_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_AppArgs = {
+  where: App_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_App_By_PkArgs = {
+  id: Scalars['bigint']['input'];
 };
 
 
@@ -2534,6 +3496,18 @@ export type Mutation_RootDelete_FarmersArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Farmers_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Home_Kingkong_ItemsArgs = {
+  where: Home_Kingkong_Items_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Home_Kingkong_Items_By_PkArgs = {
   id: Scalars['bigint']['input'];
 };
 
@@ -2635,6 +3609,34 @@ export type Mutation_RootDelete_Users_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_AddressesArgs = {
+  objects: Array<Addresses_Insert_Input>;
+  on_conflict?: InputMaybe<Addresses_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Addresses_OneArgs = {
+  object: Addresses_Insert_Input;
+  on_conflict?: InputMaybe<Addresses_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_AppArgs = {
+  objects: Array<App_Insert_Input>;
+  on_conflict?: InputMaybe<App_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_App_OneArgs = {
+  object: App_Insert_Input;
+  on_conflict?: InputMaybe<App_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_BannersArgs = {
   objects: Array<Banners_Insert_Input>;
   on_conflict?: InputMaybe<Banners_On_Conflict>;
@@ -2715,6 +3717,20 @@ export type Mutation_RootInsert_FarmersArgs = {
 export type Mutation_RootInsert_Farmers_OneArgs = {
   object: Farmers_Insert_Input;
   on_conflict?: InputMaybe<Farmers_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Home_Kingkong_ItemsArgs = {
+  objects: Array<Home_Kingkong_Items_Insert_Input>;
+  on_conflict?: InputMaybe<Home_Kingkong_Items_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Home_Kingkong_Items_OneArgs = {
+  object: Home_Kingkong_Items_Insert_Input;
+  on_conflict?: InputMaybe<Home_Kingkong_Items_On_Conflict>;
 };
 
 
@@ -2827,6 +3843,50 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_AddressesArgs = {
+  _inc?: InputMaybe<Addresses_Inc_Input>;
+  _set?: InputMaybe<Addresses_Set_Input>;
+  where: Addresses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Addresses_By_PkArgs = {
+  _inc?: InputMaybe<Addresses_Inc_Input>;
+  _set?: InputMaybe<Addresses_Set_Input>;
+  pk_columns: Addresses_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Addresses_ManyArgs = {
+  updates: Array<Addresses_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_AppArgs = {
+  _inc?: InputMaybe<App_Inc_Input>;
+  _set?: InputMaybe<App_Set_Input>;
+  where: App_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_By_PkArgs = {
+  _inc?: InputMaybe<App_Inc_Input>;
+  _set?: InputMaybe<App_Set_Input>;
+  pk_columns: App_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_App_ManyArgs = {
+  updates: Array<App_Updates>;
 };
 
 
@@ -2959,6 +4019,28 @@ export type Mutation_RootUpdate_Farmers_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Farmers_ManyArgs = {
   updates: Array<Farmers_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Home_Kingkong_ItemsArgs = {
+  _inc?: InputMaybe<Home_Kingkong_Items_Inc_Input>;
+  _set?: InputMaybe<Home_Kingkong_Items_Set_Input>;
+  where: Home_Kingkong_Items_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Home_Kingkong_Items_By_PkArgs = {
+  _inc?: InputMaybe<Home_Kingkong_Items_Inc_Input>;
+  _set?: InputMaybe<Home_Kingkong_Items_Set_Input>;
+  pk_columns: Home_Kingkong_Items_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Home_Kingkong_Items_ManyArgs = {
+  updates: Array<Home_Kingkong_Items_Updates>;
 };
 
 
@@ -5724,6 +6806,10 @@ export type Products = {
   id: Scalars['bigint']['output'];
   /** 产品图片地址 */
   image_url?: Maybe<Scalars['String']['output']>;
+  /** 是否删除 */
+  is_deleted: Scalars['Boolean']['output'];
+  /** 是否下架 */
+  is_off_shelf: Scalars['Boolean']['output'];
   /** 产品名称 */
   name: Scalars['String']['output'];
   /** 净重 */
@@ -5796,7 +6882,23 @@ export type Products_Aggregate = {
 };
 
 export type Products_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Products_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Products_Aggregate_Bool_Exp_Bool_Or>;
   count?: InputMaybe<Products_Aggregate_Bool_Exp_Count>;
+};
+
+export type Products_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Products_Select_Column_Products_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Products_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Products_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Products_Select_Column_Products_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Products_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
 };
 
 export type Products_Aggregate_Bool_Exp_Count = {
@@ -5905,6 +7007,8 @@ export type Products_Bool_Exp = {
   gross_weight?: InputMaybe<Numeric_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
   image_url?: InputMaybe<String_Comparison_Exp>;
+  is_deleted?: InputMaybe<Boolean_Comparison_Exp>;
+  is_off_shelf?: InputMaybe<Boolean_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   net_weight?: InputMaybe<Numeric_Comparison_Exp>;
   order_products?: InputMaybe<Order_Products_Bool_Exp>;
@@ -5962,6 +7066,10 @@ export type Products_Insert_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Scalars['String']['input']>;
+  /** 是否删除 */
+  is_deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  /** 是否下架 */
+  is_off_shelf?: InputMaybe<Scalars['Boolean']['input']>;
   /** 产品名称 */
   name?: InputMaybe<Scalars['String']['input']>;
   /** 净重 */
@@ -6148,6 +7256,8 @@ export type Products_Order_By = {
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image_url?: InputMaybe<Order_By>;
+  is_deleted?: InputMaybe<Order_By>;
+  is_off_shelf?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   net_weight?: InputMaybe<Order_By>;
   order_products_aggregate?: InputMaybe<Order_Products_Aggregate_Order_By>;
@@ -6185,6 +7295,10 @@ export enum Products_Select_Column {
   /** column name */
   ImageUrl = 'image_url',
   /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsOffShelf = 'is_off_shelf',
+  /** column name */
   Name = 'name',
   /** column name */
   NetWeight = 'net_weight',
@@ -6204,6 +7318,22 @@ export enum Products_Select_Column {
   UpdatedAt = 'updated_at'
 }
 
+/** select "products_aggregate_bool_exp_bool_and_arguments_columns" columns of table "products" */
+export enum Products_Select_Column_Products_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsOffShelf = 'is_off_shelf'
+}
+
+/** select "products_aggregate_bool_exp_bool_or_arguments_columns" columns of table "products" */
+export enum Products_Select_Column_Products_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsOffShelf = 'is_off_shelf'
+}
+
 /** input type for updating data in table "products" */
 export type Products_Set_Input = {
   /** 售后须知，可以是富文本 可以是纯文本 */
@@ -6218,6 +7348,10 @@ export type Products_Set_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Scalars['String']['input']>;
+  /** 是否删除 */
+  is_deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  /** 是否下架 */
+  is_off_shelf?: InputMaybe<Scalars['Boolean']['input']>;
   /** 产品名称 */
   name?: InputMaybe<Scalars['String']['input']>;
   /** 净重 */
@@ -6369,6 +7503,10 @@ export type Products_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Scalars['String']['input']>;
+  /** 是否删除 */
+  is_deleted?: InputMaybe<Scalars['Boolean']['input']>;
+  /** 是否下架 */
+  is_off_shelf?: InputMaybe<Scalars['Boolean']['input']>;
   /** 产品名称 */
   name?: InputMaybe<Scalars['String']['input']>;
   /** 净重 */
@@ -6442,6 +7580,10 @@ export enum Products_Update_Column {
   Id = 'id',
   /** column name */
   ImageUrl = 'image_url',
+  /** column name */
+  IsDeleted = 'is_deleted',
+  /** column name */
+  IsOffShelf = 'is_off_shelf',
   /** column name */
   Name = 'name',
   /** column name */
@@ -6584,6 +7726,18 @@ export type Products_Variance_Order_By = {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "addresses" */
+  addresses: Array<Addresses>;
+  /** fetch aggregated fields from the table: "addresses" */
+  addresses_aggregate: Addresses_Aggregate;
+  /** fetch data from the table: "addresses" using primary key columns */
+  addresses_by_pk?: Maybe<Addresses>;
+  /** fetch data from the table: "app" */
+  app: Array<App>;
+  /** fetch aggregated fields from the table: "app" */
+  app_aggregate: App_Aggregate;
+  /** fetch data from the table: "app" using primary key columns */
+  app_by_pk?: Maybe<App>;
   /** fetch data from the table: "banners" */
   banners: Array<Banners>;
   /** fetch aggregated fields from the table: "banners" */
@@ -6620,6 +7774,12 @@ export type Query_Root = {
   farmers_aggregate: Farmers_Aggregate;
   /** fetch data from the table: "farmers" using primary key columns */
   farmers_by_pk?: Maybe<Farmers>;
+  /** fetch data from the table: "home_kingkong_items" */
+  home_kingkong_items: Array<Home_Kingkong_Items>;
+  /** fetch aggregated fields from the table: "home_kingkong_items" */
+  home_kingkong_items_aggregate: Home_Kingkong_Items_Aggregate;
+  /** fetch data from the table: "home_kingkong_items" using primary key columns */
+  home_kingkong_items_by_pk?: Maybe<Home_Kingkong_Items>;
   /** An array relationship */
   order_delivery_media_files: Array<Order_Delivery_Media_Files>;
   /** An aggregate relationship */
@@ -6668,6 +7828,52 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+export type Query_RootAddressesArgs = {
+  distinct_on?: InputMaybe<Array<Addresses_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Addresses_Order_By>>;
+  where?: InputMaybe<Addresses_Bool_Exp>;
+};
+
+
+export type Query_RootAddresses_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Addresses_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Addresses_Order_By>>;
+  where?: InputMaybe<Addresses_Bool_Exp>;
+};
+
+
+export type Query_RootAddresses_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+export type Query_RootAppArgs = {
+  distinct_on?: InputMaybe<Array<App_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<App_Order_By>>;
+  where?: InputMaybe<App_Bool_Exp>;
+};
+
+
+export type Query_RootApp_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<App_Order_By>>;
+  where?: InputMaybe<App_Bool_Exp>;
+};
+
+
+export type Query_RootApp_By_PkArgs = {
+  id: Scalars['bigint']['input'];
 };
 
 
@@ -6805,6 +8011,29 @@ export type Query_RootFarmers_AggregateArgs = {
 
 
 export type Query_RootFarmers_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+export type Query_RootHome_Kingkong_ItemsArgs = {
+  distinct_on?: InputMaybe<Array<Home_Kingkong_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Home_Kingkong_Items_Order_By>>;
+  where?: InputMaybe<Home_Kingkong_Items_Bool_Exp>;
+};
+
+
+export type Query_RootHome_Kingkong_Items_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Home_Kingkong_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Home_Kingkong_Items_Order_By>>;
+  where?: InputMaybe<Home_Kingkong_Items_Bool_Exp>;
+};
+
+
+export type Query_RootHome_Kingkong_Items_By_PkArgs = {
   id: Scalars['bigint']['input'];
 };
 
@@ -6994,6 +8223,22 @@ export type Query_RootUsers_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "addresses" */
+  addresses: Array<Addresses>;
+  /** fetch aggregated fields from the table: "addresses" */
+  addresses_aggregate: Addresses_Aggregate;
+  /** fetch data from the table: "addresses" using primary key columns */
+  addresses_by_pk?: Maybe<Addresses>;
+  /** fetch data from the table in a streaming manner: "addresses" */
+  addresses_stream: Array<Addresses>;
+  /** fetch data from the table: "app" */
+  app: Array<App>;
+  /** fetch aggregated fields from the table: "app" */
+  app_aggregate: App_Aggregate;
+  /** fetch data from the table: "app" using primary key columns */
+  app_by_pk?: Maybe<App>;
+  /** fetch data from the table in a streaming manner: "app" */
+  app_stream: Array<App>;
   /** fetch data from the table: "banners" */
   banners: Array<Banners>;
   /** fetch aggregated fields from the table: "banners" */
@@ -7042,6 +8287,14 @@ export type Subscription_Root = {
   farmers_by_pk?: Maybe<Farmers>;
   /** fetch data from the table in a streaming manner: "farmers" */
   farmers_stream: Array<Farmers>;
+  /** fetch data from the table: "home_kingkong_items" */
+  home_kingkong_items: Array<Home_Kingkong_Items>;
+  /** fetch aggregated fields from the table: "home_kingkong_items" */
+  home_kingkong_items_aggregate: Home_Kingkong_Items_Aggregate;
+  /** fetch data from the table: "home_kingkong_items" using primary key columns */
+  home_kingkong_items_by_pk?: Maybe<Home_Kingkong_Items>;
+  /** fetch data from the table in a streaming manner: "home_kingkong_items" */
+  home_kingkong_items_stream: Array<Home_Kingkong_Items>;
   /** An array relationship */
   order_delivery_media_files: Array<Order_Delivery_Media_Files>;
   /** An aggregate relationship */
@@ -7106,6 +8359,66 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+};
+
+
+export type Subscription_RootAddressesArgs = {
+  distinct_on?: InputMaybe<Array<Addresses_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Addresses_Order_By>>;
+  where?: InputMaybe<Addresses_Bool_Exp>;
+};
+
+
+export type Subscription_RootAddresses_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Addresses_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Addresses_Order_By>>;
+  where?: InputMaybe<Addresses_Bool_Exp>;
+};
+
+
+export type Subscription_RootAddresses_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+export type Subscription_RootAddresses_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Addresses_Stream_Cursor_Input>>;
+  where?: InputMaybe<Addresses_Bool_Exp>;
+};
+
+
+export type Subscription_RootAppArgs = {
+  distinct_on?: InputMaybe<Array<App_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<App_Order_By>>;
+  where?: InputMaybe<App_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<App_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<App_Order_By>>;
+  where?: InputMaybe<App_Bool_Exp>;
+};
+
+
+export type Subscription_RootApp_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+export type Subscription_RootApp_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
+  where?: InputMaybe<App_Bool_Exp>;
 };
 
 
@@ -7286,6 +8599,36 @@ export type Subscription_RootFarmers_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Farmers_Stream_Cursor_Input>>;
   where?: InputMaybe<Farmers_Bool_Exp>;
+};
+
+
+export type Subscription_RootHome_Kingkong_ItemsArgs = {
+  distinct_on?: InputMaybe<Array<Home_Kingkong_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Home_Kingkong_Items_Order_By>>;
+  where?: InputMaybe<Home_Kingkong_Items_Bool_Exp>;
+};
+
+
+export type Subscription_RootHome_Kingkong_Items_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Home_Kingkong_Items_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Home_Kingkong_Items_Order_By>>;
+  where?: InputMaybe<Home_Kingkong_Items_Bool_Exp>;
+};
+
+
+export type Subscription_RootHome_Kingkong_Items_By_PkArgs = {
+  id: Scalars['bigint']['input'];
+};
+
+
+export type Subscription_RootHome_Kingkong_Items_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Home_Kingkong_Items_Stream_Cursor_Input>>;
+  where?: InputMaybe<Home_Kingkong_Items_Bool_Exp>;
 };
 
 
@@ -7559,7 +8902,7 @@ export type User_Roles = {
   __typename?: 'user_roles';
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: Maybe<Scalars['String']['output']>;
   updated_at: Scalars['timestamptz']['output'];
   /** An object relationship */
@@ -7672,7 +9015,7 @@ export type User_Roles_Inc_Input = {
 export type User_Roles_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -7684,7 +9027,7 @@ export type User_Roles_Max_Fields = {
   __typename?: 'user_roles_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
   user_users?: Maybe<Scalars['bigint']['output']>;
@@ -7694,7 +9037,7 @@ export type User_Roles_Max_Fields = {
 export type User_Roles_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_users?: InputMaybe<Order_By>;
@@ -7705,7 +9048,7 @@ export type User_Roles_Min_Fields = {
   __typename?: 'user_roles_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
   user_users?: Maybe<Scalars['bigint']['output']>;
@@ -7715,7 +9058,7 @@ export type User_Roles_Min_Fields = {
 export type User_Roles_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_users?: InputMaybe<Order_By>;
@@ -7770,7 +9113,7 @@ export enum User_Roles_Select_Column {
 export type User_Roles_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_users?: InputMaybe<Scalars['bigint']['input']>;
@@ -7827,7 +9170,7 @@ export type User_Roles_Stream_Cursor_Input = {
 export type User_Roles_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
-  /** 角色类型：operator/farmer/store */
+  /** 角色类型：operator/farmer/store/admin */
   role_type?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_users?: InputMaybe<Scalars['bigint']['input']>;
@@ -7929,6 +9272,8 @@ export type Users = {
   orders: Array<Orders>;
   /** An aggregate relationship */
   orders_aggregate: Orders_Aggregate;
+  /** 密码，md5 32位小写 */
+  password?: Maybe<Scalars['String']['output']>;
   /** 手机号（唯一） */
   phone: Scalars['String']['output'];
   updated_at: Scalars['timestamptz']['output'];
@@ -8069,6 +9414,7 @@ export type Users_Bool_Exp = {
   nickname?: InputMaybe<String_Comparison_Exp>;
   orders?: InputMaybe<Orders_Bool_Exp>;
   orders_aggregate?: InputMaybe<Orders_Aggregate_Bool_Exp>;
+  password?: InputMaybe<String_Comparison_Exp>;
   phone?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user_roles?: InputMaybe<User_Roles_Bool_Exp>;
@@ -8099,6 +9445,8 @@ export type Users_Insert_Input = {
   /** 昵称 */
   nickname?: InputMaybe<Scalars['String']['input']>;
   orders?: InputMaybe<Orders_Arr_Rel_Insert_Input>;
+  /** 密码，md5 32位小写 */
+  password?: InputMaybe<Scalars['String']['input']>;
   /** 手机号（唯一） */
   phone?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
@@ -8114,6 +9462,8 @@ export type Users_Max_Fields = {
   id?: Maybe<Scalars['bigint']['output']>;
   /** 昵称 */
   nickname?: Maybe<Scalars['String']['output']>;
+  /** 密码，md5 32位小写 */
+  password?: Maybe<Scalars['String']['output']>;
   /** 手机号（唯一） */
   phone?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
@@ -8128,6 +9478,8 @@ export type Users_Min_Fields = {
   id?: Maybe<Scalars['bigint']['output']>;
   /** 昵称 */
   nickname?: Maybe<Scalars['String']['output']>;
+  /** 密码，md5 32位小写 */
+  password?: Maybe<Scalars['String']['output']>;
   /** 手机号（唯一） */
   phone?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
@@ -8165,6 +9517,7 @@ export type Users_Order_By = {
   id?: InputMaybe<Order_By>;
   nickname?: InputMaybe<Order_By>;
   orders_aggregate?: InputMaybe<Orders_Aggregate_Order_By>;
+  password?: InputMaybe<Order_By>;
   phone?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_roles_aggregate?: InputMaybe<User_Roles_Aggregate_Order_By>;
@@ -8186,6 +9539,8 @@ export enum Users_Select_Column {
   /** column name */
   Nickname = 'nickname',
   /** column name */
+  Password = 'password',
+  /** column name */
   Phone = 'phone',
   /** column name */
   UpdatedAt = 'updated_at'
@@ -8199,6 +9554,8 @@ export type Users_Set_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 昵称 */
   nickname?: InputMaybe<Scalars['String']['input']>;
+  /** 密码，md5 32位小写 */
+  password?: InputMaybe<Scalars['String']['input']>;
   /** 手机号（唯一） */
   phone?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
@@ -8238,6 +9595,8 @@ export type Users_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 昵称 */
   nickname?: InputMaybe<Scalars['String']['input']>;
+  /** 密码，md5 32位小写 */
+  password?: InputMaybe<Scalars['String']['input']>;
   /** 手机号（唯一） */
   phone?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
@@ -8259,6 +9618,8 @@ export enum Users_Update_Column {
   Id = 'id',
   /** column name */
   Nickname = 'nickname',
+  /** column name */
+  Password = 'password',
   /** column name */
   Phone = 'phone',
   /** column name */

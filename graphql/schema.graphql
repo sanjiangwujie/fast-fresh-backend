@@ -96,6 +96,701 @@ input String_comparison_exp {
   _similar: String
 }
 
+"""收货地址"""
+type addresses {
+  created_at: timestamptz!
+  id: bigint!
+
+  """是否默认"""
+  is_default: Boolean!
+
+  """收货地址"""
+  receiver_address: String!
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String!
+
+  """收货电话"""
+  receiver_phone: String!
+
+  """可不填，收货人-省"""
+  receiver_province: String
+  updated_at: timestamptz!
+  user_users: bigint!
+}
+
+"""
+aggregated selection of "addresses"
+"""
+type addresses_aggregate {
+  aggregate: addresses_aggregate_fields
+  nodes: [addresses!]!
+}
+
+"""
+aggregate fields of "addresses"
+"""
+type addresses_aggregate_fields {
+  avg: addresses_avg_fields
+  count(columns: [addresses_select_column!], distinct: Boolean): Int!
+  max: addresses_max_fields
+  min: addresses_min_fields
+  stddev: addresses_stddev_fields
+  stddev_pop: addresses_stddev_pop_fields
+  stddev_samp: addresses_stddev_samp_fields
+  sum: addresses_sum_fields
+  var_pop: addresses_var_pop_fields
+  var_samp: addresses_var_samp_fields
+  variance: addresses_variance_fields
+}
+
+"""aggregate avg on columns"""
+type addresses_avg_fields {
+  id: Float
+  user_users: Float
+}
+
+"""
+Boolean expression to filter rows from the table "addresses". All fields are combined with a logical 'AND'.
+"""
+input addresses_bool_exp {
+  _and: [addresses_bool_exp!]
+  _not: addresses_bool_exp
+  _or: [addresses_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: bigint_comparison_exp
+  is_default: Boolean_comparison_exp
+  receiver_address: String_comparison_exp
+  receiver_city: String_comparison_exp
+  receiver_district: String_comparison_exp
+  receiver_name: String_comparison_exp
+  receiver_phone: String_comparison_exp
+  receiver_province: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  user_users: bigint_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "addresses"
+"""
+enum addresses_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  addresses_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "addresses"
+"""
+input addresses_inc_input {
+  id: bigint
+  user_users: bigint
+}
+
+"""
+input type for inserting data into table "addresses"
+"""
+input addresses_insert_input {
+  created_at: timestamptz
+  id: bigint
+
+  """是否默认"""
+  is_default: Boolean
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
+  updated_at: timestamptz
+  user_users: bigint
+}
+
+"""aggregate max on columns"""
+type addresses_max_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
+  updated_at: timestamptz
+  user_users: bigint
+}
+
+"""aggregate min on columns"""
+type addresses_min_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
+  updated_at: timestamptz
+  user_users: bigint
+}
+
+"""
+response of any mutation on the table "addresses"
+"""
+type addresses_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [addresses!]!
+}
+
+"""
+on_conflict condition type for table "addresses"
+"""
+input addresses_on_conflict {
+  constraint: addresses_constraint!
+  update_columns: [addresses_update_column!]! = []
+  where: addresses_bool_exp
+}
+
+"""Ordering options when selecting data from "addresses"."""
+input addresses_order_by {
+  created_at: order_by
+  id: order_by
+  is_default: order_by
+  receiver_address: order_by
+  receiver_city: order_by
+  receiver_district: order_by
+  receiver_name: order_by
+  receiver_phone: order_by
+  receiver_province: order_by
+  updated_at: order_by
+  user_users: order_by
+}
+
+"""primary key columns input for table: addresses"""
+input addresses_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "addresses"
+"""
+enum addresses_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  is_default
+
+  """column name"""
+  receiver_address
+
+  """column name"""
+  receiver_city
+
+  """column name"""
+  receiver_district
+
+  """column name"""
+  receiver_name
+
+  """column name"""
+  receiver_phone
+
+  """column name"""
+  receiver_province
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  user_users
+}
+
+"""
+input type for updating data in table "addresses"
+"""
+input addresses_set_input {
+  created_at: timestamptz
+  id: bigint
+
+  """是否默认"""
+  is_default: Boolean
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
+  updated_at: timestamptz
+  user_users: bigint
+}
+
+"""aggregate stddev on columns"""
+type addresses_stddev_fields {
+  id: Float
+  user_users: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type addresses_stddev_pop_fields {
+  id: Float
+  user_users: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type addresses_stddev_samp_fields {
+  id: Float
+  user_users: Float
+}
+
+"""
+Streaming cursor of the table "addresses"
+"""
+input addresses_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: addresses_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input addresses_stream_cursor_value_input {
+  created_at: timestamptz
+  id: bigint
+
+  """是否默认"""
+  is_default: Boolean
+
+  """收货地址"""
+  receiver_address: String
+
+  """可不填，收货人-市"""
+  receiver_city: String
+
+  """可不填，收货人-区"""
+  receiver_district: String
+
+  """收货人"""
+  receiver_name: String
+
+  """收货电话"""
+  receiver_phone: String
+
+  """可不填，收货人-省"""
+  receiver_province: String
+  updated_at: timestamptz
+  user_users: bigint
+}
+
+"""aggregate sum on columns"""
+type addresses_sum_fields {
+  id: bigint
+  user_users: bigint
+}
+
+"""
+update columns of table "addresses"
+"""
+enum addresses_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  is_default
+
+  """column name"""
+  receiver_address
+
+  """column name"""
+  receiver_city
+
+  """column name"""
+  receiver_district
+
+  """column name"""
+  receiver_name
+
+  """column name"""
+  receiver_phone
+
+  """column name"""
+  receiver_province
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  user_users
+}
+
+input addresses_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: addresses_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: addresses_set_input
+
+  """filter the rows which have to be updated"""
+  where: addresses_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type addresses_var_pop_fields {
+  id: Float
+  user_users: Float
+}
+
+"""aggregate var_samp on columns"""
+type addresses_var_samp_fields {
+  id: Float
+  user_users: Float
+}
+
+"""aggregate variance on columns"""
+type addresses_variance_fields {
+  id: Float
+  user_users: Float
+}
+
+"""应用配置表"""
+type app {
+  created_at: timestamptz!
+  id: bigint!
+
+  """收款码"""
+  payment_code: String
+  updated_at: timestamptz!
+
+  """微信加好友二维码"""
+  wechat_code: String
+}
+
+"""
+aggregated selection of "app"
+"""
+type app_aggregate {
+  aggregate: app_aggregate_fields
+  nodes: [app!]!
+}
+
+"""
+aggregate fields of "app"
+"""
+type app_aggregate_fields {
+  avg: app_avg_fields
+  count(columns: [app_select_column!], distinct: Boolean): Int!
+  max: app_max_fields
+  min: app_min_fields
+  stddev: app_stddev_fields
+  stddev_pop: app_stddev_pop_fields
+  stddev_samp: app_stddev_samp_fields
+  sum: app_sum_fields
+  var_pop: app_var_pop_fields
+  var_samp: app_var_samp_fields
+  variance: app_variance_fields
+}
+
+"""aggregate avg on columns"""
+type app_avg_fields {
+  id: Float
+}
+
+"""
+Boolean expression to filter rows from the table "app". All fields are combined with a logical 'AND'.
+"""
+input app_bool_exp {
+  _and: [app_bool_exp!]
+  _not: app_bool_exp
+  _or: [app_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: bigint_comparison_exp
+  payment_code: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  wechat_code: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "app"
+"""
+enum app_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  app_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "app"
+"""
+input app_inc_input {
+  id: bigint
+}
+
+"""
+input type for inserting data into table "app"
+"""
+input app_insert_input {
+  created_at: timestamptz
+  id: bigint
+
+  """收款码"""
+  payment_code: String
+  updated_at: timestamptz
+
+  """微信加好友二维码"""
+  wechat_code: String
+}
+
+"""aggregate max on columns"""
+type app_max_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """收款码"""
+  payment_code: String
+  updated_at: timestamptz
+
+  """微信加好友二维码"""
+  wechat_code: String
+}
+
+"""aggregate min on columns"""
+type app_min_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """收款码"""
+  payment_code: String
+  updated_at: timestamptz
+
+  """微信加好友二维码"""
+  wechat_code: String
+}
+
+"""
+response of any mutation on the table "app"
+"""
+type app_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [app!]!
+}
+
+"""
+on_conflict condition type for table "app"
+"""
+input app_on_conflict {
+  constraint: app_constraint!
+  update_columns: [app_update_column!]! = []
+  where: app_bool_exp
+}
+
+"""Ordering options when selecting data from "app"."""
+input app_order_by {
+  created_at: order_by
+  id: order_by
+  payment_code: order_by
+  updated_at: order_by
+  wechat_code: order_by
+}
+
+"""primary key columns input for table: app"""
+input app_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "app"
+"""
+enum app_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  payment_code
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  wechat_code
+}
+
+"""
+input type for updating data in table "app"
+"""
+input app_set_input {
+  created_at: timestamptz
+  id: bigint
+
+  """收款码"""
+  payment_code: String
+  updated_at: timestamptz
+
+  """微信加好友二维码"""
+  wechat_code: String
+}
+
+"""aggregate stddev on columns"""
+type app_stddev_fields {
+  id: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type app_stddev_pop_fields {
+  id: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type app_stddev_samp_fields {
+  id: Float
+}
+
+"""
+Streaming cursor of the table "app"
+"""
+input app_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: app_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input app_stream_cursor_value_input {
+  created_at: timestamptz
+  id: bigint
+
+  """收款码"""
+  payment_code: String
+  updated_at: timestamptz
+
+  """微信加好友二维码"""
+  wechat_code: String
+}
+
+"""aggregate sum on columns"""
+type app_sum_fields {
+  id: bigint
+}
+
+"""
+update columns of table "app"
+"""
+enum app_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  payment_code
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  wechat_code
+}
+
+input app_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: app_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: app_set_input
+
+  """filter the rows which have to be updated"""
+  where: app_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type app_var_pop_fields {
+  id: Float
+}
+
+"""aggregate var_samp on columns"""
+type app_var_samp_fields {
+  id: Float
+}
+
+"""aggregate variance on columns"""
+type app_variance_fields {
+  id: Float
+}
+
 """轮播图"""
 type banners {
   created_at: timestamptz!
@@ -2632,8 +3327,387 @@ input farmers_variance_order_by {
   user_users: order_by
 }
 
+"""首页金刚区"""
+type home_kingkong_items {
+  created_at: timestamptz!
+  id: bigint!
+
+  """图标 CDN 地址"""
+  img_url: String
+
+  """跳转链接（H5/小程序路径）"""
+  link_url: String
+
+  """越小越靠前"""
+  sort: bigint!
+
+  """主标题（如“秒杀”）"""
+  title: String!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "home_kingkong_items"
+"""
+type home_kingkong_items_aggregate {
+  aggregate: home_kingkong_items_aggregate_fields
+  nodes: [home_kingkong_items!]!
+}
+
+"""
+aggregate fields of "home_kingkong_items"
+"""
+type home_kingkong_items_aggregate_fields {
+  avg: home_kingkong_items_avg_fields
+  count(columns: [home_kingkong_items_select_column!], distinct: Boolean): Int!
+  max: home_kingkong_items_max_fields
+  min: home_kingkong_items_min_fields
+  stddev: home_kingkong_items_stddev_fields
+  stddev_pop: home_kingkong_items_stddev_pop_fields
+  stddev_samp: home_kingkong_items_stddev_samp_fields
+  sum: home_kingkong_items_sum_fields
+  var_pop: home_kingkong_items_var_pop_fields
+  var_samp: home_kingkong_items_var_samp_fields
+  variance: home_kingkong_items_variance_fields
+}
+
+"""aggregate avg on columns"""
+type home_kingkong_items_avg_fields {
+  id: Float
+
+  """越小越靠前"""
+  sort: Float
+}
+
+"""
+Boolean expression to filter rows from the table "home_kingkong_items". All fields are combined with a logical 'AND'.
+"""
+input home_kingkong_items_bool_exp {
+  _and: [home_kingkong_items_bool_exp!]
+  _not: home_kingkong_items_bool_exp
+  _or: [home_kingkong_items_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: bigint_comparison_exp
+  img_url: String_comparison_exp
+  link_url: String_comparison_exp
+  sort: bigint_comparison_exp
+  title: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "home_kingkong_items"
+"""
+enum home_kingkong_items_constraint {
+  """
+  unique or primary key constraint on columns "id"
+  """
+  home_kingkong_items_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "home_kingkong_items"
+"""
+input home_kingkong_items_inc_input {
+  id: bigint
+
+  """越小越靠前"""
+  sort: bigint
+}
+
+"""
+input type for inserting data into table "home_kingkong_items"
+"""
+input home_kingkong_items_insert_input {
+  created_at: timestamptz
+  id: bigint
+
+  """图标 CDN 地址"""
+  img_url: String
+
+  """跳转链接（H5/小程序路径）"""
+  link_url: String
+
+  """越小越靠前"""
+  sort: bigint
+
+  """主标题（如“秒杀”）"""
+  title: String
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type home_kingkong_items_max_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """图标 CDN 地址"""
+  img_url: String
+
+  """跳转链接（H5/小程序路径）"""
+  link_url: String
+
+  """越小越靠前"""
+  sort: bigint
+
+  """主标题（如“秒杀”）"""
+  title: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type home_kingkong_items_min_fields {
+  created_at: timestamptz
+  id: bigint
+
+  """图标 CDN 地址"""
+  img_url: String
+
+  """跳转链接（H5/小程序路径）"""
+  link_url: String
+
+  """越小越靠前"""
+  sort: bigint
+
+  """主标题（如“秒杀”）"""
+  title: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "home_kingkong_items"
+"""
+type home_kingkong_items_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [home_kingkong_items!]!
+}
+
+"""
+on_conflict condition type for table "home_kingkong_items"
+"""
+input home_kingkong_items_on_conflict {
+  constraint: home_kingkong_items_constraint!
+  update_columns: [home_kingkong_items_update_column!]! = []
+  where: home_kingkong_items_bool_exp
+}
+
+"""Ordering options when selecting data from "home_kingkong_items"."""
+input home_kingkong_items_order_by {
+  created_at: order_by
+  id: order_by
+  img_url: order_by
+  link_url: order_by
+  sort: order_by
+  title: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: home_kingkong_items"""
+input home_kingkong_items_pk_columns_input {
+  id: bigint!
+}
+
+"""
+select columns of table "home_kingkong_items"
+"""
+enum home_kingkong_items_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  img_url
+
+  """column name"""
+  link_url
+
+  """column name"""
+  sort
+
+  """column name"""
+  title
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "home_kingkong_items"
+"""
+input home_kingkong_items_set_input {
+  created_at: timestamptz
+  id: bigint
+
+  """图标 CDN 地址"""
+  img_url: String
+
+  """跳转链接（H5/小程序路径）"""
+  link_url: String
+
+  """越小越靠前"""
+  sort: bigint
+
+  """主标题（如“秒杀”）"""
+  title: String
+  updated_at: timestamptz
+}
+
+"""aggregate stddev on columns"""
+type home_kingkong_items_stddev_fields {
+  id: Float
+
+  """越小越靠前"""
+  sort: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type home_kingkong_items_stddev_pop_fields {
+  id: Float
+
+  """越小越靠前"""
+  sort: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type home_kingkong_items_stddev_samp_fields {
+  id: Float
+
+  """越小越靠前"""
+  sort: Float
+}
+
+"""
+Streaming cursor of the table "home_kingkong_items"
+"""
+input home_kingkong_items_stream_cursor_input {
+  """Stream column input with initial value"""
+  initial_value: home_kingkong_items_stream_cursor_value_input!
+
+  """cursor ordering"""
+  ordering: cursor_ordering
+}
+
+"""Initial value of the column from where the streaming should start"""
+input home_kingkong_items_stream_cursor_value_input {
+  created_at: timestamptz
+  id: bigint
+
+  """图标 CDN 地址"""
+  img_url: String
+
+  """跳转链接（H5/小程序路径）"""
+  link_url: String
+
+  """越小越靠前"""
+  sort: bigint
+
+  """主标题（如“秒杀”）"""
+  title: String
+  updated_at: timestamptz
+}
+
+"""aggregate sum on columns"""
+type home_kingkong_items_sum_fields {
+  id: bigint
+
+  """越小越靠前"""
+  sort: bigint
+}
+
+"""
+update columns of table "home_kingkong_items"
+"""
+enum home_kingkong_items_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  img_url
+
+  """column name"""
+  link_url
+
+  """column name"""
+  sort
+
+  """column name"""
+  title
+
+  """column name"""
+  updated_at
+}
+
+input home_kingkong_items_updates {
+  """increments the numeric columns with given value of the filtered values"""
+  _inc: home_kingkong_items_inc_input
+
+  """sets the columns of the filtered rows to the given values"""
+  _set: home_kingkong_items_set_input
+
+  """filter the rows which have to be updated"""
+  where: home_kingkong_items_bool_exp!
+}
+
+"""aggregate var_pop on columns"""
+type home_kingkong_items_var_pop_fields {
+  id: Float
+
+  """越小越靠前"""
+  sort: Float
+}
+
+"""aggregate var_samp on columns"""
+type home_kingkong_items_var_samp_fields {
+  id: Float
+
+  """越小越靠前"""
+  sort: Float
+}
+
+"""aggregate variance on columns"""
+type home_kingkong_items_variance_fields {
+  id: Float
+
+  """越小越靠前"""
+  sort: Float
+}
+
 """mutation root"""
 type mutation_root {
+  """
+  delete data from the table: "addresses"
+  """
+  delete_addresses(
+    """filter the rows which have to be deleted"""
+    where: addresses_bool_exp!
+  ): addresses_mutation_response
+
+  """
+  delete single row from the table: "addresses"
+  """
+  delete_addresses_by_pk(id: bigint!): addresses
+
+  """
+  delete data from the table: "app"
+  """
+  delete_app(
+    """filter the rows which have to be deleted"""
+    where: app_bool_exp!
+  ): app_mutation_response
+
+  """
+  delete single row from the table: "app"
+  """
+  delete_app_by_pk(id: bigint!): app
+
   """
   delete data from the table: "banners"
   """
@@ -2711,6 +3785,19 @@ type mutation_root {
   delete single row from the table: "farmers"
   """
   delete_farmers_by_pk(id: bigint!): farmers
+
+  """
+  delete data from the table: "home_kingkong_items"
+  """
+  delete_home_kingkong_items(
+    """filter the rows which have to be deleted"""
+    where: home_kingkong_items_bool_exp!
+  ): home_kingkong_items_mutation_response
+
+  """
+  delete single row from the table: "home_kingkong_items"
+  """
+  delete_home_kingkong_items_by_pk(id: bigint!): home_kingkong_items
 
   """
   delete data from the table: "order_delivery_media_files"
@@ -2815,6 +3902,50 @@ type mutation_root {
   delete single row from the table: "users"
   """
   delete_users_by_pk(id: bigint!): users
+
+  """
+  insert data into the table: "addresses"
+  """
+  insert_addresses(
+    """the rows to be inserted"""
+    objects: [addresses_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: addresses_on_conflict
+  ): addresses_mutation_response
+
+  """
+  insert a single row into the table: "addresses"
+  """
+  insert_addresses_one(
+    """the row to be inserted"""
+    object: addresses_insert_input!
+
+    """upsert condition"""
+    on_conflict: addresses_on_conflict
+  ): addresses
+
+  """
+  insert data into the table: "app"
+  """
+  insert_app(
+    """the rows to be inserted"""
+    objects: [app_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: app_on_conflict
+  ): app_mutation_response
+
+  """
+  insert a single row into the table: "app"
+  """
+  insert_app_one(
+    """the row to be inserted"""
+    object: app_insert_input!
+
+    """upsert condition"""
+    on_conflict: app_on_conflict
+  ): app
 
   """
   insert data into the table: "banners"
@@ -2947,6 +4078,28 @@ type mutation_root {
     """upsert condition"""
     on_conflict: farmers_on_conflict
   ): farmers
+
+  """
+  insert data into the table: "home_kingkong_items"
+  """
+  insert_home_kingkong_items(
+    """the rows to be inserted"""
+    objects: [home_kingkong_items_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: home_kingkong_items_on_conflict
+  ): home_kingkong_items_mutation_response
+
+  """
+  insert a single row into the table: "home_kingkong_items"
+  """
+  insert_home_kingkong_items_one(
+    """the row to be inserted"""
+    object: home_kingkong_items_insert_input!
+
+    """upsert condition"""
+    on_conflict: home_kingkong_items_on_conflict
+  ): home_kingkong_items
 
   """
   insert data into the table: "order_delivery_media_files"
@@ -3123,6 +4276,74 @@ type mutation_root {
     """upsert condition"""
     on_conflict: users_on_conflict
   ): users
+
+  """
+  update data of the table: "addresses"
+  """
+  update_addresses(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: addresses_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: addresses_set_input
+
+    """filter the rows which have to be updated"""
+    where: addresses_bool_exp!
+  ): addresses_mutation_response
+
+  """
+  update single row of the table: "addresses"
+  """
+  update_addresses_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: addresses_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: addresses_set_input
+    pk_columns: addresses_pk_columns_input!
+  ): addresses
+
+  """
+  update multiples rows of table: "addresses"
+  """
+  update_addresses_many(
+    """updates to execute, in order"""
+    updates: [addresses_updates!]!
+  ): [addresses_mutation_response]
+
+  """
+  update data of the table: "app"
+  """
+  update_app(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: app_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: app_set_input
+
+    """filter the rows which have to be updated"""
+    where: app_bool_exp!
+  ): app_mutation_response
+
+  """
+  update single row of the table: "app"
+  """
+  update_app_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: app_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: app_set_input
+    pk_columns: app_pk_columns_input!
+  ): app
+
+  """
+  update multiples rows of table: "app"
+  """
+  update_app_many(
+    """updates to execute, in order"""
+    updates: [app_updates!]!
+  ): [app_mutation_response]
 
   """
   update data of the table: "banners"
@@ -3327,6 +4548,40 @@ type mutation_root {
     """updates to execute, in order"""
     updates: [farmers_updates!]!
   ): [farmers_mutation_response]
+
+  """
+  update data of the table: "home_kingkong_items"
+  """
+  update_home_kingkong_items(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: home_kingkong_items_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: home_kingkong_items_set_input
+
+    """filter the rows which have to be updated"""
+    where: home_kingkong_items_bool_exp!
+  ): home_kingkong_items_mutation_response
+
+  """
+  update single row of the table: "home_kingkong_items"
+  """
+  update_home_kingkong_items_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: home_kingkong_items_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: home_kingkong_items_set_input
+    pk_columns: home_kingkong_items_pk_columns_input!
+  ): home_kingkong_items
+
+  """
+  update multiples rows of table: "home_kingkong_items"
+  """
+  update_home_kingkong_items_many(
+    """updates to execute, in order"""
+    updates: [home_kingkong_items_updates!]!
+  ): [home_kingkong_items_mutation_response]
 
   """
   update data of the table: "order_delivery_media_files"
@@ -6863,6 +8118,12 @@ type products {
   """产品图片地址"""
   image_url: String
 
+  """是否删除"""
+  is_deleted: Boolean!
+
+  """是否下架"""
+  is_off_shelf: Boolean!
+
   """产品名称"""
   name: String!
 
@@ -6935,7 +8196,23 @@ type products_aggregate {
 }
 
 input products_aggregate_bool_exp {
+  bool_and: products_aggregate_bool_exp_bool_and
+  bool_or: products_aggregate_bool_exp_bool_or
   count: products_aggregate_bool_exp_count
+}
+
+input products_aggregate_bool_exp_bool_and {
+  arguments: products_select_column_products_aggregate_bool_exp_bool_and_arguments_columns!
+  distinct: Boolean
+  filter: products_bool_exp
+  predicate: Boolean_comparison_exp!
+}
+
+input products_aggregate_bool_exp_bool_or {
+  arguments: products_select_column_products_aggregate_bool_exp_bool_or_arguments_columns!
+  distinct: Boolean
+  filter: products_bool_exp
+  predicate: Boolean_comparison_exp!
 }
 
 input products_aggregate_bool_exp_count {
@@ -7056,6 +8333,8 @@ input products_bool_exp {
   gross_weight: numeric_comparison_exp
   id: bigint_comparison_exp
   image_url: String_comparison_exp
+  is_deleted: Boolean_comparison_exp
+  is_off_shelf: Boolean_comparison_exp
   name: String_comparison_exp
   net_weight: numeric_comparison_exp
   order_products: order_products_bool_exp
@@ -7132,6 +8411,12 @@ input products_insert_input {
 
   """产品图片地址"""
   image_url: String
+
+  """是否删除"""
+  is_deleted: Boolean
+
+  """是否下架"""
+  is_off_shelf: Boolean
 
   """产品名称"""
   name: String
@@ -7374,6 +8659,8 @@ input products_order_by {
   gross_weight: order_by
   id: order_by
   image_url: order_by
+  is_deleted: order_by
+  is_off_shelf: order_by
   name: order_by
   net_weight: order_by
   order_products_aggregate: order_products_aggregate_order_by
@@ -7421,6 +8708,12 @@ enum products_select_column {
   image_url
 
   """column name"""
+  is_deleted
+
+  """column name"""
+  is_off_shelf
+
+  """column name"""
   name
 
   """column name"""
@@ -7449,6 +8742,28 @@ enum products_select_column {
 }
 
 """
+select "products_aggregate_bool_exp_bool_and_arguments_columns" columns of table "products"
+"""
+enum products_select_column_products_aggregate_bool_exp_bool_and_arguments_columns {
+  """column name"""
+  is_deleted
+
+  """column name"""
+  is_off_shelf
+}
+
+"""
+select "products_aggregate_bool_exp_bool_or_arguments_columns" columns of table "products"
+"""
+enum products_select_column_products_aggregate_bool_exp_bool_or_arguments_columns {
+  """column name"""
+  is_deleted
+
+  """column name"""
+  is_off_shelf
+}
+
+"""
 input type for updating data in table "products"
 """
 input products_set_input {
@@ -7467,6 +8782,12 @@ input products_set_input {
 
   """产品图片地址"""
   image_url: String
+
+  """是否删除"""
+  is_deleted: Boolean
+
+  """是否下架"""
+  is_off_shelf: Boolean
 
   """产品名称"""
   name: String
@@ -7665,6 +8986,12 @@ input products_stream_cursor_value_input {
   """产品图片地址"""
   image_url: String
 
+  """是否删除"""
+  is_deleted: Boolean
+
+  """是否下架"""
+  is_off_shelf: Boolean
+
   """产品名称"""
   name: String
 
@@ -7764,6 +9091,12 @@ enum products_update_column {
 
   """column name"""
   image_url
+
+  """column name"""
+  is_deleted
+
+  """column name"""
+  is_off_shelf
 
   """column name"""
   name
@@ -7949,6 +9282,92 @@ input products_variance_order_by {
 }
 
 type query_root {
+  """
+  fetch data from the table: "addresses"
+  """
+  addresses(
+    """distinct select on columns"""
+    distinct_on: [addresses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [addresses_order_by!]
+
+    """filter the rows returned"""
+    where: addresses_bool_exp
+  ): [addresses!]!
+
+  """
+  fetch aggregated fields from the table: "addresses"
+  """
+  addresses_aggregate(
+    """distinct select on columns"""
+    distinct_on: [addresses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [addresses_order_by!]
+
+    """filter the rows returned"""
+    where: addresses_bool_exp
+  ): addresses_aggregate!
+
+  """fetch data from the table: "addresses" using primary key columns"""
+  addresses_by_pk(id: bigint!): addresses
+
+  """
+  fetch data from the table: "app"
+  """
+  app(
+    """distinct select on columns"""
+    distinct_on: [app_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [app_order_by!]
+
+    """filter the rows returned"""
+    where: app_bool_exp
+  ): [app!]!
+
+  """
+  fetch aggregated fields from the table: "app"
+  """
+  app_aggregate(
+    """distinct select on columns"""
+    distinct_on: [app_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [app_order_by!]
+
+    """filter the rows returned"""
+    where: app_bool_exp
+  ): app_aggregate!
+
+  """fetch data from the table: "app" using primary key columns"""
+  app_by_pk(id: bigint!): app
+
   """
   fetch data from the table: "banners"
   """
@@ -8192,6 +9611,51 @@ type query_root {
 
   """fetch data from the table: "farmers" using primary key columns"""
   farmers_by_pk(id: bigint!): farmers
+
+  """
+  fetch data from the table: "home_kingkong_items"
+  """
+  home_kingkong_items(
+    """distinct select on columns"""
+    distinct_on: [home_kingkong_items_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [home_kingkong_items_order_by!]
+
+    """filter the rows returned"""
+    where: home_kingkong_items_bool_exp
+  ): [home_kingkong_items!]!
+
+  """
+  fetch aggregated fields from the table: "home_kingkong_items"
+  """
+  home_kingkong_items_aggregate(
+    """distinct select on columns"""
+    distinct_on: [home_kingkong_items_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [home_kingkong_items_order_by!]
+
+    """filter the rows returned"""
+    where: home_kingkong_items_bool_exp
+  ): home_kingkong_items_aggregate!
+
+  """
+  fetch data from the table: "home_kingkong_items" using primary key columns
+  """
+  home_kingkong_items_by_pk(id: bigint!): home_kingkong_items
 
   """An array relationship"""
   order_delivery_media_files(
@@ -8524,6 +9988,120 @@ type query_root {
 
 type subscription_root {
   """
+  fetch data from the table: "addresses"
+  """
+  addresses(
+    """distinct select on columns"""
+    distinct_on: [addresses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [addresses_order_by!]
+
+    """filter the rows returned"""
+    where: addresses_bool_exp
+  ): [addresses!]!
+
+  """
+  fetch aggregated fields from the table: "addresses"
+  """
+  addresses_aggregate(
+    """distinct select on columns"""
+    distinct_on: [addresses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [addresses_order_by!]
+
+    """filter the rows returned"""
+    where: addresses_bool_exp
+  ): addresses_aggregate!
+
+  """fetch data from the table: "addresses" using primary key columns"""
+  addresses_by_pk(id: bigint!): addresses
+
+  """
+  fetch data from the table in a streaming manner: "addresses"
+  """
+  addresses_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [addresses_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: addresses_bool_exp
+  ): [addresses!]!
+
+  """
+  fetch data from the table: "app"
+  """
+  app(
+    """distinct select on columns"""
+    distinct_on: [app_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [app_order_by!]
+
+    """filter the rows returned"""
+    where: app_bool_exp
+  ): [app!]!
+
+  """
+  fetch aggregated fields from the table: "app"
+  """
+  app_aggregate(
+    """distinct select on columns"""
+    distinct_on: [app_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [app_order_by!]
+
+    """filter the rows returned"""
+    where: app_bool_exp
+  ): app_aggregate!
+
+  """fetch data from the table: "app" using primary key columns"""
+  app_by_pk(id: bigint!): app
+
+  """
+  fetch data from the table in a streaming manner: "app"
+  """
+  app_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [app_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: app_bool_exp
+  ): [app!]!
+
+  """
   fetch data from the table: "banners"
   """
   banners(
@@ -8850,6 +10428,65 @@ type subscription_root {
     """filter the rows returned"""
     where: farmers_bool_exp
   ): [farmers!]!
+
+  """
+  fetch data from the table: "home_kingkong_items"
+  """
+  home_kingkong_items(
+    """distinct select on columns"""
+    distinct_on: [home_kingkong_items_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [home_kingkong_items_order_by!]
+
+    """filter the rows returned"""
+    where: home_kingkong_items_bool_exp
+  ): [home_kingkong_items!]!
+
+  """
+  fetch aggregated fields from the table: "home_kingkong_items"
+  """
+  home_kingkong_items_aggregate(
+    """distinct select on columns"""
+    distinct_on: [home_kingkong_items_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [home_kingkong_items_order_by!]
+
+    """filter the rows returned"""
+    where: home_kingkong_items_bool_exp
+  ): home_kingkong_items_aggregate!
+
+  """
+  fetch data from the table: "home_kingkong_items" using primary key columns
+  """
+  home_kingkong_items_by_pk(id: bigint!): home_kingkong_items
+
+  """
+  fetch data from the table in a streaming manner: "home_kingkong_items"
+  """
+  home_kingkong_items_stream(
+    """maximum number of rows returned in a single batch"""
+    batch_size: Int!
+
+    """cursor to stream the results returned by the query"""
+    cursor: [home_kingkong_items_stream_cursor_input]!
+
+    """filter the rows returned"""
+    where: home_kingkong_items_bool_exp
+  ): [home_kingkong_items!]!
 
   """An array relationship"""
   order_delivery_media_files(
@@ -9331,7 +10968,7 @@ type user_roles {
   created_at: timestamptz!
   id: bigint!
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: String
   updated_at: timestamptz!
 
@@ -9457,7 +11094,7 @@ input user_roles_insert_input {
   created_at: timestamptz
   id: bigint
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: String
   updated_at: timestamptz
   user: users_obj_rel_insert_input
@@ -9469,7 +11106,7 @@ type user_roles_max_fields {
   created_at: timestamptz
   id: bigint
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: String
   updated_at: timestamptz
   user_users: bigint
@@ -9482,7 +11119,7 @@ input user_roles_max_order_by {
   created_at: order_by
   id: order_by
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: order_by
   updated_at: order_by
   user_users: order_by
@@ -9493,7 +11130,7 @@ type user_roles_min_fields {
   created_at: timestamptz
   id: bigint
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: String
   updated_at: timestamptz
   user_users: bigint
@@ -9506,7 +11143,7 @@ input user_roles_min_order_by {
   created_at: order_by
   id: order_by
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: order_by
   updated_at: order_by
   user_users: order_by
@@ -9574,7 +11211,7 @@ input user_roles_set_input {
   created_at: timestamptz
   id: bigint
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: String
   updated_at: timestamptz
   user_users: bigint
@@ -9638,7 +11275,7 @@ input user_roles_stream_cursor_value_input {
   created_at: timestamptz
   id: bigint
 
-  """角色类型：operator/farmer/store"""
+  """角色类型：operator/farmer/store/admin"""
   role_type: String
   updated_at: timestamptz
   user_users: bigint
@@ -9849,6 +11486,9 @@ type users {
     where: orders_bool_exp
   ): orders_aggregate!
 
+  """密码，md5 32位小写"""
+  password: String
+
   """手机号（唯一）"""
   phone: String!
   updated_at: timestamptz!
@@ -9937,6 +11577,7 @@ input users_bool_exp {
   nickname: String_comparison_exp
   orders: orders_bool_exp
   orders_aggregate: orders_aggregate_bool_exp
+  password: String_comparison_exp
   phone: String_comparison_exp
   updated_at: timestamptz_comparison_exp
   user_roles: user_roles_bool_exp
@@ -9980,6 +11621,9 @@ input users_insert_input {
   nickname: String
   orders: orders_arr_rel_insert_input
 
+  """密码，md5 32位小写"""
+  password: String
+
   """手机号（唯一）"""
   phone: String
   updated_at: timestamptz
@@ -9996,6 +11640,9 @@ type users_max_fields {
   """昵称"""
   nickname: String
 
+  """密码，md5 32位小写"""
+  password: String
+
   """手机号（唯一）"""
   phone: String
   updated_at: timestamptz
@@ -10010,6 +11657,9 @@ type users_min_fields {
 
   """昵称"""
   nickname: String
+
+  """密码，md5 32位小写"""
+  password: String
 
   """手机号（唯一）"""
   phone: String
@@ -10055,6 +11705,7 @@ input users_order_by {
   id: order_by
   nickname: order_by
   orders_aggregate: orders_aggregate_order_by
+  password: order_by
   phone: order_by
   updated_at: order_by
   user_roles_aggregate: user_roles_aggregate_order_by
@@ -10082,6 +11733,9 @@ enum users_select_column {
   nickname
 
   """column name"""
+  password
+
+  """column name"""
   phone
 
   """column name"""
@@ -10099,6 +11753,9 @@ input users_set_input {
 
   """昵称"""
   nickname: String
+
+  """密码，md5 32位小写"""
+  password: String
 
   """手机号（唯一）"""
   phone: String
@@ -10141,6 +11798,9 @@ input users_stream_cursor_value_input {
   """昵称"""
   nickname: String
 
+  """密码，md5 32位小写"""
+  password: String
+
   """手机号（唯一）"""
   phone: String
   updated_at: timestamptz
@@ -10166,6 +11826,9 @@ enum users_update_column {
 
   """column name"""
   nickname
+
+  """column name"""
+  password
 
   """column name"""
   phone

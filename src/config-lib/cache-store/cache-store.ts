@@ -63,11 +63,38 @@ export function clearCache() {
 }
 
 /**
+ * 获取缓存值
+ */
+export function get(key: string): any | undefined {
+  const entry = staticCache.get(key);
+  if (!entry) return undefined;
+  // 检查是否过期（这里假设验证码等简单数据不需要过期时间检查，由业务逻辑控制）
+  return entry.data;
+}
+
+/**
+ * 设置缓存值
+ */
+export function set(key: string, value: any, duration?: number): void {
+  staticCache.set(key, { data: value, timestamp: Date.now() });
+}
+
+/**
+ * 删除缓存值
+ */
+export function deleteKey(key: string): void {
+  staticCache.delete(key);
+}
+
+/**
  * 缓存管理器
  */
 const cacheStore = {
   cache,
   clearCache,
   fnv1aHash,
+  get,
+  set,
+  delete: deleteKey,
 };
 export default cacheStore;
