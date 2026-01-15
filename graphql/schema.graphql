@@ -519,6 +519,8 @@ type addresses_variance_fields {
 
 """应用配置表"""
 type app {
+  """联系我们 二维码"""
+  contact_code: String
   created_at: timestamptz!
   id: bigint!
 
@@ -567,6 +569,7 @@ input app_bool_exp {
   _and: [app_bool_exp!]
   _not: app_bool_exp
   _or: [app_bool_exp!]
+  contact_code: String_comparison_exp
   created_at: timestamptz_comparison_exp
   id: bigint_comparison_exp
   payment_code: String_comparison_exp
@@ -595,6 +598,8 @@ input app_inc_input {
 input type for inserting data into table "app"
 """
 input app_insert_input {
+  """联系我们 二维码"""
+  contact_code: String
   created_at: timestamptz
   id: bigint
 
@@ -608,6 +613,8 @@ input app_insert_input {
 
 """aggregate max on columns"""
 type app_max_fields {
+  """联系我们 二维码"""
+  contact_code: String
   created_at: timestamptz
   id: bigint
 
@@ -621,6 +628,8 @@ type app_max_fields {
 
 """aggregate min on columns"""
 type app_min_fields {
+  """联系我们 二维码"""
+  contact_code: String
   created_at: timestamptz
   id: bigint
 
@@ -654,6 +663,7 @@ input app_on_conflict {
 
 """Ordering options when selecting data from "app"."""
 input app_order_by {
+  contact_code: order_by
   created_at: order_by
   id: order_by
   payment_code: order_by
@@ -670,6 +680,9 @@ input app_pk_columns_input {
 select columns of table "app"
 """
 enum app_select_column {
+  """column name"""
+  contact_code
+
   """column name"""
   created_at
 
@@ -690,6 +703,8 @@ enum app_select_column {
 input type for updating data in table "app"
 """
 input app_set_input {
+  """联系我们 二维码"""
+  contact_code: String
   created_at: timestamptz
   id: bigint
 
@@ -729,6 +744,8 @@ input app_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input app_stream_cursor_value_input {
+  """联系我们 二维码"""
+  contact_code: String
   created_at: timestamptz
   id: bigint
 
@@ -749,6 +766,9 @@ type app_sum_fields {
 update columns of table "app"
 """
 enum app_update_column {
+  """column name"""
+  contact_code
+
   """column name"""
   created_at
 
@@ -1564,8 +1584,41 @@ type batches {
   """产品图片地址"""
   image_url: String
 
-  """An object relationship"""
-  product: products
+  """An array relationship"""
+  products(
+    """distinct select on columns"""
+    distinct_on: [products_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [products_order_by!]
+
+    """filter the rows returned"""
+    where: products_bool_exp
+  ): [products!]!
+
+  """An aggregate relationship"""
+  products_aggregate(
+    """distinct select on columns"""
+    distinct_on: [products_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [products_order_by!]
+
+    """filter the rows returned"""
+    where: products_bool_exp
+  ): products_aggregate!
   updated_at: timestamptz!
 }
 
@@ -1660,7 +1713,8 @@ input batches_bool_exp {
   farmer_farmers: bigint_comparison_exp
   id: bigint_comparison_exp
   image_url: String_comparison_exp
-  product: products_bool_exp
+  products: products_bool_exp
+  products_aggregate: products_aggregate_bool_exp
   updated_at: timestamptz_comparison_exp
 }
 
@@ -1694,7 +1748,7 @@ input batches_insert_input {
 
   """产品图片地址"""
   image_url: String
-  product: products_obj_rel_insert_input
+  products: products_arr_rel_insert_input
   updated_at: timestamptz
 }
 
@@ -1784,7 +1838,7 @@ input batches_order_by {
   farmer_farmers: order_by
   id: order_by
   image_url: order_by
-  product: products_order_by
+  products_aggregate: products_aggregate_order_by
   updated_at: order_by
 }
 
@@ -8354,11 +8408,6 @@ unique or primary key constraints on table "products"
 """
 enum products_constraint {
   """
-  unique or primary key constraint on columns "batch_batches"
-  """
-  products_batch_batches_key
-
-  """
   unique or primary key constraint on columns "id"
   """
   products_pkey
@@ -10969,7 +11018,7 @@ type user_roles {
   id: bigint!
 
   """角色类型：operator/farmer/store/admin"""
-  role_type: String
+  role_type: String!
   updated_at: timestamptz!
 
   """An object relationship"""

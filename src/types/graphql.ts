@@ -432,6 +432,8 @@ export type Addresses_Variance_Fields = {
 /** 应用配置表 */
 export type App = {
   __typename?: 'app';
+  /** 联系我们 二维码 */
+  contact_code?: Maybe<Scalars['String']['output']>;
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
   /** 收款码 */
@@ -482,6 +484,7 @@ export type App_Bool_Exp = {
   _and?: InputMaybe<Array<App_Bool_Exp>>;
   _not?: InputMaybe<App_Bool_Exp>;
   _or?: InputMaybe<Array<App_Bool_Exp>>;
+  contact_code?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
   payment_code?: InputMaybe<String_Comparison_Exp>;
@@ -502,6 +505,8 @@ export type App_Inc_Input = {
 
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
+  /** 联系我们 二维码 */
+  contact_code?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 收款码 */
@@ -514,6 +519,8 @@ export type App_Insert_Input = {
 /** aggregate max on columns */
 export type App_Max_Fields = {
   __typename?: 'app_max_fields';
+  /** 联系我们 二维码 */
+  contact_code?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   /** 收款码 */
@@ -526,6 +533,8 @@ export type App_Max_Fields = {
 /** aggregate min on columns */
 export type App_Min_Fields = {
   __typename?: 'app_min_fields';
+  /** 联系我们 二维码 */
+  contact_code?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   /** 收款码 */
@@ -553,6 +562,7 @@ export type App_On_Conflict = {
 
 /** Ordering options when selecting data from "app". */
 export type App_Order_By = {
+  contact_code?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   payment_code?: InputMaybe<Order_By>;
@@ -568,6 +578,8 @@ export type App_Pk_Columns_Input = {
 /** select columns of table "app" */
 export enum App_Select_Column {
   /** column name */
+  ContactCode = 'contact_code',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
@@ -581,6 +593,8 @@ export enum App_Select_Column {
 
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
+  /** 联系我们 二维码 */
+  contact_code?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 收款码 */
@@ -618,6 +632,8 @@ export type App_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type App_Stream_Cursor_Value_Input = {
+  /** 联系我们 二维码 */
+  contact_code?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 收款码 */
@@ -635,6 +651,8 @@ export type App_Sum_Fields = {
 
 /** update columns of table "app" */
 export enum App_Update_Column {
+  /** column name */
+  ContactCode = 'contact_code',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -1323,8 +1341,10 @@ export type Batches = {
   id: Scalars['bigint']['output'];
   /** 产品图片地址 */
   image_url?: Maybe<Scalars['String']['output']>;
-  /** An object relationship */
-  product?: Maybe<Products>;
+  /** An array relationship */
+  products: Array<Products>;
+  /** An aggregate relationship */
+  products_aggregate: Products_Aggregate;
   updated_at: Scalars['timestamptz']['output'];
 };
 
@@ -1346,6 +1366,26 @@ export type BatchesBatch_Media_Files_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Batch_Media_Files_Order_By>>;
   where?: InputMaybe<Batch_Media_Files_Bool_Exp>;
+};
+
+
+/** 发车批次 */
+export type BatchesProductsArgs = {
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Products_Order_By>>;
+  where?: InputMaybe<Products_Bool_Exp>;
+};
+
+
+/** 发车批次 */
+export type BatchesProducts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Products_Order_By>>;
+  where?: InputMaybe<Products_Bool_Exp>;
 };
 
 /** aggregated selection of "batches" */
@@ -1436,7 +1476,8 @@ export type Batches_Bool_Exp = {
   farmer_farmers?: InputMaybe<Bigint_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
   image_url?: InputMaybe<String_Comparison_Exp>;
-  product?: InputMaybe<Products_Bool_Exp>;
+  products?: InputMaybe<Products_Bool_Exp>;
+  products_aggregate?: InputMaybe<Products_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -1461,7 +1502,7 @@ export type Batches_Insert_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   /** 产品图片地址 */
   image_url?: InputMaybe<Scalars['String']['input']>;
-  product?: InputMaybe<Products_Obj_Rel_Insert_Input>;
+  products?: InputMaybe<Products_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
 };
 
@@ -1538,7 +1579,7 @@ export type Batches_Order_By = {
   farmer_farmers?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   image_url?: InputMaybe<Order_By>;
-  product?: InputMaybe<Products_Order_By>;
+  products_aggregate?: InputMaybe<Products_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -7025,8 +7066,6 @@ export type Products_Bool_Exp = {
 
 /** unique or primary key constraints on table "products" */
 export enum Products_Constraint {
-  /** unique or primary key constraint on columns "batch_batches" */
-  ProductsBatchBatchesKey = 'products_batch_batches_key',
   /** unique or primary key constraint on columns "id" */
   ProductsPkey = 'products_pkey'
 }
@@ -8903,7 +8942,7 @@ export type User_Roles = {
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
   /** 角色类型：operator/farmer/store/admin */
-  role_type?: Maybe<Scalars['String']['output']>;
+  role_type: Scalars['String']['output'];
   updated_at: Scalars['timestamptz']['output'];
   /** An object relationship */
   user: Users;

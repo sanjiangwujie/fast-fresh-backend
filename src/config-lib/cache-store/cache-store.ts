@@ -1,6 +1,16 @@
 type CacheEntry<T> = { data: T; timestamp: number };
 import { cacheOptionsConfig } from "./config";
 const staticCache = new Map<string, CacheEntry<any>>();
+const fnIdMap = new WeakMap<Function, string>();
+let fnIdSeq = 0;
+
+function getFnId(fn: Function): string {
+  const existing = fnIdMap.get(fn);
+  if (existing) return existing;
+  const id = `fn_${(++fnIdSeq).toString(36)}`;
+  fnIdMap.set(fn, id);
+  return id;
+}
 
 /**
  * 字符串哈希函数
@@ -38,7 +48,8 @@ export function cache<T extends (...args: any[]) => Promise<any>>(
 ): (...args: Parameters<T>) => Promise<Awaited<ReturnType<T>>> {
   const { duration = 5 * 60 * 1000, useCache = true, forceRefresh = false } = options;
   return async (...args: Parameters<T>) => {
-    const rawKey = fn.toString() + JSON.stringify(args);
+    // 注意：编译/压缩后 fn.toString() 可能不稳定，导致不同函数 key 冲突
+    const rawKey = `${getFnId(fn)}:${JSON.stringify(args)}`;
     const key = fnv1aHash(rawKey);
     if (!useCache) {
       const data = await fn(...args);
