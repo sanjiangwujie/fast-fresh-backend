@@ -2228,17 +2228,47 @@ export type Carts_Variance_Order_By = {
 /** 分类表 */
 export type Categories = {
   __typename?: 'categories';
-  /** 分类类别，如 水果、蔬菜 */
-  category_name?: Maybe<Scalars['String']['output']>;
+  /** An array relationship */
+  categories: Array<Categories>;
+  /** An aggregate relationship */
+  categories_aggregate: Categories_Aggregate;
+  /** An object relationship */
+  category?: Maybe<Categories>;
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
+  /** 排序，0是最前 */
+  idx: Scalars['bigint']['output'];
+  /** 分类层级，0是顶级 */
+  level: Scalars['bigint']['output'];
   /** 分类名称，如 苹果、香蕉、车厘子 */
   name: Scalars['String']['output'];
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['bigint']['output']>;
   /** An array relationship */
   products: Array<Products>;
   /** An aggregate relationship */
   products_aggregate: Products_Aggregate;
   updated_at: Scalars['timestamptz']['output'];
+};
+
+
+/** 分类表 */
+export type CategoriesCategoriesArgs = {
+  distinct_on?: InputMaybe<Array<Categories_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Categories_Order_By>>;
+  where?: InputMaybe<Categories_Bool_Exp>;
+};
+
+
+/** 分类表 */
+export type CategoriesCategories_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Categories_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Categories_Order_By>>;
+  where?: InputMaybe<Categories_Bool_Exp>;
 };
 
 
@@ -2268,6 +2298,17 @@ export type Categories_Aggregate = {
   nodes: Array<Categories>;
 };
 
+export type Categories_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Categories_Aggregate_Bool_Exp_Count>;
+};
+
+export type Categories_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Categories_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Categories_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "categories" */
 export type Categories_Aggregate_Fields = {
   __typename?: 'categories_aggregate_fields';
@@ -2291,10 +2332,49 @@ export type Categories_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** order by aggregate values of table "categories" */
+export type Categories_Aggregate_Order_By = {
+  avg?: InputMaybe<Categories_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Categories_Max_Order_By>;
+  min?: InputMaybe<Categories_Min_Order_By>;
+  stddev?: InputMaybe<Categories_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Categories_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Categories_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Categories_Sum_Order_By>;
+  var_pop?: InputMaybe<Categories_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Categories_Var_Samp_Order_By>;
+  variance?: InputMaybe<Categories_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "categories" */
+export type Categories_Arr_Rel_Insert_Input = {
+  data: Array<Categories_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Categories_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Categories_Avg_Fields = {
   __typename?: 'categories_avg_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['Float']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['Float']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "categories" */
+export type Categories_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "categories". All fields are combined with a logical 'AND'. */
@@ -2302,10 +2382,15 @@ export type Categories_Bool_Exp = {
   _and?: InputMaybe<Array<Categories_Bool_Exp>>;
   _not?: InputMaybe<Categories_Bool_Exp>;
   _or?: InputMaybe<Array<Categories_Bool_Exp>>;
-  category_name?: InputMaybe<String_Comparison_Exp>;
+  categories?: InputMaybe<Categories_Bool_Exp>;
+  categories_aggregate?: InputMaybe<Categories_Aggregate_Bool_Exp>;
+  category?: InputMaybe<Categories_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
+  idx?: InputMaybe<Bigint_Comparison_Exp>;
+  level?: InputMaybe<Bigint_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  parent_category_categories?: InputMaybe<Bigint_Comparison_Exp>;
   products?: InputMaybe<Products_Bool_Exp>;
   products_aggregate?: InputMaybe<Products_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -2320,16 +2405,28 @@ export enum Categories_Constraint {
 /** input type for incrementing numeric columns in table "categories" */
 export type Categories_Inc_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Scalars['bigint']['input']>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Scalars['bigint']['input']>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Scalars['bigint']['input']>;
 };
 
 /** input type for inserting data into table "categories" */
 export type Categories_Insert_Input = {
-  /** 分类类别，如 水果、蔬菜 */
-  category_name?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<Categories_Arr_Rel_Insert_Input>;
+  category?: InputMaybe<Categories_Obj_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Scalars['bigint']['input']>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Scalars['bigint']['input']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
   name?: InputMaybe<Scalars['String']['input']>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Scalars['bigint']['input']>;
   products?: InputMaybe<Products_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
 };
@@ -2337,25 +2434,63 @@ export type Categories_Insert_Input = {
 /** aggregate max on columns */
 export type Categories_Max_Fields = {
   __typename?: 'categories_max_fields';
-  /** 分类类别，如 水果、蔬菜 */
-  category_name?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['bigint']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['bigint']['output']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
   name?: Maybe<Scalars['String']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['bigint']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** order by max() on columns of table "categories" */
+export type Categories_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 分类名称，如 苹果、香蕉、车厘子 */
+  name?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Categories_Min_Fields = {
   __typename?: 'categories_min_fields';
-  /** 分类类别，如 水果、蔬菜 */
-  category_name?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['bigint']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['bigint']['output']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
   name?: Maybe<Scalars['String']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['bigint']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** order by min() on columns of table "categories" */
+export type Categories_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 分类名称，如 苹果、香蕉、车厘子 */
+  name?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "categories" */
@@ -2383,10 +2518,14 @@ export type Categories_On_Conflict = {
 
 /** Ordering options when selecting data from "categories". */
 export type Categories_Order_By = {
-  category_name?: InputMaybe<Order_By>;
+  categories_aggregate?: InputMaybe<Categories_Aggregate_Order_By>;
+  category?: InputMaybe<Categories_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  idx?: InputMaybe<Order_By>;
+  level?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  parent_category_categories?: InputMaybe<Order_By>;
   products_aggregate?: InputMaybe<Products_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -2399,25 +2538,33 @@ export type Categories_Pk_Columns_Input = {
 /** select columns of table "categories" */
 export enum Categories_Select_Column {
   /** column name */
-  CategoryName = 'category_name',
-  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */
+  Idx = 'idx',
+  /** column name */
+  Level = 'level',
+  /** column name */
   Name = 'name',
+  /** column name */
+  ParentCategoryCategories = 'parent_category_categories',
   /** column name */
   UpdatedAt = 'updated_at'
 }
 
 /** input type for updating data in table "categories" */
 export type Categories_Set_Input = {
-  /** 分类类别，如 水果、蔬菜 */
-  category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Scalars['bigint']['input']>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Scalars['bigint']['input']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
   name?: InputMaybe<Scalars['String']['input']>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Scalars['bigint']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
 };
 
@@ -2425,18 +2572,69 @@ export type Categories_Set_Input = {
 export type Categories_Stddev_Fields = {
   __typename?: 'categories_stddev_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['Float']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['Float']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev() on columns of table "categories" */
+export type Categories_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Categories_Stddev_Pop_Fields = {
   __typename?: 'categories_stddev_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['Float']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['Float']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_pop() on columns of table "categories" */
+export type Categories_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Categories_Stddev_Samp_Fields = {
   __typename?: 'categories_stddev_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['Float']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['Float']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "categories" */
+export type Categories_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "categories" */
@@ -2449,12 +2647,16 @@ export type Categories_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Categories_Stream_Cursor_Value_Input = {
-  /** 分类类别，如 水果、蔬菜 */
-  category_name?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Scalars['bigint']['input']>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Scalars['bigint']['input']>;
   /** 分类名称，如 苹果、香蕉、车厘子 */
   name?: InputMaybe<Scalars['String']['input']>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Scalars['bigint']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
 };
 
@@ -2462,18 +2664,39 @@ export type Categories_Stream_Cursor_Value_Input = {
 export type Categories_Sum_Fields = {
   __typename?: 'categories_sum_fields';
   id?: Maybe<Scalars['bigint']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['bigint']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['bigint']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** order by sum() on columns of table "categories" */
+export type Categories_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "categories" */
 export enum Categories_Update_Column {
   /** column name */
-  CategoryName = 'category_name',
-  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */
+  Idx = 'idx',
+  /** column name */
+  Level = 'level',
+  /** column name */
   Name = 'name',
+  /** column name */
+  ParentCategoryCategories = 'parent_category_categories',
   /** column name */
   UpdatedAt = 'updated_at'
 }
@@ -2491,18 +2714,69 @@ export type Categories_Updates = {
 export type Categories_Var_Pop_Fields = {
   __typename?: 'categories_var_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['Float']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['Float']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_pop() on columns of table "categories" */
+export type Categories_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Categories_Var_Samp_Fields = {
   __typename?: 'categories_var_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['Float']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['Float']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_samp() on columns of table "categories" */
+export type Categories_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Categories_Variance_Fields = {
   __typename?: 'categories_variance_fields';
   id?: Maybe<Scalars['Float']['output']>;
+  /** 排序，0是最前 */
+  idx?: Maybe<Scalars['Float']['output']>;
+  /** 分类层级，0是顶级 */
+  level?: Maybe<Scalars['Float']['output']>;
+  /** 父级分类的id */
+  parent_category_categories?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "categories" */
+export type Categories_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+  /** 排序，0是最前 */
+  idx?: InputMaybe<Order_By>;
+  /** 分类层级，0是顶级 */
+  level?: InputMaybe<Order_By>;
+  /** 父级分类的id */
+  parent_category_categories?: InputMaybe<Order_By>;
 };
 
 /** ordering argument of a cursor */
@@ -6840,6 +7114,8 @@ export type Products = {
   category?: Maybe<Categories>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
   created_at: Scalars['timestamptz']['output'];
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['bigint']['output']>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: Maybe<Scalars['String']['output']>;
   /** 毛重 */
@@ -6863,16 +7139,18 @@ export type Products = {
   origin?: Maybe<Origins>;
   origin_origins?: Maybe<Scalars['bigint']['output']>;
   /** 零售单位-供门店参考 */
-  retail_unit?: Maybe<Scalars['String']['output']>;
+  retail_unit: Scalars['String']['output'];
   /** 销量 */
   sales: Scalars['bigint']['output'];
   /** 包装单位 */
-  unit?: Maybe<Scalars['String']['output']>;
+  unit: Scalars['String']['output'];
   /** 包装单价 */
   unit_price?: Maybe<Scalars['numeric']['output']>;
   /** 包装单位库存 */
   unit_stock?: Maybe<Scalars['bigint']['output']>;
   updated_at: Scalars['timestamptz']['output'];
+  /** An object relationship */
+  user?: Maybe<Users>;
 };
 
 
@@ -6999,6 +7277,8 @@ export type Products_Avg_Fields = {
   __typename?: 'products_avg_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['Float']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
@@ -7017,6 +7297,8 @@ export type Products_Avg_Fields = {
 export type Products_Avg_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7044,6 +7326,7 @@ export type Products_Bool_Exp = {
   category?: InputMaybe<Categories_Bool_Exp>;
   category_categories?: InputMaybe<Bigint_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  created_by_users?: InputMaybe<Bigint_Comparison_Exp>;
   detail_html?: InputMaybe<String_Comparison_Exp>;
   gross_weight?: InputMaybe<Numeric_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
@@ -7062,6 +7345,7 @@ export type Products_Bool_Exp = {
   unit_price?: InputMaybe<Numeric_Comparison_Exp>;
   unit_stock?: InputMaybe<Bigint_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "products" */
@@ -7074,6 +7358,8 @@ export enum Products_Constraint {
 export type Products_Inc_Input = {
   batch_batches?: InputMaybe<Scalars['bigint']['input']>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Scalars['bigint']['input']>;
   /** 毛重 */
   gross_weight?: InputMaybe<Scalars['numeric']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
@@ -7098,6 +7384,8 @@ export type Products_Insert_Input = {
   category?: InputMaybe<Categories_Obj_Rel_Insert_Input>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Scalars['bigint']['input']>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: InputMaybe<Scalars['String']['input']>;
   /** 毛重 */
@@ -7127,6 +7415,7 @@ export type Products_Insert_Input = {
   /** 包装单位库存 */
   unit_stock?: InputMaybe<Scalars['bigint']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -7137,6 +7426,8 @@ export type Products_Max_Fields = {
   batch_batches?: Maybe<Scalars['bigint']['output']>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['bigint']['output']>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: Maybe<Scalars['String']['output']>;
   /** 毛重 */
@@ -7169,6 +7460,8 @@ export type Products_Max_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: InputMaybe<Order_By>;
   /** 毛重 */
@@ -7202,6 +7495,8 @@ export type Products_Min_Fields = {
   batch_batches?: Maybe<Scalars['bigint']['output']>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['bigint']['output']>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: Maybe<Scalars['String']['output']>;
   /** 毛重 */
@@ -7234,6 +7529,8 @@ export type Products_Min_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: InputMaybe<Order_By>;
   /** 毛重 */
@@ -7291,6 +7588,7 @@ export type Products_Order_By = {
   category?: InputMaybe<Categories_Order_By>;
   category_categories?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  created_by_users?: InputMaybe<Order_By>;
   detail_html?: InputMaybe<Order_By>;
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7308,6 +7606,7 @@ export type Products_Order_By = {
   unit_price?: InputMaybe<Order_By>;
   unit_stock?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
 };
 
 /** primary key columns input for table: products */
@@ -7325,6 +7624,8 @@ export enum Products_Select_Column {
   CategoryCategories = 'category_categories',
   /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUsers = 'created_by_users',
   /** column name */
   DetailHtml = 'detail_html',
   /** column name */
@@ -7380,6 +7681,8 @@ export type Products_Set_Input = {
   batch_batches?: InputMaybe<Scalars['bigint']['input']>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Scalars['bigint']['input']>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: InputMaybe<Scalars['String']['input']>;
   /** 毛重 */
@@ -7414,6 +7717,8 @@ export type Products_Stddev_Fields = {
   __typename?: 'products_stddev_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['Float']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
@@ -7432,6 +7737,8 @@ export type Products_Stddev_Fields = {
 export type Products_Stddev_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7451,6 +7758,8 @@ export type Products_Stddev_Pop_Fields = {
   __typename?: 'products_stddev_pop_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['Float']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
@@ -7469,6 +7778,8 @@ export type Products_Stddev_Pop_Fields = {
 export type Products_Stddev_Pop_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7488,6 +7799,8 @@ export type Products_Stddev_Samp_Fields = {
   __typename?: 'products_stddev_samp_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['Float']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
@@ -7506,6 +7819,8 @@ export type Products_Stddev_Samp_Fields = {
 export type Products_Stddev_Samp_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7535,6 +7850,8 @@ export type Products_Stream_Cursor_Value_Input = {
   batch_batches?: InputMaybe<Scalars['bigint']['input']>;
   category_categories?: InputMaybe<Scalars['bigint']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Scalars['bigint']['input']>;
   /** 商品详情，可以是富文本可以是纯文本 */
   detail_html?: InputMaybe<Scalars['String']['input']>;
   /** 毛重 */
@@ -7569,6 +7886,8 @@ export type Products_Sum_Fields = {
   __typename?: 'products_sum_fields';
   batch_batches?: Maybe<Scalars['bigint']['output']>;
   category_categories?: Maybe<Scalars['bigint']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['bigint']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['numeric']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
@@ -7587,6 +7906,8 @@ export type Products_Sum_Fields = {
 export type Products_Sum_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7611,6 +7932,8 @@ export enum Products_Update_Column {
   CategoryCategories = 'category_categories',
   /** column name */
   CreatedAt = 'created_at',
+  /** column name */
+  CreatedByUsers = 'created_by_users',
   /** column name */
   DetailHtml = 'detail_html',
   /** column name */
@@ -7657,6 +7980,8 @@ export type Products_Var_Pop_Fields = {
   __typename?: 'products_var_pop_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['Float']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
@@ -7675,6 +8000,8 @@ export type Products_Var_Pop_Fields = {
 export type Products_Var_Pop_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7694,6 +8021,8 @@ export type Products_Var_Samp_Fields = {
   __typename?: 'products_var_samp_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['Float']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
@@ -7712,6 +8041,8 @@ export type Products_Var_Samp_Fields = {
 export type Products_Var_Samp_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7731,6 +8062,8 @@ export type Products_Variance_Fields = {
   __typename?: 'products_variance_fields';
   batch_batches?: Maybe<Scalars['Float']['output']>;
   category_categories?: Maybe<Scalars['Float']['output']>;
+  /** 谁创建的商品 */
+  created_by_users?: Maybe<Scalars['Float']['output']>;
   /** 毛重 */
   gross_weight?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
@@ -7749,6 +8082,8 @@ export type Products_Variance_Fields = {
 export type Products_Variance_Order_By = {
   batch_batches?: InputMaybe<Order_By>;
   category_categories?: InputMaybe<Order_By>;
+  /** 谁创建的商品 */
+  created_by_users?: InputMaybe<Order_By>;
   /** 毛重 */
   gross_weight?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -7801,9 +8136,9 @@ export type Query_Root = {
   carts_aggregate: Carts_Aggregate;
   /** fetch data from the table: "carts" using primary key columns */
   carts_by_pk?: Maybe<Carts>;
-  /** fetch data from the table: "categories" */
+  /** An array relationship */
   categories: Array<Categories>;
-  /** fetch aggregated fields from the table: "categories" */
+  /** An aggregate relationship */
   categories_aggregate: Categories_Aggregate;
   /** fetch data from the table: "categories" using primary key columns */
   categories_by_pk?: Maybe<Categories>;
@@ -8310,9 +8645,9 @@ export type Subscription_Root = {
   carts_by_pk?: Maybe<Carts>;
   /** fetch data from the table in a streaming manner: "carts" */
   carts_stream: Array<Carts>;
-  /** fetch data from the table: "categories" */
+  /** An array relationship */
   categories: Array<Categories>;
-  /** fetch aggregated fields from the table: "categories" */
+  /** An aggregate relationship */
   categories_aggregate: Categories_Aggregate;
   /** fetch data from the table: "categories" using primary key columns */
   categories_by_pk?: Maybe<Categories>;
@@ -9315,6 +9650,10 @@ export type Users = {
   password?: Maybe<Scalars['String']['output']>;
   /** 手机号（唯一） */
   phone: Scalars['String']['output'];
+  /** An array relationship */
+  products: Array<Products>;
+  /** An aggregate relationship */
+  products_aggregate: Products_Aggregate;
   updated_at: Scalars['timestamptz']['output'];
   /** An array relationship */
   user_roles: Array<User_Roles>;
@@ -9380,6 +9719,26 @@ export type UsersOrders_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Orders_Order_By>>;
   where?: InputMaybe<Orders_Bool_Exp>;
+};
+
+
+/** 用户表 */
+export type UsersProductsArgs = {
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Products_Order_By>>;
+  where?: InputMaybe<Products_Bool_Exp>;
+};
+
+
+/** 用户表 */
+export type UsersProducts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Products_Order_By>>;
+  where?: InputMaybe<Products_Bool_Exp>;
 };
 
 
@@ -9455,6 +9814,8 @@ export type Users_Bool_Exp = {
   orders_aggregate?: InputMaybe<Orders_Aggregate_Bool_Exp>;
   password?: InputMaybe<String_Comparison_Exp>;
   phone?: InputMaybe<String_Comparison_Exp>;
+  products?: InputMaybe<Products_Bool_Exp>;
+  products_aggregate?: InputMaybe<Products_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user_roles?: InputMaybe<User_Roles_Bool_Exp>;
   user_roles_aggregate?: InputMaybe<User_Roles_Aggregate_Bool_Exp>;
@@ -9488,6 +9849,7 @@ export type Users_Insert_Input = {
   password?: InputMaybe<Scalars['String']['input']>;
   /** 手机号（唯一） */
   phone?: InputMaybe<Scalars['String']['input']>;
+  products?: InputMaybe<Products_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_roles?: InputMaybe<User_Roles_Arr_Rel_Insert_Input>;
 };
@@ -9558,6 +9920,7 @@ export type Users_Order_By = {
   orders_aggregate?: InputMaybe<Orders_Aggregate_Order_By>;
   password?: InputMaybe<Order_By>;
   phone?: InputMaybe<Order_By>;
+  products_aggregate?: InputMaybe<Products_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_roles_aggregate?: InputMaybe<User_Roles_Aggregate_Order_By>;
 };

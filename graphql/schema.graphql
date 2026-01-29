@@ -2602,13 +2602,58 @@ input carts_variance_order_by {
 
 """分类表"""
 type categories {
-  """分类类别，如 水果、蔬菜"""
-  category_name: String
+  """An array relationship"""
+  categories(
+    """distinct select on columns"""
+    distinct_on: [categories_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [categories_order_by!]
+
+    """filter the rows returned"""
+    where: categories_bool_exp
+  ): [categories!]!
+
+  """An aggregate relationship"""
+  categories_aggregate(
+    """distinct select on columns"""
+    distinct_on: [categories_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [categories_order_by!]
+
+    """filter the rows returned"""
+    where: categories_bool_exp
+  ): categories_aggregate!
+
+  """An object relationship"""
+  category: categories
   created_at: timestamptz!
   id: bigint!
 
+  """排序，0是最前"""
+  idx: bigint!
+
+  """分类层级，0是顶级"""
+  level: bigint!
+
   """分类名称，如 苹果、香蕉、车厘子"""
   name: String!
+
+  """父级分类的id"""
+  parent_category_categories: bigint
 
   """An array relationship"""
   products(
@@ -2656,6 +2701,17 @@ type categories_aggregate {
   nodes: [categories!]!
 }
 
+input categories_aggregate_bool_exp {
+  count: categories_aggregate_bool_exp_count
+}
+
+input categories_aggregate_bool_exp_count {
+  arguments: [categories_select_column!]
+  distinct: Boolean
+  filter: categories_bool_exp
+  predicate: Int_comparison_exp!
+}
+
 """
 aggregate fields of "categories"
 """
@@ -2673,9 +2729,61 @@ type categories_aggregate_fields {
   variance: categories_variance_fields
 }
 
+"""
+order by aggregate values of table "categories"
+"""
+input categories_aggregate_order_by {
+  avg: categories_avg_order_by
+  count: order_by
+  max: categories_max_order_by
+  min: categories_min_order_by
+  stddev: categories_stddev_order_by
+  stddev_pop: categories_stddev_pop_order_by
+  stddev_samp: categories_stddev_samp_order_by
+  sum: categories_sum_order_by
+  var_pop: categories_var_pop_order_by
+  var_samp: categories_var_samp_order_by
+  variance: categories_variance_order_by
+}
+
+"""
+input type for inserting array relation for remote table "categories"
+"""
+input categories_arr_rel_insert_input {
+  data: [categories_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: categories_on_conflict
+}
+
 """aggregate avg on columns"""
 type categories_avg_fields {
   id: Float
+
+  """排序，0是最前"""
+  idx: Float
+
+  """分类层级，0是顶级"""
+  level: Float
+
+  """父级分类的id"""
+  parent_category_categories: Float
+}
+
+"""
+order by avg() on columns of table "categories"
+"""
+input categories_avg_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """
@@ -2685,10 +2793,15 @@ input categories_bool_exp {
   _and: [categories_bool_exp!]
   _not: categories_bool_exp
   _or: [categories_bool_exp!]
-  category_name: String_comparison_exp
+  categories: categories_bool_exp
+  categories_aggregate: categories_aggregate_bool_exp
+  category: categories_bool_exp
   created_at: timestamptz_comparison_exp
   id: bigint_comparison_exp
+  idx: bigint_comparison_exp
+  level: bigint_comparison_exp
   name: String_comparison_exp
+  parent_category_categories: bigint_comparison_exp
   products: products_bool_exp
   products_aggregate: products_aggregate_bool_exp
   updated_at: timestamptz_comparison_exp
@@ -2709,45 +2822,119 @@ input type for incrementing numeric columns in table "categories"
 """
 input categories_inc_input {
   id: bigint
+
+  """排序，0是最前"""
+  idx: bigint
+
+  """分类层级，0是顶级"""
+  level: bigint
+
+  """父级分类的id"""
+  parent_category_categories: bigint
 }
 
 """
 input type for inserting data into table "categories"
 """
 input categories_insert_input {
-  """分类类别，如 水果、蔬菜"""
-  category_name: String
+  categories: categories_arr_rel_insert_input
+  category: categories_obj_rel_insert_input
   created_at: timestamptz
   id: bigint
 
+  """排序，0是最前"""
+  idx: bigint
+
+  """分类层级，0是顶级"""
+  level: bigint
+
   """分类名称，如 苹果、香蕉、车厘子"""
   name: String
+
+  """父级分类的id"""
+  parent_category_categories: bigint
   products: products_arr_rel_insert_input
   updated_at: timestamptz
 }
 
 """aggregate max on columns"""
 type categories_max_fields {
-  """分类类别，如 水果、蔬菜"""
-  category_name: String
   created_at: timestamptz
   id: bigint
 
+  """排序，0是最前"""
+  idx: bigint
+
+  """分类层级，0是顶级"""
+  level: bigint
+
   """分类名称，如 苹果、香蕉、车厘子"""
   name: String
+
+  """父级分类的id"""
+  parent_category_categories: bigint
   updated_at: timestamptz
+}
+
+"""
+order by max() on columns of table "categories"
+"""
+input categories_max_order_by {
+  created_at: order_by
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """分类名称，如 苹果、香蕉、车厘子"""
+  name: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
+  updated_at: order_by
 }
 
 """aggregate min on columns"""
 type categories_min_fields {
-  """分类类别，如 水果、蔬菜"""
-  category_name: String
   created_at: timestamptz
   id: bigint
 
+  """排序，0是最前"""
+  idx: bigint
+
+  """分类层级，0是顶级"""
+  level: bigint
+
   """分类名称，如 苹果、香蕉、车厘子"""
   name: String
+
+  """父级分类的id"""
+  parent_category_categories: bigint
   updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "categories"
+"""
+input categories_min_order_by {
+  created_at: order_by
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """分类名称，如 苹果、香蕉、车厘子"""
+  name: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
+  updated_at: order_by
 }
 
 """
@@ -2782,10 +2969,14 @@ input categories_on_conflict {
 
 """Ordering options when selecting data from "categories"."""
 input categories_order_by {
-  category_name: order_by
+  categories_aggregate: categories_aggregate_order_by
+  category: categories_order_by
   created_at: order_by
   id: order_by
+  idx: order_by
+  level: order_by
   name: order_by
+  parent_category_categories: order_by
   products_aggregate: products_aggregate_order_by
   updated_at: order_by
 }
@@ -2800,16 +2991,22 @@ select columns of table "categories"
 """
 enum categories_select_column {
   """column name"""
-  category_name
-
-  """column name"""
   created_at
 
   """column name"""
   id
 
   """column name"""
+  idx
+
+  """column name"""
+  level
+
+  """column name"""
   name
+
+  """column name"""
+  parent_category_categories
 
   """column name"""
   updated_at
@@ -2819,29 +3016,111 @@ enum categories_select_column {
 input type for updating data in table "categories"
 """
 input categories_set_input {
-  """分类类别，如 水果、蔬菜"""
-  category_name: String
   created_at: timestamptz
   id: bigint
 
+  """排序，0是最前"""
+  idx: bigint
+
+  """分类层级，0是顶级"""
+  level: bigint
+
   """分类名称，如 苹果、香蕉、车厘子"""
   name: String
+
+  """父级分类的id"""
+  parent_category_categories: bigint
   updated_at: timestamptz
 }
 
 """aggregate stddev on columns"""
 type categories_stddev_fields {
   id: Float
+
+  """排序，0是最前"""
+  idx: Float
+
+  """分类层级，0是顶级"""
+  level: Float
+
+  """父级分类的id"""
+  parent_category_categories: Float
+}
+
+"""
+order by stddev() on columns of table "categories"
+"""
+input categories_stddev_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """aggregate stddev_pop on columns"""
 type categories_stddev_pop_fields {
   id: Float
+
+  """排序，0是最前"""
+  idx: Float
+
+  """分类层级，0是顶级"""
+  level: Float
+
+  """父级分类的id"""
+  parent_category_categories: Float
+}
+
+"""
+order by stddev_pop() on columns of table "categories"
+"""
+input categories_stddev_pop_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """aggregate stddev_samp on columns"""
 type categories_stddev_samp_fields {
   id: Float
+
+  """排序，0是最前"""
+  idx: Float
+
+  """分类层级，0是顶级"""
+  level: Float
+
+  """父级分类的id"""
+  parent_category_categories: Float
+}
+
+"""
+order by stddev_samp() on columns of table "categories"
+"""
+input categories_stddev_samp_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """
@@ -2857,19 +3136,51 @@ input categories_stream_cursor_input {
 
 """Initial value of the column from where the streaming should start"""
 input categories_stream_cursor_value_input {
-  """分类类别，如 水果、蔬菜"""
-  category_name: String
   created_at: timestamptz
   id: bigint
 
+  """排序，0是最前"""
+  idx: bigint
+
+  """分类层级，0是顶级"""
+  level: bigint
+
   """分类名称，如 苹果、香蕉、车厘子"""
   name: String
+
+  """父级分类的id"""
+  parent_category_categories: bigint
   updated_at: timestamptz
 }
 
 """aggregate sum on columns"""
 type categories_sum_fields {
   id: bigint
+
+  """排序，0是最前"""
+  idx: bigint
+
+  """分类层级，0是顶级"""
+  level: bigint
+
+  """父级分类的id"""
+  parent_category_categories: bigint
+}
+
+"""
+order by sum() on columns of table "categories"
+"""
+input categories_sum_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """
@@ -2877,16 +3188,22 @@ update columns of table "categories"
 """
 enum categories_update_column {
   """column name"""
-  category_name
-
-  """column name"""
   created_at
 
   """column name"""
   id
 
   """column name"""
+  idx
+
+  """column name"""
+  level
+
+  """column name"""
   name
+
+  """column name"""
+  parent_category_categories
 
   """column name"""
   updated_at
@@ -2906,16 +3223,91 @@ input categories_updates {
 """aggregate var_pop on columns"""
 type categories_var_pop_fields {
   id: Float
+
+  """排序，0是最前"""
+  idx: Float
+
+  """分类层级，0是顶级"""
+  level: Float
+
+  """父级分类的id"""
+  parent_category_categories: Float
+}
+
+"""
+order by var_pop() on columns of table "categories"
+"""
+input categories_var_pop_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """aggregate var_samp on columns"""
 type categories_var_samp_fields {
   id: Float
+
+  """排序，0是最前"""
+  idx: Float
+
+  """分类层级，0是顶级"""
+  level: Float
+
+  """父级分类的id"""
+  parent_category_categories: Float
+}
+
+"""
+order by var_samp() on columns of table "categories"
+"""
+input categories_var_samp_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """aggregate variance on columns"""
 type categories_variance_fields {
   id: Float
+
+  """排序，0是最前"""
+  idx: Float
+
+  """分类层级，0是顶级"""
+  level: Float
+
+  """父级分类的id"""
+  parent_category_categories: Float
+}
+
+"""
+order by variance() on columns of table "categories"
+"""
+input categories_variance_order_by {
+  id: order_by
+
+  """排序，0是最前"""
+  idx: order_by
+
+  """分类层级，0是顶级"""
+  level: order_by
+
+  """父级分类的id"""
+  parent_category_categories: order_by
 }
 
 """ordering argument of a cursor"""
@@ -8162,6 +8554,9 @@ type products {
   category_categories: bigint
   created_at: timestamptz!
 
+  """谁创建的商品"""
+  created_by_users: bigint
+
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: String
 
@@ -8225,13 +8620,13 @@ type products {
   origin_origins: bigint
 
   """零售单位-供门店参考"""
-  retail_unit: String
+  retail_unit: String!
 
   """销量"""
   sales: bigint!
 
   """包装单位"""
-  unit: String
+  unit: String!
 
   """包装单价"""
   unit_price: numeric
@@ -8239,6 +8634,9 @@ type products {
   """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz!
+
+  """An object relationship"""
+  user: users
 }
 
 """
@@ -8325,6 +8723,9 @@ type products_avg_fields {
   batch_batches: Float
   category_categories: Float
 
+  """谁创建的商品"""
+  created_by_users: Float
+
   """毛重"""
   gross_weight: Float
   id: Float
@@ -8349,6 +8750,9 @@ order by avg() on columns of table "products"
 input products_avg_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """谁创建的商品"""
+  created_by_users: order_by
 
   """毛重"""
   gross_weight: order_by
@@ -8383,6 +8787,7 @@ input products_bool_exp {
   category: categories_bool_exp
   category_categories: bigint_comparison_exp
   created_at: timestamptz_comparison_exp
+  created_by_users: bigint_comparison_exp
   detail_html: String_comparison_exp
   gross_weight: numeric_comparison_exp
   id: bigint_comparison_exp
@@ -8401,6 +8806,7 @@ input products_bool_exp {
   unit_price: numeric_comparison_exp
   unit_stock: bigint_comparison_exp
   updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
 }
 
 """
@@ -8419,6 +8825,9 @@ input type for incrementing numeric columns in table "products"
 input products_inc_input {
   batch_batches: bigint
   category_categories: bigint
+
+  """谁创建的商品"""
+  created_by_users: bigint
 
   """毛重"""
   gross_weight: numeric
@@ -8450,6 +8859,9 @@ input products_insert_input {
   category: categories_obj_rel_insert_input
   category_categories: bigint
   created_at: timestamptz
+
+  """谁创建的商品"""
+  created_by_users: bigint
 
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: String
@@ -8491,6 +8903,7 @@ input products_insert_input {
   """包装单位库存"""
   unit_stock: bigint
   updated_at: timestamptz
+  user: users_obj_rel_insert_input
 }
 
 """aggregate max on columns"""
@@ -8500,6 +8913,9 @@ type products_max_fields {
   batch_batches: bigint
   category_categories: bigint
   created_at: timestamptz
+
+  """谁创建的商品"""
+  created_by_users: bigint
 
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: String
@@ -8545,6 +8961,9 @@ input products_max_order_by {
   category_categories: order_by
   created_at: order_by
 
+  """谁创建的商品"""
+  created_by_users: order_by
+
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: order_by
 
@@ -8586,6 +9005,9 @@ type products_min_fields {
   batch_batches: bigint
   category_categories: bigint
   created_at: timestamptz
+
+  """谁创建的商品"""
+  created_by_users: bigint
 
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: String
@@ -8630,6 +9052,9 @@ input products_min_order_by {
   batch_batches: order_by
   category_categories: order_by
   created_at: order_by
+
+  """谁创建的商品"""
+  created_by_users: order_by
 
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: order_by
@@ -8704,6 +9129,7 @@ input products_order_by {
   category: categories_order_by
   category_categories: order_by
   created_at: order_by
+  created_by_users: order_by
   detail_html: order_by
   gross_weight: order_by
   id: order_by
@@ -8721,6 +9147,7 @@ input products_order_by {
   unit_price: order_by
   unit_stock: order_by
   updated_at: order_by
+  user: users_order_by
 }
 
 """primary key columns input for table: products"""
@@ -8743,6 +9170,9 @@ enum products_select_column {
 
   """column name"""
   created_at
+
+  """column name"""
+  created_by_users
 
   """column name"""
   detail_html
@@ -8822,6 +9252,9 @@ input products_set_input {
   category_categories: bigint
   created_at: timestamptz
 
+  """谁创建的商品"""
+  created_by_users: bigint
+
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: String
 
@@ -8867,6 +9300,9 @@ type products_stddev_fields {
   batch_batches: Float
   category_categories: Float
 
+  """谁创建的商品"""
+  created_by_users: Float
+
   """毛重"""
   gross_weight: Float
   id: Float
@@ -8892,6 +9328,9 @@ input products_stddev_order_by {
   batch_batches: order_by
   category_categories: order_by
 
+  """谁创建的商品"""
+  created_by_users: order_by
+
   """毛重"""
   gross_weight: order_by
   id: order_by
@@ -8914,6 +9353,9 @@ input products_stddev_order_by {
 type products_stddev_pop_fields {
   batch_batches: Float
   category_categories: Float
+
+  """谁创建的商品"""
+  created_by_users: Float
 
   """毛重"""
   gross_weight: Float
@@ -8940,6 +9382,9 @@ input products_stddev_pop_order_by {
   batch_batches: order_by
   category_categories: order_by
 
+  """谁创建的商品"""
+  created_by_users: order_by
+
   """毛重"""
   gross_weight: order_by
   id: order_by
@@ -8962,6 +9407,9 @@ input products_stddev_pop_order_by {
 type products_stddev_samp_fields {
   batch_batches: Float
   category_categories: Float
+
+  """谁创建的商品"""
+  created_by_users: Float
 
   """毛重"""
   gross_weight: Float
@@ -8987,6 +9435,9 @@ order by stddev_samp() on columns of table "products"
 input products_stddev_samp_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """谁创建的商品"""
+  created_by_users: order_by
 
   """毛重"""
   gross_weight: order_by
@@ -9024,6 +9475,9 @@ input products_stream_cursor_value_input {
   batch_batches: bigint
   category_categories: bigint
   created_at: timestamptz
+
+  """谁创建的商品"""
+  created_by_users: bigint
 
   """商品详情，可以是富文本可以是纯文本"""
   detail_html: String
@@ -9070,6 +9524,9 @@ type products_sum_fields {
   batch_batches: bigint
   category_categories: bigint
 
+  """谁创建的商品"""
+  created_by_users: bigint
+
   """毛重"""
   gross_weight: numeric
   id: bigint
@@ -9094,6 +9551,9 @@ order by sum() on columns of table "products"
 input products_sum_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """谁创建的商品"""
+  created_by_users: order_by
 
   """毛重"""
   gross_weight: order_by
@@ -9128,6 +9588,9 @@ enum products_update_column {
 
   """column name"""
   created_at
+
+  """column name"""
+  created_by_users
 
   """column name"""
   detail_html
@@ -9191,6 +9654,9 @@ type products_var_pop_fields {
   batch_batches: Float
   category_categories: Float
 
+  """谁创建的商品"""
+  created_by_users: Float
+
   """毛重"""
   gross_weight: Float
   id: Float
@@ -9216,6 +9682,9 @@ input products_var_pop_order_by {
   batch_batches: order_by
   category_categories: order_by
 
+  """谁创建的商品"""
+  created_by_users: order_by
+
   """毛重"""
   gross_weight: order_by
   id: order_by
@@ -9238,6 +9707,9 @@ input products_var_pop_order_by {
 type products_var_samp_fields {
   batch_batches: Float
   category_categories: Float
+
+  """谁创建的商品"""
+  created_by_users: Float
 
   """毛重"""
   gross_weight: Float
@@ -9264,6 +9736,9 @@ input products_var_samp_order_by {
   batch_batches: order_by
   category_categories: order_by
 
+  """谁创建的商品"""
+  created_by_users: order_by
+
   """毛重"""
   gross_weight: order_by
   id: order_by
@@ -9286,6 +9761,9 @@ input products_var_samp_order_by {
 type products_variance_fields {
   batch_batches: Float
   category_categories: Float
+
+  """谁创建的商品"""
+  created_by_users: Float
 
   """毛重"""
   gross_weight: Float
@@ -9311,6 +9789,9 @@ order by variance() on columns of table "products"
 input products_variance_order_by {
   batch_batches: order_by
   category_categories: order_by
+
+  """谁创建的商品"""
+  created_by_users: order_by
 
   """毛重"""
   gross_weight: order_by
@@ -9579,9 +10060,7 @@ type query_root {
   """fetch data from the table: "carts" using primary key columns"""
   carts_by_pk(id: bigint!): carts
 
-  """
-  fetch data from the table: "categories"
-  """
+  """An array relationship"""
   categories(
     """distinct select on columns"""
     distinct_on: [categories_select_column!]
@@ -9599,9 +10078,7 @@ type query_root {
     where: categories_bool_exp
   ): [categories!]!
 
-  """
-  fetch aggregated fields from the table: "categories"
-  """
+  """An aggregate relationship"""
   categories_aggregate(
     """distinct select on columns"""
     distinct_on: [categories_select_column!]
@@ -10368,9 +10845,7 @@ type subscription_root {
     where: carts_bool_exp
   ): [carts!]!
 
-  """
-  fetch data from the table: "categories"
-  """
+  """An array relationship"""
   categories(
     """distinct select on columns"""
     distinct_on: [categories_select_column!]
@@ -10388,9 +10863,7 @@ type subscription_root {
     where: categories_bool_exp
   ): [categories!]!
 
-  """
-  fetch aggregated fields from the table: "categories"
-  """
+  """An aggregate relationship"""
   categories_aggregate(
     """distinct select on columns"""
     distinct_on: [categories_select_column!]
@@ -11540,6 +12013,42 @@ type users {
 
   """手机号（唯一）"""
   phone: String!
+
+  """An array relationship"""
+  products(
+    """distinct select on columns"""
+    distinct_on: [products_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [products_order_by!]
+
+    """filter the rows returned"""
+    where: products_bool_exp
+  ): [products!]!
+
+  """An aggregate relationship"""
+  products_aggregate(
+    """distinct select on columns"""
+    distinct_on: [products_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [products_order_by!]
+
+    """filter the rows returned"""
+    where: products_bool_exp
+  ): products_aggregate!
   updated_at: timestamptz!
 
   """An array relationship"""
@@ -11628,6 +12137,8 @@ input users_bool_exp {
   orders_aggregate: orders_aggregate_bool_exp
   password: String_comparison_exp
   phone: String_comparison_exp
+  products: products_bool_exp
+  products_aggregate: products_aggregate_bool_exp
   updated_at: timestamptz_comparison_exp
   user_roles: user_roles_bool_exp
   user_roles_aggregate: user_roles_aggregate_bool_exp
@@ -11675,6 +12186,7 @@ input users_insert_input {
 
   """手机号（唯一）"""
   phone: String
+  products: products_arr_rel_insert_input
   updated_at: timestamptz
   user_roles: user_roles_arr_rel_insert_input
 }
@@ -11756,6 +12268,7 @@ input users_order_by {
   orders_aggregate: orders_aggregate_order_by
   password: order_by
   phone: order_by
+  products_aggregate: products_aggregate_order_by
   updated_at: order_by
   user_roles_aggregate: user_roles_aggregate_order_by
 }
